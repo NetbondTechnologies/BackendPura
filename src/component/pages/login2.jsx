@@ -1,14 +1,31 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Loader from "../loader/loader";
 AOS.init();
+import { Link } from "react-router-dom";
 
 export default function Login2() {
+  const [loading, setloading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setloading(false);
+    }, 1000);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex w-full  justify-center items-center h-[65vh]">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <div className=" w-full flex h-screen justify-center items-center">
       <div
         data-aos="fade-down"
-        data-aos-duration="2000"
+        data-aos-duration="600"
         className="w-[70%] bg-background-sky flex flex-col items-center lg:flex-row lg:h-[75%] h-[60%] shadow-2xl shadow-buttext-button-orange"
       >
         <div className="lg:w-1/2 w-full h-40 lg:h-full flex items-center">
@@ -19,7 +36,9 @@ export default function Login2() {
           />
         </div>
         <form className="flex w-full bg-white flex-col h-full p-2 lg:w-1/2 gap-4 justify-center items-center">
-          <h1 className="text-2xl text-button-orange font-bold mt-4 lg:mt-0">LOGIN</h1>
+          <h1 className="text-2xl text-button-orange font-bold mt-4 lg:mt-0">
+            LOGIN
+          </h1>
           <input
             className="lg:w-60 w-40 p-2 h-10 border lg:text-lg focus:outline-buttext-button-orange border-gray-400 rounded-lg"
             type="email"
@@ -35,7 +54,12 @@ export default function Login2() {
           </button>
           <p className="flex items-center flex-col lg:flex-row">
             No account ?
-            <Link to="/signup" className="text-button-orange font-bold text-lg p-2">Sign up</Link>
+            <Link
+              to="/signup"
+              className="text-button-orange font-bold text-lg p-2"
+            >
+              Sign up
+            </Link>
           </p>
         </form>
       </div>

@@ -1,5 +1,10 @@
 import React from "react";
+import WishlistButton from "../button/wishlistbutton";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init();
 
 const products = [
   {
@@ -60,13 +65,13 @@ const Rating = ({ rating }) => {
 
 export default function Topproduct() {
   return (
-    <div className="-mb-4">
+    <div data-aos="fade-down" data-aos-duration="600" className="-mb-4">
       <div className="w-full flex justify-center items-center h-16 text-2xl font-bold text-button-orange">
         <span>Trending Products</span>
         <img src="/trending.svg" alt="" />
       </div>
       <div className="container mx-auto my-10 px-4">
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
             <div
               key={product.id}
@@ -78,11 +83,13 @@ export default function Topproduct() {
                   TOP RATED
                 </div>
               </div>
+
               <img
                 src={product.image}
                 alt={product.title}
                 className="w-full h-56"
               />
+
               <div className="p-4">
                 <div className="flex justify-between text-sm text-gray-500">
                   <a href="#" className="hover:text-gray-700">

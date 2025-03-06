@@ -1,11 +1,9 @@
-import Carousel from "../Carousel/Carousel";
-import Footer from "../footer/footer";
-import ProductCard from "../product cart/product";
 import Topproduct from "../product cart/topproduct";
-import { useEffect, useState } from "react";
+import ProductCard from "../product cart/product";
+import { useState,useEffect } from "react";
 import Loader from "../loader/loader";
-
-export default function Home() {
+import Footer from "../footer/footer";
+export default function Shopall() {
   const [loading, setloading] = useState(true);
 
   useEffect(() => {
@@ -21,12 +19,11 @@ export default function Home() {
       </div>
     );
   }
-
   return (
     <div>
-      <Carousel />
       <ProductCard />
       <Topproduct />
+     
     </div>
   );
 }

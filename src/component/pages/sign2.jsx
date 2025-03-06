@@ -1,13 +1,31 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Link } from "react-router-dom";
 AOS.init();
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Loader from "../loader/loader";
+
 export default function Sign2() {
+  const [loading, setloading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setloading(false);
+    }, 1000);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex w-full  justify-center items-center h-[65vh]">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <div className="bg-gray-200 w-full flex h-screen justify-center items-center">
       <div
         data-aos="fade-down"
-        data-aos-duration="2000"
+        data-aos-duration="600"
         className="w-[70%] bg-background-sky flex flex-col lg:flex-row lg:h-[75%] h-[60%] shadow-2xl shadow-background-outline-background-sky"
       >
         <div className="lg:w-1/2 w-full h-40 lg:h-full flex items-center">
@@ -51,7 +69,10 @@ export default function Sign2() {
           </button>
           <p className="text-sm flex flex-col lg:flex-row items-center">
             Already have an account ?
-            <Link to="/login" className="text-background-outline-background-sky p-2 text-lg font-bold">
+            <Link
+              to="/login"
+              className="text-background-outline-background-sky p-2 text-lg font-bold"
+            >
               Login
             </Link>
           </p>

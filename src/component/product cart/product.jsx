@@ -1,4 +1,8 @@
-import { Star } from "lucide-react";
+import { useState } from "react";
+import WishlistButton from "../button/wishlistbutton";
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init();
 
 const products = [
   {
@@ -25,20 +29,29 @@ const products = [
 ];
 
 const ProductCard = () => {
+  const [wishlist, setWishlist] = useState({});
+
+  const toggleWishlist = (id) => {
+    setWishlist((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
   return (
-    <div>
+    <div data-aos="fade-down" data-aos-duration="600">
       <div className="w-full mt-10 -mb-8 text-center h-28">
         <h1 className="text-2xl m-4 items-center font-extrabold text-button-orange">
           Featured Product
         </h1>
-        <h1 className="text-lg font-semibold">“Exquisite craftsmanship meets timeless elegance – shop our stunning jewelry collection today!”</h1>
+        <h1 className="text-lg font-semibold">
+          “Exquisite craftsmanship meets timeless elegance – shop our stunning
+          jewelry collection today!”
+        </h1>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-10">
         {products.map((product) => (
           <div
             key={product.id}
-            className="p-6 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+            className="p-6 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl relative"
           >
             <div className="relative w-full h-56">
               <img
@@ -46,7 +59,12 @@ const ProductCard = () => {
                 alt={product.name}
                 className="w-full h-full object-cover rounded-lg"
               />
-              <span className="absolute top-2 right-2 bg-cyan-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+              <WishlistButton
+                isWishlisted={wishlist[product.id]}
+                toggleWishlist={() => toggleWishlist(product.id)}
+              />
+
+              <span className="absolute top-2 left-2 bg-cyan-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
                 New
               </span>
             </div>
@@ -55,13 +73,8 @@ const ProductCard = () => {
                 {product.name}
               </h3>
               <p className="text-gray-600 text-sm mt-1">{product.price}</p>
-              <div className="flex justify-center items-center mt-2 gap-1">
-                {[...Array(5)].map((_, index) => (
-                  <Star key={index} className="h-5 w-5 text-background-sky" />
-                ))}
-              </div>
               <button className="mt-4 w-full bg-background-sky hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300">
-                Buy Now
+                Add To Cart
               </button>
             </div>
           </div>

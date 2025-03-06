@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 export default function Footer() {
   return (
-    <div className="bg-button-orange">
-      <div className="w-full flex gap-5 h-24 lg:h-56 text-white bg-button-orange">
+    <div className="bg-button-orange  bottom-0">
+      <div className="w-full flex gap-5 h-32 lg:h-56 text-white bg-button-orange">
         <div className="w-[60%] font-bold lg:flex hidden h-44 border-white ">
           <div className="flex w-1/4 flex-col h-36 ml-10 mt-8 gap-2 items-start">
             <button className="text-lg">SERVICES</button>
@@ -46,11 +46,31 @@ export default function Footer() {
             </button>
           </div>
         </div>
-        <div className="w-full h-32 text-sm flex lg:hidden gap-2 flex-col mb-2 p-2">
-          <button className="">SERVICES</button>
-          <button>Blog</button>
-          <button>Contact Us</button>
-          <button>Wishlist Product</button>
+
+        {/* footer for mobile */}
+        <div className="w-full h-32 text-sm flex lg:hidden gap-2 mb-2 mt-6 p-2">
+          <div className="flex w-1/2 flex-col gap-2">
+            <button className="">SERVICES</button>
+            <button>Blog</button>
+            <button>Contact Us</button>
+            <button>Wishlist Product</button>
+          </div>
+          <div className="flex w-1/2 flex-col text-sm gap-2">
+            <button>MY ACCOUNT</button>
+            <button>Privacy</button>
+            <button>Checkout</button>
+            <button>Recent Order</button>
+          </div>
+          <div className="w-1/2 flex flex-col gap-4">
+            <input
+              placeholder="Enter email id"
+              className="w-36 font-bold text-gray-500 p-2 h-6 focus:outline-0 : bg-white"
+              type="text"
+            />
+            <button className="bg-background-sky font-bold w-36 h-8">
+              SUBSCRIBE
+            </button>
+          </div>
         </div>
       </div>
       <div className="p-2">
