@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import Loader from "../loader/loader";
+import { useEffect } from "react";
 const productsData = [
   {
     id: 1,
@@ -29,6 +30,7 @@ const productsData = [
 
 const Checkoutcart = () => {
   const [products, setProducts] = useState(productsData);
+
   const [quantities, setQuantities] = useState(
     productsData.reduce((acc, product) => ({ ...acc, [product.id]: 1 }), {})
   );
@@ -44,6 +46,22 @@ const Checkoutcart = () => {
   const handleDecrease = (id) => {
     setQuantities((prev) => ({ ...prev, [id]: Math.max(prev[id] - 1, 1) }));
   };
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex w-full justify-center items-center h-[65vh] bg-gradient-to-br from-gray-50 to-gray-100">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto bg-white p-4 sm:p-6 rounded-lg shadow-lg mt-10">
@@ -124,6 +142,11 @@ const Checkoutcart = () => {
             ))}
           </tbody>
         </table>
+        <div className="w-full relative h-24">
+          <button className=" absolute right-40 bg-background-sky text-regal-white font-bold w-44 h-12 top-6 ">
+            Checkout
+          </button>
+        </div>
       </div>
 
       {/* Cart for mobile screen  */}
@@ -176,6 +199,11 @@ const Checkoutcart = () => {
             </div>
           </div>
         ))}
+        <div className="w-full h-14 flex my-6 justify-center items-center">
+          <button className="bg-background-sky h-10  w-44 text-regal-white">
+            Checkout
+          </button>
+        </div>
       </div>
     </div>
   );

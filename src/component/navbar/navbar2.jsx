@@ -23,10 +23,10 @@ export default function Navbar2() {
         />
         <div className="text-button-orange  flex font-bold gap-12 p-2 text-xl">
           <Link to="/">Home</Link>
-          <Link to="/shopall" >Shop All</Link>
-          <button>Anklets</button>
-          <button>About Us</button>
-          <button>Contact Us</button>
+          <Link to="/shopall">Shop All</Link>
+          <Link to="/anklets">Anklets</Link>
+          <Link to="/aboutus">About Us</Link>
+          <Link to="/contactus">Contact Us</Link>
         </div>
       </nav>
 
