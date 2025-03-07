@@ -34,7 +34,6 @@ const ProductCard = () => {
   const toggleWishlist = (id) => {
     setWishlist((prev) => ({ ...prev, [id]: !prev[id] }));
   };
-
   return (
     <div data-aos="fade-down" data-aos-duration="600">
       <div className="w-full mt-10 -mb-8 text-center h-28">

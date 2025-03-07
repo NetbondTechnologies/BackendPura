@@ -7,8 +7,8 @@ export default function Footer() {
           <div className="flex w-1/4 flex-col h-36 ml-10 mt-8 gap-2 items-start">
             <button className="text-lg">SERVICES</button>
             <button>Blog</button>
-            <button>Contact Us</button>
-            <button>Wishlist Product</button>
+            <Link to="/contactus">Contact Us</Link>
+            <Link to="/wishlist">Wishlist Product</Link>
           </div>
 
           <div className="flex w-1/4 flex-col h-36 ml-10 mt-8 gap-2 items-start">
@@ -52,7 +52,7 @@ export default function Footer() {
           <div className="flex w-1/2 flex-col gap-2">
             <button className="">SERVICES</button>
             <button>Blog</button>
-            <button>Contact Us</button>
+            <Link to="/contactus">Contact Us</Link>
             <button>Wishlist Product</button>
           </div>
           <div className="flex w-1/2 flex-col text-sm gap-2">

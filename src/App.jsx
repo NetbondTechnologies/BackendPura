@@ -10,6 +10,7 @@ import Layout from "./component/layout/layout";
 import Profile from "./component/pages/profile";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Dashboard from "./component/admin/dashboard";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/aboutus" element={<Aboutus />}></Route>
             <Route path="/contactus" element={<Contactus />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/dashboard" element={<Dashboard />}></Route>
           </Routes>
         </Layout>
       </Router>

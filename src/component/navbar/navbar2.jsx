@@ -27,6 +27,7 @@ export default function Navbar2() {
           <Link to="/anklets">Anklets</Link>
           <Link to="/aboutus">About Us</Link>
           <Link to="/contactus">Contact Us</Link>
+          <Link to="/dashboard">Dashboard</Link>
         </div>
       </nav>
 

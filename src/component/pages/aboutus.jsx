@@ -1,4 +1,5 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+import Featuring from "../product cart/featuring";
 import Loader from "../loader/loader";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -80,6 +81,7 @@ export default function Aboutus() {
           />
         </div>
       </div>
+      <Featuring />
     </div>
   );
 }

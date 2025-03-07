@@ -1,10 +1,11 @@
 import Carousel from "../Carousel/Carousel";
-import Footer from "../footer/footer";
+import Collection from "../product cart/collection";
 import ProductCard from "../product cart/product";
 import Topproduct from "../product cart/topproduct";
 import { useEffect, useState } from "react";
+import Service from "../services/services";
 import Loader from "../loader/loader";
-
+import Featuring from "../product cart/featuring";
 export default function Home() {
   const [loading, setloading] = useState(true);
 
@@ -25,6 +26,9 @@ export default function Home() {
   return (
     <div>
       <Carousel />
+      <Collection />
+      <Featuring />
+      <Service />
       <ProductCard />
       <Topproduct />
     </div>
