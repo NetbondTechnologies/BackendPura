@@ -1,56 +1,72 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
-  AlignCenter,
   FilePlus,
-  MonitorCog,
-  PersonStanding,
+  Menu,
+  TableProperties,
   TicketPercent,
+  User,
   UserPen,
   UserRoundSearch,
   View,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+
 export default function Dashboard() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <div>
-      <div className="w-full h-screen flex">
-        <div className="w-[20%] text-lg h-screen font-semibold bg-black text-white">
-          <div className="flex flex-col gap-4 py-10 px-4">
-            <h1 className="text-xl flex gap-2 font-bold">
-              <MonitorCog />
-              Admin Control
-            </h1>
-            <Link className="flex gap-2">
-              <FilePlus />
-              Add Product
-            </Link>
-            <Link className="flex gap-2 items-center">
-              <View />
-              View Order
-            </Link>
-            <Link className="flex gap-2 items-center">
-              <UserRoundSearch />
-              View User
-            </Link>
-            <Link className="flex gap-2 items-center">
-              <AlignCenter />
-              Category
-            </Link>
-            <Link className="flex gap-2 items-center">
-              <TicketPercent />
-              Coupons
-            </Link>
-            <Link className="flex gap-2 items-center">
-              <PersonStanding />
-              Our Staff
-            </Link>
-            <Link className="flex gap-2 items-center">
-              <UserPen />
-              Manage Account
-            </Link>
-          </div>
-        </div>
-        <div></div>
+    <div className="h-28 flex flex-col">
+      {/* Desktop Header */}
+      <div className="hidden lg:flex justify-between items-center bg-black text-white py-6 px-8">
+        <h1 className="text-2xl font-bold">Admin Control</h1>
+        <nav className="flex gap-16">
+          <Link to="/addproduct" className="flex items-center gap-2">
+            <FilePlus /> Add Product
+          </Link>
+          <Link to="/orderlist" className="flex items-center gap-2">
+            <View /> View Order
+          </Link>
+          <Link to="/userview" className="flex items-center gap-2">
+            <UserRoundSearch /> View User
+          </Link>
+          <Link to="/productlist" className="flex items-center gap-2">
+            <TableProperties /> Product list
+          </Link>
+          <Link className="flex items-center gap-2">
+            <UserPen /> Manage Account
+          </Link>
+        </nav>
       </div>
+
+      {/* Mobile Header */}
+      <div className="lg:hidden flex justify-between items-center bg-black text-white py-4 px-6">
+        <button onClick={() => setMenuOpen(!menuOpen)}>
+          <Menu className="w-8 h-8" />
+        </button>
+        <h1 className="text-xl font-semibold">Admin Dashboard</h1>
+        <User className="w-8 h-8" />
+      </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="lg:hidden z-40 flex flex-col bg-black text-white w-full py-4 px-6 gap-4">
+          <Link to="/addproduct" className="flex items-center gap-2">
+            <FilePlus /> Add Product
+          </Link>
+          <Link to="/orderlist" className="flex items-center gap-2">
+            <View /> View Order
+          </Link>
+          <Link to="/userview" className="flex items-center gap-2">
+            <UserRoundSearch /> View User
+          </Link>
+          <Link to="/productlist" className="flex items-center gap-2">
+            <TicketPercent /> Productlist
+          </Link>
+          <Link  className="flex items-center gap-2">
+            <UserPen /> Manage Account
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

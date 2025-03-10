@@ -16,12 +16,12 @@ export default function Featuring() {
           </p>
         </div>
         <div className=" w-full lg:w-1/2 flex items-center">
-          <video autoPlay loop muted src="public\ringvideo.mp4"></video>
+          <video autoPlay loop muted src="/ringvideo.mp4"></video>
         </div>
       </div>
       <div className="w-full h-[70%] lg:h-96 my-14 flex flex-col lg:flex-row">
         <div className=" w-full lg:w-1/2 flex items-center">
-          <video autoPlay loop muted src="public\ring2.mp4"></video>
+          <video autoPlay loop muted src="/ring2.mp4"></video>
         </div>
         <div className=" w-full lg:w-1/2 m-2 lg:m-8 flex flex-col gap-8 items-center">
           <h1 className="text-2xl font-bold">Wedding Special Ring</h1>

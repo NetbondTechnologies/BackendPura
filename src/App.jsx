@@ -8,9 +8,12 @@ import Wishlist from "./component/pages/wishlist";
 import Aboutus from "./component/pages/aboutus";
 import Layout from "./component/layout/layout";
 import Profile from "./component/pages/profile";
-
+import AddProduct from "./component/admin/component/addproduct";
+import OrderList from "./component/admin/component/orderlist";
+import AdminProductList from "./component/admin/component/adminproductlist";
+import AdminUserView from "./component/admin/component/adminusersview";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Dashboard from "./component/admin/dashboard";
+import Adminhome from "./component/admin/component/adminhome";
 
 function App() {
   return (
@@ -27,7 +30,14 @@ function App() {
             <Route path="/aboutus" element={<Aboutus />}></Route>
             <Route path="/contactus" element={<Contactus />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/dashboard" element={<Dashboard />}></Route>
+            <Route path="/userview" element={<AdminUserView />}></Route>
+
+            {/* admin routes */}
+
+            <Route path="/dashboard" element={<Adminhome />}></Route>
+            <Route path="/addproduct" element={<AddProduct />}></Route>
+            <Route path="/orderlist" element={<OrderList />}></Route>
+            <Route path="/productlist" element={<AdminProductList />}></Route>
           </Routes>
         </Layout>
       </Router>
