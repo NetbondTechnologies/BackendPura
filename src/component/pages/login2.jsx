@@ -1,12 +1,28 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next"; // Import translation hook
 import Loader from "../loader/loader";
-AOS.init();
 import { Link } from "react-router-dom";
 
+AOS.init();
+
 export default function Login2() {
+  const { t } = useTranslation(); // Initialize translation hook
   const [loading, setloading] = useState(true);
+  const [logindata, setlogindata] = useState({ email: "", password: "" });
+
+  function submitdata(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    setlogindata({ ...logindata, [name]: value });
+    console.log(logindata);
+  }
+
+  function userlogin(e) {
+    e.preventDefault();
+    // API Call
+  }
 
   useEffect(() => {
     setTimeout(() => {
@@ -16,13 +32,14 @@ export default function Login2() {
 
   if (loading) {
     return (
-      <div className="flex w-full  justify-center items-center h-[65vh]">
+      <div className="flex w-full justify-center items-center h-[65vh]">
         <Loader />
       </div>
     );
   }
+
   return (
-    <div className=" w-full flex h-screen justify-center items-center">
+    <div className="w-full flex h-screen justify-center items-center">
       <div
         data-aos="fade-down"
         data-aos-duration="600"
@@ -35,30 +52,40 @@ export default function Login2() {
             alt="User"
           />
         </div>
-        <form className="flex w-full bg-white flex-col h-full p-2 lg:w-1/2 gap-4 justify-center items-center">
+        <form
+          onSubmit={userlogin}
+          className="flex w-full bg-white flex-col h-full p-2 lg:w-1/2 gap-4 justify-center items-center"
+        >
           <h1 className="text-2xl text-button-orange font-bold mt-4 lg:mt-0">
-            LOGIN
+            {t("login")}
           </h1>
           <input
+            onChange={submitdata}
             className="lg:w-60 w-40 p-2 h-10 border lg:text-lg focus:outline-buttext-button-orange border-gray-400 rounded-lg"
             type="email"
-            placeholder="Email"
+            name="email"
+            placeholder={t("email_placeholder")}
           />
           <input
-            className="lg:w-60 w-40 p-2 h-10  lg:h-10 border  focus:outline-buttext-button-orange lg:text-lg border-gray-400 rounded-lg"
+            onChange={submitdata}
+            className="lg:w-60 w-40 p-2 h-10 lg:h-10 border focus:outline-buttext-button-orange lg:text-lg border-gray-400 rounded-lg"
             type="password"
-            placeholder="Password"
+            name="password"
+            placeholder={t("password_placeholder")}
           />
-          <button className="lg:w-60 w-28 h-8 text-sm lg:h-10 p-2 text-white bg-background-sky rounded-2xl font-bold bg-buttext-button-orange hover:bg-buttext-button-orange hover:shadow-lg hover hover:shadow-buttext-button-orange">
-            LOGIN
+          <button
+            type="submit"
+            className="lg:w-60 w-28 h-8 text-sm lg:h-10 p-2 text-white bg-background-sky rounded-2xl font-bold bg-buttext-button-orange hover:bg-buttext-button-orange hover:shadow-lg hover hover:shadow-buttext-button-orange"
+          >
+            {t("login_button")}
           </button>
           <p className="flex items-center flex-col lg:flex-row">
-            No account ?
+            {t("no_account")}
             <Link
               to="/signup"
               className="text-button-orange font-bold text-lg p-2"
             >
-              Sign up
+              {t("sign_up")}
             </Link>
           </p>
         </form>

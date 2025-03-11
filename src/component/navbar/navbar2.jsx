@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 export default function Navbar2() {
   const [menu, setmenu] = useState(false);
+  const { t } = useTranslation();
 
   function menutoggle() {
     setmenu(!menu);
@@ -12,22 +15,22 @@ export default function Navbar2() {
       <nav className="relative hidden lg:flex gap-4 items-center h-12 w-full">
         <button
           onClick={menutoggle}
-          className="text-lg w-72 rounded-sm ml-5  text-white font-semibold bg-button-orange h-10"
+          className="text-lg w-72 rounded-sm ml-5 text-white font-semibold bg-button-orange h-10"
         >
-          BROWSE CATEGORIES
+          {t("BROWSE_CATEGORIES")}
         </button>
         <img
           className="absolute left-8 h-6 w-6"
           src="/menu.svg"
-          alt="CATEGORIES"
+          alt={t("CATEGORIES")}
         />
-        <div className="text-button-orange  flex font-bold gap-12 p-2 text-xl">
-          <Link to="/">Home</Link>
-          <Link to="/shopall">Shop All</Link>
-          <Link to="/anklets">Anklets</Link>
-          <Link to="/aboutus">About Us</Link>
-          <Link to="/contactus">Contact Us</Link>
-          <Link to="/dashboard">Dashboard</Link>
+        <div className="text-button-orange flex font-bold gap-12 p-2 text-xl">
+          <Link to="/">{t("Home")}</Link>
+          <Link to="/shopall">{t("Shop All")}</Link>
+          <Link to="/anklets">{t("Anklets")}</Link>
+          <Link to="/aboutus">{t("About us")}</Link>
+          <Link to="/contactus">{t("Contact us")}</Link>
+          <Link to="/dashboard">{t("Dashboard")}</Link>
         </div>
       </nav>
 
@@ -35,17 +38,17 @@ export default function Navbar2() {
         onMouseOut={menutoggle}
         className={`${
           menu
-            ? "flex flex-col z-20 absolute left-5 p-4 border-2 text-xl gap-2 bg-button-orange text-white rounded items-start  w-72 h-72"
+            ? "flex flex-col z-20 absolute left-5 p-4 border-2 text-xl gap-2 bg-button-orange text-white rounded items-start w-72 h-72"
             : "hidden"
         }`}
       >
-        <button>Home</button>
-        <button>Shop All</button>
-        <button>Anklets</button>
-        <button>Bracelets</button>
-        <button>Earrings</button>
-        <button>Neckless</button>
-        <button>Ring</button>
+        <button>{t("Home")}</button>
+        <button>{t("Shop All")}</button>
+        <button>{t("Anklets")}</button>
+        <button>{t("Bracelets")}</button>
+        <button>{t("Earrings")}</button>
+        <button>{t("Necklace")}</button>
+        <button>{t("Ring")}</button>
       </div>
     </div>
   );

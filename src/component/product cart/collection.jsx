@@ -1,30 +1,34 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useTranslation } from "react-i18next";
+
 AOS.init();
 
 export default function Collection() {
+  const { t } = useTranslation();
+
   return (
     <div className="px-4">
       <div data-aos="fade-down" data-aos-duration="600">
         <h1 className="text-3xl sm:text-4xl m-6 sm:m-10 font-bold text-center">
-          Collections
+          {t("Collections")}
         </h1>
         <div className="w-full grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-6 justify-items-center">
           {[
             {
-              name: "Bangles",
+              name: t("Bangles"),
               img: "https://media.istockphoto.com/id/1308181463/photo/indian-traditional-wedding-gold-bangles.jpg?s=612x612&w=0&k=20&c=z0YoAn0SwpGlePtQCqIN55DJPd9ZzyIk_xOrjQD2RYM=",
             },
             {
-              name: "Bracelet",
+              name: t("Bracelet"),
               img: "https://cdn.pixabay.com/photo/2015/03/09/14/03/gold-665722_1280.jpg",
             },
             {
-              name: "Earring",
+              name: t("Earring"),
               img: "https://smarsjewelry.com/cdn/shop/files/909.1.jpg?v=1711633887",
             },
             {
-              name: "Necklace",
+              name: t("Necklace"),
               img: "https://thumbs.dreamstime.com/b/indian-jewellery-made-gold-one-neckless-earrings-193593857.jpg?w=768",
             },
           ].map((item, index) => (

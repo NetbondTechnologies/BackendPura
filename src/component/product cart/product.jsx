@@ -1,5 +1,6 @@
 import { useState } from "react";
 import WishlistButton from "../button/wishlistbutton";
+import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 AOS.init();
@@ -52,7 +53,9 @@ const ProductCard = () => {
             key={product.id}
             className="p-6 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl relative"
           >
+            
             <div className="relative w-full h-56">
+              <Link to="/singleproduct">
               <img
                 src={product.image}
                 alt={product.name}
@@ -65,7 +68,7 @@ const ProductCard = () => {
 
               <span className="absolute top-2 left-2 bg-cyan-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
                 New
-              </span>
+              </span></Link>
             </div>
             <div className="mt-4 text-center">
               <h3 className="text-lg font-bold text-gray-800">

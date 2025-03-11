@@ -14,7 +14,7 @@ import AdminProductList from "./component/admin/component/adminproductlist";
 import AdminUserView from "./component/admin/component/adminusersview";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Adminhome from "./component/admin/component/adminhome";
-
+import SingleProduct from "./component/product cart/singleproduct";
 function App() {
   return (
     <>
@@ -38,6 +38,7 @@ function App() {
             <Route path="/addproduct" element={<AddProduct />}></Route>
             <Route path="/orderlist" element={<OrderList />}></Route>
             <Route path="/productlist" element={<AdminProductList />}></Route>
+            <Route path="/singleproduct" element={<SingleProduct />}></Route>
           </Routes>
         </Layout>
       </Router>
