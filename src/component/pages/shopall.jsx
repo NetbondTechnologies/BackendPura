@@ -24,10 +24,10 @@ export default function Shopall() {
   return (
     <div>
       <Collection />
-      <Featuring />
       <Service />
       <ProductCard />
       <Topproduct />
+      <Featuring />
     </div>
   );
 }

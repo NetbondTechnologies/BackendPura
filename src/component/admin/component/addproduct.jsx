@@ -5,6 +5,7 @@ const AddProduct = () => {
   const [product, setProduct] = useState({
     name: "",
     description: "",
+    category: "",
     price: "",
   });
   const [image, setImage] = useState(null);
@@ -24,6 +25,7 @@ const AddProduct = () => {
     const formData = new FormData();
     formData.append("name", product.name);
     formData.append("description", product.description);
+    formData.append("category", product.category);
     formData.append("price", product.price);
     if (image) {
       formData.append("image", image);
@@ -88,6 +90,18 @@ const AddProduct = () => {
           </div>
 
           <div>
+            <label className="block text-gray-700 font-medium">Category</label>
+            <input
+              type="text"
+              name="category"
+              value={product.category}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none"
+              required
+            />
+          </div>
+
+          <div>
             <label className="block text-gray-700 font-medium">Price</label>
             <input
               type="number"
@@ -101,7 +115,7 @@ const AddProduct = () => {
 
           <button
             type="submit"
-            className="w-full bg-background-sky hover:bg-background-sky text-white p-2 rounded-lg transition duration-200"
+            className="w-full bg-background-sky hover:bg-button-hover text-white p-2 rounded-lg transition duration-200"
           >
             Add Product
           </button>

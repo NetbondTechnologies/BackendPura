@@ -15,6 +15,8 @@ import AdminUserView from "./component/admin/component/adminusersview";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Adminhome from "./component/admin/component/adminhome";
 import SingleProduct from "./component/product cart/singleproduct";
+import Category from "./component/pages/category";
+import Categorycart from "./component/product cart/categorycart";
 function App() {
   return (
     <>
@@ -39,6 +41,8 @@ function App() {
             <Route path="/orderlist" element={<OrderList />}></Route>
             <Route path="/productlist" element={<AdminProductList />}></Route>
             <Route path="/singleproduct" element={<SingleProduct />}></Route>
+            <Route path="/category" element={<Category />}></Route>
+            <Route path="/category/bangles" element={<Categorycart/>}></Route>
           </Routes>
         </Layout>
       </Router>

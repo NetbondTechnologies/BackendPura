@@ -1,7 +1,5 @@
 import React from "react";
 import WishlistButton from "../button/wishlistbutton";
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
-
 import AOS from "aos";
 import "aos/dist/aos.css";
 AOS.init();
@@ -14,7 +12,6 @@ const products = [
     oldPrice: 1099,
     newPrice: 999,
     available: 6,
-    rating: 5,
     image:
       "https://media.istockphoto.com/id/486592060/photo/indian-jewellery.jpg?s=612x612&w=0&k=20&c=-7hy7-dPV7q7brtV60TrCR2Uq3vhrIaEU3tUqjqNYww=",
     quantity: 4,
@@ -26,7 +23,6 @@ const products = [
     oldPrice: 1199,
     newPrice: 1099,
     available: 7,
-    rating: 4.5,
     image:
       "https://lh7-us.googleusercontent.com/18-UMH2EypsHUXNm5Z5yFe_BiBu76yKgaQNGpOO_w_9atZc6R1uwdG0imc51ueQTUwUCOJyG8Lqlbu--PeoUQGppYX16isumCocOR254QFo93e93K0B0NDykCH0ZBgqi38-ghvmaODzp2FKnF1P1rY4",
     quantity: 2,
@@ -38,30 +34,11 @@ const products = [
     oldPrice: 1399,
     newPrice: 1299,
     available: 5,
-    rating: 4.5,
     image:
       "https://media.istockphoto.com/id/486592060/photo/indian-jewellery.jpg?s=612x612&w=0&k=20&c=-7hy7-dPV7q7brtV60TrCR2Uq3vhrIaEU3tUqjqNYww=",
     quantity: 3,
   },
 ];
-
-const Rating = ({ rating }) => {
-  const fullStars = Math.floor(rating);
-  const halfStar = rating % 1 !== 0;
-  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-
-  return (
-    <div className="flex text-background-sky">
-      {[...Array(fullStars)].map((_, i) => (
-        <FaStar key={i} />
-      ))}
-      {halfStar && <FaStarHalfAlt />}
-      {[...Array(emptyStars)].map((_, i) => (
-        <FaRegStar key={i} />
-      ))}
-    </div>
-  );
-};
 
 export default function Topproduct() {
   return (
@@ -105,11 +82,8 @@ export default function Topproduct() {
                 </div>
                 <div className="flex justify-between items-center text-gray-600">
                   <p>
-                    Available:{" "}
-                    <span className="font-bold">{product.available}</span>
+                    Available: <span className="font-bold">{product.available}</span>
                   </p>
-
-                  <Rating rating={product.rating} />
                 </div>
                 <div className="w-full">
                   <button className="bg-background-sky w-40 text-regal-white hover:bg-cyan-600 rounded my-4 h-10 ">

@@ -27,7 +27,7 @@ export default function Navbar2() {
         <div className="text-button-orange flex font-bold gap-12 p-2 text-xl">
           <Link to="/">{t("Home")}</Link>
           <Link to="/shopall">{t("Shop All")}</Link>
-          <Link to="/anklets">{t("Anklets")}</Link>
+          <Link to="/category">{t("Category")}</Link>
           <Link to="/aboutus">{t("About us")}</Link>
           <Link to="/contactus">{t("Contact us")}</Link>
           <Link to="/dashboard">{t("Dashboard")}</Link>
@@ -44,7 +44,7 @@ export default function Navbar2() {
       >
         <button>{t("Home")}</button>
         <button>{t("Shop All")}</button>
-        <button>{t("Anklets")}</button>
+        <button>{t("Category")}</button>
         <button>{t("Bracelets")}</button>
         <button>{t("Earrings")}</button>
         <button>{t("Necklace")}</button>

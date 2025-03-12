@@ -1,6 +1,7 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 AOS.init();
 
@@ -36,12 +37,16 @@ export default function Collection() {
               key={index}
               className="w-40 sm:w-48 m-2 md:w-56 lg:w-64 lg:m-2 h-auto flex flex-col items-center lg:p-4 bg-white shadow-lg rounded-lg"
             >
-              <img
-                className="rounded-full w-32 sm:w-36 md:w-40 lg:w-44 h-32 sm:h-36 md:h-40 lg:h-44 object-cover"
-                src={item.img}
-                alt={item.name}
-              />
-              <h1 className="text-lg sm:text-xl font-bold mt-3">{item.name}</h1>
+              <Link to="/category/bangles">
+                <img
+                  className="rounded-full w-32 sm:w-36 md:w-40 lg:w-44 h-32 sm:h-36 md:h-40 lg:h-44 object-cover"
+                  src={item.img}
+                  alt={item.name}
+                />
+                <h1 className="text-lg sm:text-xl font-bold mt-3">
+                  {item.name}
+                </h1>
+              </Link>
             </div>
           ))}
         </div>
