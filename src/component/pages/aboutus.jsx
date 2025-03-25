@@ -37,7 +37,7 @@ export default function Aboutus() {
         <div className="w-full lg:w-1/2 flex flex-col justify-center lg:m-10 items-center">
           <h1 className="text-2xl font-bold text-black">{t("OUR STORY")}</h1>
           <p className="m-8 mb-0 font-serif leading-8 font-semibold text-gray-700">
-            {t("Nestled in the heart of exquisite craftsmanship, Arrawali Jewellers is a testament to tradition, elegance, and timeless beauty. Our journey began with a passion for fine jewelry and a commitment to offering pieces that blend artistry with luxury. With years of dedication, we have grown into a trusted name in the world of jewelry, known for our impeccable designs, premium quality, and exceptional service.")}
+            {t("Nestled in the heart of exquisite craftsmanship, Puramente International is a testament to tradition, elegance, and timeless beauty. Our journey began with a passion for fine jewelry and a commitment to offering pieces that blend artistry with luxury. With years of dedication, we have grown into a trusted name in the world of jewelry, known for our impeccable designs, premium quality, and exceptional service.")}
           </p>
           <p className="m-8 lg:flex hidden font-serif leading-8 font-semibold text-gray-700">
             {t("We take pride in our craftsmanship, sourcing only the finest materials and working with skilled artisans to bring our designs to life. Whether you're looking for a statement piece for a special occasion or a timeless treasure to cherish forever")}
@@ -59,10 +59,10 @@ export default function Aboutus() {
             {t("Why Arrawali Jewellers")}
           </h1>
           <p className="m-8 mb-0 font-serif leading-8 font-semibold text-gray-700">
-            {t("Arrawali Jewellers is renowned for its exquisite craftsmanship and timeless elegance. Our jewelry is meticulously designed, blending tradition with contemporary aesthetics to create pieces that are both beautiful and meaningful. We take pride in using only the finest materials, ensuring each piece maintains its brilliance and value for years to come. With a deep-rooted legacy in the jewelry industry,")}
+            {t("Puramente International is renowned for its exquisite craftsmanship and timeless elegance. Our jewelry is meticulously designed, blending tradition with contemporary aesthetics to create pieces that are both beautiful and meaningful. We take pride in using only the finest materials, ensuring each piece maintains its brilliance and value for years to come. With a deep-rooted legacy in the jewelry industry,")}
           </p>
           <p className="m-8 lg:flex hidden font-serif leading-8 font-semibold text-gray-700">
-            {t("You're searching for a statement piece or a cherished keepsake, Arrawali Jewellers is the perfect destination to find jewelry that reflects your unique style and sophistication.")}
+            {t("You're searching for a statement piece or a cherished keepsake, Puramente International is the perfect destination to find jewelry that reflects your unique style and sophistication.")}
           </p>
         </div>
         <div className="lg:w-1/2 flex items-center h-screen w-full">

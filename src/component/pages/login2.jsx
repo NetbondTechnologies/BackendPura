@@ -1,14 +1,14 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next"; // Import translation hook
+import { useTranslation } from "react-i18next"; 
 import Loader from "../loader/loader";
 import { Link } from "react-router-dom";
 
 AOS.init();
 
 export default function Login2() {
-  const { t } = useTranslation(); // Initialize translation hook
+  const { t } = useTranslation(); 
   const [loading, setloading] = useState(true);
   const [logindata, setlogindata] = useState({ email: "", password: "" });
 

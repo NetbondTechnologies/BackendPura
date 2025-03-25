@@ -19,7 +19,7 @@ export default function Navbar1() {
       <nav className="w-full hidden lg:flex h-32 items-center bg-background-sky">
         <img
           className="h-16 w-28 p-2 ml-6"
-          src="//www.arrawalijewellers.com/wp-content/uploads/2025/02/Asset-2-1.png"
+          src="/puramente logo.png"
           alt="logo"
         />
         <div className="w-[70%]">
@@ -70,7 +70,7 @@ export default function Navbar1() {
           </button>
         </div>
         <div>
-          <img className="h-10 w-16" src="//www.arrawalijewellers.com/wp-content/uploads/2025/02/Asset-2-1.png" alt="jewellers" />
+          <img className="h-10 w-16" src="/puramente logo.png" alt="jewellers" />
         </div>
         <div className="flex">
           <Link to="/user">

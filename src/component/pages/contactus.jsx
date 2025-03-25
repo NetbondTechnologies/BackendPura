@@ -131,7 +131,7 @@ export default function Contactus() {
                   {t("write_to_us")}
                 </h3>
                 <p className="text-gray-600 font-medium text-lg">
-                  ArrawaliJ@gmail.com
+                  PuramenteInternational@gmail.com
                 </p>
               </div>
             </div>

@@ -53,18 +53,18 @@ export default function Footer() {
         </div>
 
         {/* Mobile Footer */}
-        <div className="w-full h-32 text-sm flex lg:hidden gap-2 mb-2 mt-6 p-2">
-          <div className="flex w-1/2 flex-col gap-2">
+        <div className="w-full h-44 text-sm flex lg:hidden gap-2 mb-2 mt-6 p-2">
+          <div className="flex items-center w-1/2 flex-col gap-2">
             <button>{t("SERVICES")}</button>
             <button>{t("Blog")}</button>
             <Link to="/contactus">{t("Contact us")}</Link>
-            <button>{t("Wishlist Product")}</button>
+            <Link to="/wishlist">{t("Wishlist Product")}</Link>
           </div>
           <div className="flex w-1/2 flex-col text-sm gap-2">
             <button>{t("MY ACCOUNT")}</button>
             <button>{t("Privacy")}</button>
             <button>{t("Checkout")}</button>
-            <button>{t("Recent Order")}</button>
+           
           </div>
           <div className="w-1/2 flex flex-col gap-4">
             <input
@@ -80,7 +80,7 @@ export default function Footer() {
       </div>
       <div className="p-2">
         <h1 className="text-white m-8">
-          {t("© 2025 Arrawali Jewellers All Rights Reserved! Developed By Netbond Technologies")}
+          {t("© 2025 Puramente International All Rights Reserved! Developed By Netbond Technologies")}
         </h1>
       </div>
     </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import WishlistButton from "../button/wishlistbutton";
 import AOS from "aos";
 import "aos/dist/aos.css";
 AOS.init();
@@ -24,7 +23,7 @@ const products = [
     newPrice: 1099,
     available: 7,
     image:
-      "https://lh7-us.googleusercontent.com/18-UMH2EypsHUXNm5Z5yFe_BiBu76yKgaQNGpOO_w_9atZc6R1uwdG0imc51ueQTUwUCOJyG8Lqlbu--PeoUQGppYX16isumCocOR254QFo93e93K0B0NDykCH0ZBgqi38-ghvmaODzp2FKnF1P1rY4",
+      "https://media.istockphoto.com/id/486592060/photo/indian-jewellery.jpg?s=612x612&w=0&k=20&c=-7hy7-dPV7q7brtV60TrCR2Uq3vhrIaEU3tUqjqNYww=",
     quantity: 2,
   },
   {

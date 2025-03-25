@@ -70,7 +70,6 @@ const ProductCard = () => {
           <Filter />
         </div>
 
-        
         <select
           onChange={(e) => setSortOption(e.target.value)}
           className="bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-lg shadow-sm hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-gray-400"
@@ -94,15 +93,15 @@ const ProductCard = () => {
                   src={product.image}
                   alt={product.name}
                   className="w-full h-full object-cover rounded-lg"
-                />
-                <WishlistButton
-                  isWishlisted={wishlist[product.id]}
-                  toggleWishlist={() => toggleWishlist(product.id)}
-                />
-                <span className="absolute top-2 left-2 bg-cyan-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
-                  New
-                </span>
+                />{" "}
               </Link>
+              <WishlistButton
+                isWishlisted={wishlist[product.id]}
+                toggleWishlist={() => toggleWishlist(product.id)}
+              />
+              <span className="absolute top-2 left-2 bg-cyan-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+                New
+              </span>
             </div>
             <div className="mt-4 text-center">
               <h3 className="text-lg font-bold text-gray-800">

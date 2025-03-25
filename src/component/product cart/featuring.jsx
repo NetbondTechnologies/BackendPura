@@ -10,7 +10,7 @@ export default function Featuring() {
           <h1 className="text-2xl font-bold">{t("NEW DIAMOND RINGS")}</h1>
           <p className="text-lg text-gray-600 line-clamp-5 lg:line-clamp-none">
             {t(
-              "At Arrawali Jewellers, we are committed to delivering the finest diamond rings, crafted with precision and elegance. Our diamonds are carefully selected based on the 4Cs—Cut, Clarity, Color, and Carat Weight—to ensure exceptional brilliance and quality. Each diamond is expertly cut to maximize its sparkle, with various shapes available, including Round, Princess, and Oval. We offer diamonds with high clarity, ranging from Flawless (FL) to Slightly Included (SI), ensuring minimal imperfections."
+              "At Puramente International, we are committed to delivering the finest diamond rings, crafted with precision and elegance. Our diamonds are carefully selected based on the 4Cs—Cut, Clarity, Color, and Carat Weight—to ensure exceptional brilliance and quality. Each diamond is expertly cut to maximize its sparkle, with various shapes available, including Round, Princess, and Oval. We offer diamonds with high clarity, ranging from Flawless (FL) to Slightly Included (SI), ensuring minimal imperfections."
             )}
           </p>
         </div>

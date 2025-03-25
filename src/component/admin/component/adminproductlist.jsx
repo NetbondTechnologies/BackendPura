@@ -15,14 +15,16 @@ const initialProducts = [
     name: "Silver Ring",
     price: "$129.99",
     stock: 5,
-    image: "https://via.placeholder.com/100",
+    image:
+      "https://assets.ajio.com/medias/sys_master/root/20230818/h5W3/64de9e8aafa4cf41f5599946/-473Wx593H-466470410-silver-MODEL.jpg",
   },
   {
     id: 3,
     name: "Pearl Earrings",
     price: "$79.99",
     stock: 8,
-    image: "https://via.placeholder.com/100",
+    image:
+      "https://www.purepearls.in/wp-content/uploads/2023/05/image00014-1024x1024.jpeg",
   },
 ];
 
