@@ -6,7 +6,7 @@ const AddProduct = () => {
     name: "",
     description: "",
     category: "",
-    price: "",
+    code: "",
   });
   const [image, setImage] = useState(null);
 
@@ -56,7 +56,9 @@ const AddProduct = () => {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-gray-700 font-medium">Product Name</label>
+            <label className="block text-gray-700 font-medium">
+              Product Name
+            </label>
             <input
               type="text"
               name="name"
@@ -68,7 +70,9 @@ const AddProduct = () => {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium">Description</label>
+            <label className="block text-gray-700 font-medium">
+              Description
+            </label>
             <textarea
               name="description"
               value={product.description}
@@ -79,7 +83,9 @@ const AddProduct = () => {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium">Product Image</label>
+            <label className="block text-gray-700 font-medium">
+              Product Image
+            </label>
             <input
               type="file"
               accept="image/*"
@@ -102,11 +108,10 @@ const AddProduct = () => {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium">Price</label>
+            <label className="block text-gray-700 font-medium">Product Code</label>
             <input
-              type="number"
-              name="price"
-              value={product.price}
+              name="code"
+              value={product.code}
               onChange={handleChange}
               className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none"
               required

@@ -3,9 +3,17 @@ import Collection from "../product cart/collection";
 import ProductCard from "../product cart/product";
 import Topproduct from "../product cart/topproduct";
 import { useEffect, useState } from "react";
-import Service from "../services/services";
+import InfoCards from "../newcomponent/info";
+import FairTradePrinciples from "../newcomponent/tradeinfromation";
+import WhoWeAre from "../newcomponent/woweare";
+import HelpSection from "../newcomponent/help";
+import Jewelryinfo from "../newcomponent/Jewelryinfo";
+
+
+
+
 import Loader from "../loader/loader";
-import Featuring from "../product cart/featuring";
+
 export default function Home() {
   const [loading, setloading] = useState(true);
 
@@ -26,11 +34,14 @@ export default function Home() {
   return (
     <div>
       <Carousel />
+      <InfoCards/>
       <Collection />
-      <Featuring />
-      <Service />
       <ProductCard />
-      <Topproduct />
+      <Topproduct /> 
+      <WhoWeAre/>
+      <FairTradePrinciples/>
+      <Jewelryinfo/>
+      <HelpSection/>
     </div>
   );
 }

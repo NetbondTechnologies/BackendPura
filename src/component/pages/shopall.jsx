@@ -3,8 +3,7 @@ import ProductCard from "../product cart/product";
 import { useState, useEffect } from "react";
 import Loader from "../loader/loader";
 import Collection from "../product cart/collection";
-import Service from "../services/services";
-import Featuring from "../product cart/featuring";
+
 export default function Shopall() {
   const [loading, setloading] = useState(true);
 
@@ -24,10 +23,8 @@ export default function Shopall() {
   return (
     <div>
       <Collection />
-      <Service />
       <ProductCard />
       <Topproduct />
-      <Featuring />
     </div>
   );
 }

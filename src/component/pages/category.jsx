@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Featuring from "../product cart/featuring";
+
 import Collection from "../product cart/collection";
 import { useEffect,useState } from "react";
 import Loader from "../loader/loader";
@@ -22,7 +22,7 @@ export default function Category() {
   return (
     <div>
       <Collection />
-      <Featuring />
+      
     </div>
   );
 }

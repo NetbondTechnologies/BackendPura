@@ -19,7 +19,6 @@ export default function Categorycart() {
         <div className="mt-4 text-center">
           <h3 className="text-lg font-bold text-gray-800">Bangeles</h3>
           <p className="text-gray-600 text-sm mt-1">
-        
           </p>
           <button className="mt-4 w-full bg-background-sky hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300">
             Add To Cart

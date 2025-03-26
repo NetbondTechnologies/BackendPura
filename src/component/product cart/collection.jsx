@@ -17,8 +17,8 @@ export default function Collection() {
         <div className="w-full grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-6 justify-items-center">
           {[
             {
-              name: t("Bangles"),
-              img: "https://media.istockphoto.com/id/1308181463/photo/indian-traditional-wedding-gold-bangles.jpg?s=612x612&w=0&k=20&c=z0YoAn0SwpGlePtQCqIN55DJPd9ZzyIk_xOrjQD2RYM=",
+              name: t("Ring"),
+              img: "/ring.jpg",
             },
             {
               name: t("Bracelet"),
@@ -35,7 +35,7 @@ export default function Collection() {
           ].map((item, index) => (
             <div
               key={index}
-              className="w-40 sm:w-48 m-2 md:w-56 lg:w-64 lg:m-2 h-auto flex flex-col items-center lg:p-4 bg-white shadow-lg rounded-lg"
+              className="w-40 bg-white sm:w-48 m-2 md:w-56 lg:w-64 lg:m-2 h-auto flex flex-col items-center lg:p-4  shadow-lg rounded-lg"
             >
               <Link to="/category/bangles">
                 <img
