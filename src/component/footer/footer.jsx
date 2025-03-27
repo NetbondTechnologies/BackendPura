@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { FaYoutube } from "react-icons/fa6";
+import { FaFacebook } from "react-icons/fa";
+
+import { AiFillInstagram } from "react-icons/ai";
 
 export default function Footer() {
   const { t } = useTranslation(); // i18n hook
@@ -49,6 +53,35 @@ export default function Footer() {
             <button className="bg-background-sky w-44 h-10 mt-4">
               {t("SUBSCRIBE")}
             </button>
+            <div className="flex py-6 gap-4">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="
+                https://www.instagram.com/puramenteinternational/
+                "
+              >
+                <AiFillInstagram className="h-6 hover:text-cyan-500 w-8" />
+              </a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="
+                https://www.facebook.com/puramenteinternational1/
+                "
+              >
+                <FaFacebook className="h-6 hover:text-cyan-500 w-8" />
+              </a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="
+                https://www.youtube.com/@puramenteinternational1982
+                "
+              >
+                <FaYoutube className="h-6 hover:text-cyan-500 w-8" />
+              </a>
+            </div>
           </div>
         </div>
 
@@ -64,23 +97,54 @@ export default function Footer() {
             <button>{t("MY ACCOUNT")}</button>
             <button>{t("Privacy")}</button>
             <button>{t("Checkout")}</button>
-           
           </div>
           <div className="w-1/2 flex flex-col gap-4">
             <input
-              placeholder={t("Enter email id")}
+              placeholder={t("Enter email id")} 
               className="w-36 font-bold text-gray-500 p-2 h-6 focus:outline-0 bg-white"
               type="text"
             />
             <button className="bg-background-sky font-bold w-36 h-8">
               {t("SUBSCRIBE")}
             </button>
+            <div className="flex gap-4">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="
+                https://www.instagram.com/puramenteinternational/
+                "
+              >
+                <AiFillInstagram className="h-6 hover:text-cyan-500 w-8" />
+              </a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="
+                https://www.facebook.com/puramenteinternational1/
+                "
+              >
+                <FaFacebook className="h-6 hover:text-cyan-500 w-8" />
+              </a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="
+                https://www.youtube.com/@puramenteinternational1982
+                "
+              >
+                <FaYoutube className="h-6 hover:text-cyan-500 w-8" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
+
       <div className="p-2">
         <h1 className="text-white m-8">
-          {t("© 2025 Puramente International All Rights Reserved! Developed By Netbond Technologies")}
+          {t(
+            "© 2025 Puramente International All Rights Reserved! Developed By Netbond Technologies"
+          )}
         </h1>
       </div>
     </div>

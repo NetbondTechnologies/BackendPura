@@ -5,75 +5,106 @@ const Jewelryinfo = () => {
 
   const sections = {
     intro: {
-      title: "Why Puramente International Excels",
+      title: "Why Puramente International",
       content: (
-        <div className="space-y-6 text-gray-600 leading-relaxed">
+        <div className="space-y-4 text-gray-600 leading-relaxed">
           <p>
-            In the dazzling world of jewelry, where artistry meets craftsmanship, Puramente International shines as a beacon of excellence. As one of India’s most trusted jewelry manufacturers, we are your premier destination for custom jewelry and wholesale brass and 925 sterling silver pieces.
+            In the dazzling world of jewelry, where artistry meets
+            craftsmanship, Puramente International shines as a beacon of
+            excellence. As one of India’s most trusted jewelry manufacturers, we
+            are your premier destination for custom jewelry and wholesale brass
+            and 925 sterling silver pieces.
           </p>
           <p>
-            Serving Jewelry Retailers, Brands, Designers, and Wholesalers worldwide, we invite you to embark on a sparkling journey with us!
+            Serving Jewelry Retailers, Brands, Designers, and Wholesalers
+            worldwide, we invite you to embark on a sparkling journey with us!
           </p>
         </div>
       ),
+      image: "/companypicture.webp",
     },
     welcome: {
       title: "Welcome to Your Jewelry Journey",
       content: (
-        <div className="space-y-6 text-gray-600 leading-relaxed">
+        <div className="space-y-4 text-gray-600 leading-relaxed">
           <p>
-            Whether you’re dreaming of entering the silver jewelry realm or scaling your existing business, you’ve found your perfect partner. Discovering the ideal manufacturer and wholesaler is a thrilling adventure.
+            Whether you’re dreaming of entering the silver jewelry realm or
+            scaling your existing business, you’ve found your perfect partner.
+            Discovering the ideal manufacturer and wholesaler is a thrilling
+            adventure.
           </p>
           <p>
-            We provide more than a roadmap—we offer a blueprint for success with unique design suggestions to elevate your brand. Let’s create brilliance together!
+            We provide more than a roadmap—we offer a blueprint for success with
+            unique design suggestions to elevate your brand. Let’s create
+            brilliance together!
           </p>
         </div>
       ),
+      image: "/journey.webp",
     },
     custom: {
       title: "Crafting Dreams: Custom Jewelry",
       content: (
-        <div className="space-y-6 text-gray-600 leading-relaxed">
+        <div className="space-y-4 text-gray-600 leading-relaxed">
           <p>
-            At Puramente International, jewelry is a canvas of art and emotion. Our custom jewelry manufacturing transforms your sketches and dreams into tangible treasures.
+            At Puramente International, jewelry is a canvas of art and emotion.
+            Our custom jewelry manufacturing transforms your sketches and dreams
+            into tangible treasures.
           </p>
           <p>
-            With skilled artisans and a blend of handmade and casting techniques, we craft each piece with passion, turning your vision into timeless keepsakes.
+            With skilled artisans and a blend of handmade and casting
+            techniques, we craft each piece with passion, turning your vision
+            into timeless keepsakes.
           </p>
         </div>
       ),
+      image: "/POSTERS/2.JPG",
     },
     materials: {
       title: "Unveiling the Sparkle: Our Materials",
       content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-gradient-to-br from-cyan-100 to-cyan-200 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
-            <h3 className="text-xl font-semibold text-cyan-800 mb-3">Brass: Versatile Elegance</h3>
-            <p className="text-gray-600">
-              With its warm, golden hue, our nickel-free, hypoallergenic brass offers intricate designs spanning vintage charm to modern sophistication.
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="bg-gradient-to-br from-cyan-100 to-cyan-200 p-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+            <h3 className="text-lg font-semibold text-cyan-800 mb-2">
+              Brass: Versatile Elegance
+            </h3>
+            <p className="text-gray-600 text-sm">
+              With its warm, golden hue, our nickel-free, hypoallergenic brass
+              offers intricate designs spanning vintage charm to modern
+              sophistication.
             </p>
           </div>
-          <div className="bg-gradient-to-br from-cyan-100 to-cyan-200 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
-            <h3 className="text-xl font-semibold text-cyan-800 mb-3">925 Sterling Silver: Timeless Beauty</h3>
-            <p className="text-gray-600">
-              Known as the “metal of the moon,” our sterling silver radiates a luminous glow, crafted into jewelry that echoes centuries of tradition.
+          <div className="bg-gradient-to-br from-cyan-100 to-cyan-200 p-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+            <h3 className="text-lg font-semibold text-cyan-800 mb-2">
+              925 Sterling Silver: Timeless Beauty
+            </h3>
+            <p className="text-gray-600 text-sm">
+              Known as the “metal of the moon,” our sterling silver radiates a
+              luminous glow, crafted into jewelry that echoes centuries of
+              tradition.
             </p>
           </div>
         </div>
       ),
+      image:
+        "https://img.freepik.com/free-photo/flat-lay-bead-working-essentials_23-2148815819.jpg?t=st=1743063621~exp=1743067221~hmac=b3a58eb4ecdc11f080df09684d6f78d7382046fc294d3195ae4bdf4860551d65&w=1380",
     },
     global: {
       title: "Our Global Network",
       content: (
         <p className="text-gray-600 leading-relaxed">
-          From Milan to Marrakech, our reach spans the globe. We deliver quality and creativity, ensuring every piece reflects your brand and captivates customers worldwide.
+          From Milan to Marrakech, our reach spans the globe. We deliver quality
+          and creativity, ensuring every piece reflects your brand and
+          captivates customers worldwide.
         </p>
       ),
+      image:
+        "https://img.freepik.com/free-vector/character-illustration-people-with-global-network-concept_53876-43079.jpg?t=st=1743063672~exp=1743067272~hmac=c5978a4eb0735eec792988638d6eb614244f38c214590221c959670ad33a2c47&w=1380",
     },
     why: {
       title: "Why Choose Puramente",
       content: (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-600">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-600">
           {[
             "Customization: Your vision crafted into unique masterpieces",
             "Materials of Distinction: Premium brass and sterling silver",
@@ -83,54 +114,61 @@ const Jewelryinfo = () => {
             "Quality Assurance: Meticulous checks for excellence",
           ].map((item, index) => (
             <div key={index} className="flex items-start">
-              <span className="text-cyan-500 mr-3 text-xl">✦</span>
-              <span>{item}</span>
+              <span className="text-cyan-500 mr-2 text-lg">✦</span>
+              <span className="text-sm">{item}</span>
             </div>
           ))}
         </div>
       ),
+      image: "/why.webp",
     },
     conclusion: {
       title: "Your Journey Begins",
       content: (
-        <div className="space-y-6 text-gray-600 leading-relaxed">
+        <div className="space-y-4 text-gray-600 leading-relaxed">
           <p>
-            In jewelry, the journey is as precious as the destination. As India’s premier manufacturer, our dedication to excellence and customization sets us apart.
+            In jewelry, the journey is as precious as the destination. As
+            India’s premier manufacturer, our dedication to excellence and
+            customization sets us apart.
           </p>
           <p>
-            Retailers, brands, designers, and wholesalers—join us to bring your vision to life. Let’s craft a sparkling legacy together!
+            Retailers, brands, designers, and wholesalers—join us to bring your
+            vision to life. Let’s craft a sparkling legacy together!
           </p>
         </div>
       ),
+      image: "https://img.freepik.com/free-vector/milestone-route-map-template-with-modern-execution-plan_1017-44254.jpg?t=st=1743063825~exp=1743067425~hmac=bf9be63bd8a56fb919896fce01e842058e8274f02352a392d7c445eb4d283094&w=1380",
     },
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-100 via-cyan-300 to-cyan-600 flex flex-col font-sans antialiased">
       {/* Header */}
-      <header className="bg-gradient-to-r from-cyan-800 to-cyan-900 text-white py-16 relative overflow-hidden">
+      <header className="bg-gradient-to-r from-cyan-800 to-cyan-900 text-white py-8 sm:py-12 lg:py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/diamond-upholstery.png')] opacity-10"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight drop-shadow-lg">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight drop-shadow-lg">
             Puramente International
           </h1>
-          <p className="text-lg sm:text-xl mt-4 opacity-90 font-light">
+          <p className="text-base sm:text-lg lg:text-xl mt-2 sm:mt-4 opacity-90 font-light">
             India's Finest Jewelry Manufacturer
           </p>
         </div>
       </header>
 
       {/* Main Layout */}
-      <div className="flex-1 flex flex-col md:flex-row container mx-auto px-4 sm:px-6 lg:px-8 py-12 gap-8 lg:gap-10">
+      <div className="flex-1 flex flex-col md:flex-row container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 gap-6 lg:gap-10">
         {/* Sidebar Navigation */}
-        <aside className="md:w-1/4 bg-gradient-to-b from-cyan-50 to-cyan-200 rounded-2xl shadow-lg p-6 sticky top-16 h-fit transition-transform duration-300 hover:scale-[1.02]">
-          <h2 className="text-2xl font-semibold text-cyan-800 mb-6">Explore</h2>
-          <nav className="space-y-3">
+        <aside className="md:w-1/4 bg-gradient-to-b from-cyan-50 to-cyan-200 rounded-2xl shadow-lg p-4 sm:p-6 sticky top-4 sm:top-16 h-fit transition-transform duration-300 hover:scale-[1.01] md:hover:scale-[1.02]">
+          <h2 className="text-xl sm:text-2xl font-semibold text-cyan-800 mb-4 sm:mb-6">
+            Explore
+          </h2>
+          <nav className="space-y-2 sm:space-y-3">
             {Object.keys(sections).map((key) => (
               <button
                 key={key}
                 onClick={() => setActiveSection(key)}
-                className={`w-full text-left py-3 px-4 rounded-lg transition-all duration-300 text-base font-medium ${
+                className={`w-full text-left py-2 sm:py-3 px-3 sm:px-4 rounded-lg transition-all duration-300 text-sm sm:text-base font-medium ${
                   activeSection === key
                     ? "bg-cyan-600 text-white shadow-md"
                     : "text-cyan-700 hover:bg-cyan-300 hover:text-cyan-900"
@@ -143,23 +181,32 @@ const Jewelryinfo = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="md:w-3/4 bg-gradient-to-b from-cyan-50 to-cyan-200 rounded-2xl shadow-lg p-6 sm:p-8 animate-fade-in">
-          <h2 className="text-3xl sm:text-4xl font-bold text-cyan-800 mb-6 tracking-tight">
+        <main className="md:w-3/4 bg-gradient-to-b from-cyan-50 to-cyan-200 rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 animate-fade-in">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-cyan-800 mb-4 sm:mb-6 tracking-tight">
             {sections[activeSection].title}
           </h2>
+          {/* Display Image Above Content */}
+
           {sections[activeSection].content}
           {activeSection === "conclusion" && (
-            <button className="mt-8 bg-gradient-to-r from-cyan-600 to-cyan-800 text-white px-6 py-3 rounded-full font-semibold hover:from-cyan-700 hover:to-cyan-900 transition-all duration-300 shadow-md hover:shadow-lg">
+            <button className="mt-4 sm:mt-6 lg:mt-8 bg-gradient-to-r from-cyan-600 to-cyan-800 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-cyan-700 hover:to-cyan-900 transition-all duration-300 shadow-md hover:shadow-lg text-sm sm:text-base">
               Start Your Journey
             </button>
+          )}
+          {sections[activeSection].image && (
+            <img
+              src={sections[activeSection].image}
+              alt={sections[activeSection].title}
+              className="w-full h-48 sm:h-64 md:h-72 lg:h-96 rounded-lg shadow-md mb-4 sm:mb-6 object-cover"
+            />
           )}
         </main>
       </div>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-cyan-900 to-cyan-800 text-white py-8">
+      <footer className="bg-gradient-to-r from-cyan-900 to-cyan-800 text-white py-6 sm:py-8">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-lg font-light opacity-90">
+          <p className="text-sm sm:text-lg font-light opacity-90">
             Puramente International - Where Craftsmanship Meets Creativity
           </p>
         </div>

@@ -23,28 +23,42 @@ export default function Carousel() {
       <SwiperSlide>
         <img
           className="w-full"
-          src="https://media.istockphoto.com/id/486592060/photo/indian-jewellery.jpg?s=612x612&w=0&k=20&c=-7hy7-dPV7q7brtV60TrCR2Uq3vhrIaEU3tUqjqNYww="
+          src="/POSTERS/1.JPG"
           alt=""
         />
       </SwiperSlide>
       <SwiperSlide>
         <img
           className="w-full"
-          src="https://lh7-us.googleusercontent.com/18-UMH2EypsHUXNm5Z5yFe_BiBu76yKgaQNGpOO_w_9atZc6R1uwdG0imc51ueQTUwUCOJyG8Lqlbu--PeoUQGppYX16isumCocOR254QFo93e93K0B0NDykCH0ZBgqi38-ghvmaODzp2FKnF1P1rY4"
+          src="/POSTERS/2.JPG"
           alt=""
         />
       </SwiperSlide>
       <SwiperSlide>
         <img
           className="w-full"
-          src="https://media.istockphoto.com/id/672126138/photo/indian-traditional-gold-necklace.jpg?s=612x612&w=0&k=20&c=Ws53gwkpu1Yc3_DcRzkilI9h3iaS9cMx20yDj-qXIaM="
+          src="/POSTERS/3.JPG"
           alt=""
         />
       </SwiperSlide>
       <SwiperSlide>
         <img
           className="w-full"
-          src="https://media.istockphoto.com/id/1133525210/photo/pair-of-fancy-golden-designer-earrings-closeup-macro-image-on-red-background.jpg?s=612x612&w=0&k=20&c=ZUknXtyeMhsS9Tdd2nRt8DkOTHc-6tmeG-KdTV_ODLU="
+          src="/POSTERS/4.JPG"
+          alt=""
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <img
+          className="w-full"
+          src="/POSTERS/5.JPG"
+          alt=""
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <img
+          className="w-full"
+          src="/POSTERS/6.JPG"
           alt=""
         />
       </SwiperSlide>

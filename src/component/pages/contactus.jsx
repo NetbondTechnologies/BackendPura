@@ -141,10 +141,11 @@ export default function Contactus() {
 
       {/* Offline Store Section */}
       <div className="w-full items-center gap-10 lg:gap-0 flex flex-col lg:flex-row h-screen">
-        <div className="lg:w-1/2 border">
+        <div className="lg:w-1/2 h-1/2 lg:h-screen border">
           <img
-            src="https://images.pexels.com/photos/31004381/pexels-photo-31004381/free-photo-of-historic-arcade-shopping-mall-in-leeds.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            alt=""
+            src="/puramentestore.jpeg"
+            alt="store"
+            className="w-full h-full"
           />
         </div>
         <div className="lg:w-1/2 flex items-center flex-col">
@@ -154,10 +155,10 @@ export default function Contactus() {
           <p className="m-12 text-xl font-semibold text-black">
             {t("store_address")}
           </p>
-          <p className="text-xl font-semibold text-black">
+          <p className="lg:text-xl font-semibold text-black">
             {t("phone")}: 1414911855, +91 7023555055
           </p>
-          <p className="text-xl font-semibold text-black">{t("timings")}</p>
+          <p className="lg:text-xl font-semibold text-black">{t("timings")}</p>
         </div>
       </div>
     </div>

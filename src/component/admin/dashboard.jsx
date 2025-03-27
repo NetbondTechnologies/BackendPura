@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
+  File,
   FilePlus,
   Menu,
   TableProperties,
@@ -19,7 +20,7 @@ export default function Dashboard() {
       {/* Desktop Header */}
       <div className="hidden lg:flex justify-between items-center bg-black text-white py-6 px-8">
         <h1 className="text-2xl font-bold">Admin Control</h1>
-        <nav className="flex mx-24 gap-16">
+        <nav className="flex mx-24 gap-10">
           <Link to="/addproduct" className="flex items-center gap-2">
             <FilePlus /> Add Product
           </Link>
@@ -31,6 +32,9 @@ export default function Dashboard() {
           </Link>
           <Link to="/productlist" className="flex items-center gap-2">
             <TableProperties /> Product list
+          </Link>
+          <Link to="/excelfile" className="flex items-center gap-2">
+            <File/> Excel File Upload
           </Link>
         </nav>
       </div>
@@ -58,6 +62,9 @@ export default function Dashboard() {
           </Link>
           <Link to="/productlist" className="flex items-center gap-2">
             <TicketPercent /> Productlist
+          </Link>
+          <Link to="/excelfile" className="flex items-center gap-2">
+            <File/> Excel File Upload
           </Link>
         </div>
       )}

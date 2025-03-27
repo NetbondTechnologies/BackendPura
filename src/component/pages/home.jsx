@@ -8,9 +8,8 @@ import FairTradePrinciples from "../newcomponent/tradeinfromation";
 import WhoWeAre from "../newcomponent/woweare";
 import HelpSection from "../newcomponent/help";
 import Jewelryinfo from "../newcomponent/Jewelryinfo";
-
-
-
+import TradeBanner from "../newcomponent/tradebanner";
+import VideoSection from "../newcomponent/youtubevideo";
 
 import Loader from "../loader/loader";
 
@@ -30,18 +29,19 @@ export default function Home() {
       </div>
     );
   }
-
   return (
     <div>
       <Carousel />
-      <InfoCards/>
       <Collection />
       <ProductCard />
-      <Topproduct /> 
-      <WhoWeAre/>
-      <FairTradePrinciples/>
-      <Jewelryinfo/>
-      <HelpSection/>
+      <Topproduct />
+      <WhoWeAre />
+      <TradeBanner />
+      <FairTradePrinciples />
+      <InfoCards />
+      <Jewelryinfo />
+      <VideoSection />
+      <HelpSection />
     </div>
   );
 }

@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import FairTradePrinciples from "../newcomponent/tradeinfromation";
+import TradeBanner from "../newcomponent/tradebanner";
+import VideoSection from "../newcomponent/youtubevideo";
+import HelpSection from "../newcomponent/help";
 
 import Loader from "../loader/loader";
 import AOS from "aos";
@@ -81,7 +84,10 @@ export default function Aboutus() {
           />
         </div>
       </div>
+      <TradeBanner />
       <FairTradePrinciples />
+      <VideoSection />
+      <HelpSection />
     </div>
   );
 }

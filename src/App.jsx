@@ -17,6 +17,7 @@ import Adminhome from "./component/admin/component/adminhome";
 import SingleProduct from "./component/product cart/singleproduct";
 import Category from "./component/pages/category";
 import Categorycart from "./component/product cart/categorycart";
+import ExcelUploader from "./component/admin/component/exceluploader";
 function App() {
   return (
     <>
@@ -43,6 +44,7 @@ function App() {
             <Route path="/singleproduct" element={<SingleProduct />}></Route>
             <Route path="/category" element={<Category />}></Route>
             <Route path="/category/bangles" element={<Categorycart/>}></Route>
+            <Route path="/excelfile" element={<ExcelUploader/>}></Route>
           </Routes>
         </Layout>
       </Router>
