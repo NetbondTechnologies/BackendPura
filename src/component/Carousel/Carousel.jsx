@@ -23,13 +23,6 @@ export default function Carousel() {
       <SwiperSlide>
         <img
           className="w-full"
-          src="/POSTERS/1.JPG"
-          alt=""
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <img
-          className="w-full"
           src="/POSTERS/2.JPG"
           alt=""
         />
@@ -38,6 +31,13 @@ export default function Carousel() {
         <img
           className="w-full"
           src="/POSTERS/3.JPG"
+          alt=""
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <img
+          className="w-full"
+          src="/POSTERS/1.JPG"
           alt=""
         />
       </SwiperSlide>

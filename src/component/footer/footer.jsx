@@ -16,7 +16,7 @@ export default function Footer() {
             <button className="text-lg">{t("SERVICES")}</button>
             <button>{t("Blog")}</button>
             <Link to="/contactus">{t("Contact us")}</Link>
-            <Link to="/wishlist">{t("Wishlist Product")}</Link>
+            <Link to="/cart">{t("Wishlist Product")}</Link>
           </div>
 
           <div className="flex w-1/4 flex-col h-36 ml-10 mt-8 gap-2 items-start">

@@ -29,11 +29,11 @@ export default function Navbar2() {
           alt={t("CATEGORIES")}
         />
         <div className="text-button-orange flex font-bold gap-10 p-2 text-xl">
-          <Link to="/">{t("Home")}</Link>
-          <Link to="/shopall">{t("Shop All")}</Link>
-          <Link to="/category">{t("Category")}</Link>
-          <Link to="/aboutus">{t("About us")}</Link>
-          <Link to="/contactus">{t("Contact us")}</Link>
+          <Link className="hover:text-cyan-600" to="/">{t("Home")}</Link>
+          <Link className="hover:text-cyan-600" to="/shopall">{t("Shop All")}</Link>
+          <Link className="hover:text-cyan-600" to="/category">{t("Category")}</Link>
+          <Link className="hover:text-cyan-600" to="/aboutus">{t("About us")}</Link>
+          <Link className="hover:text-cyan-600" to="/contactus">{t("Contact us")}</Link>
           <Link className="text-center  text-black " to="/dashboard">{t("Dashboard")}</Link>
           <div className="flex  gap-4">
             <a
