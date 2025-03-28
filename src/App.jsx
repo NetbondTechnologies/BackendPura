@@ -43,7 +43,7 @@ function App() {
             <Route path="/productlist" element={<AdminProductList />}></Route>
             <Route path="/singleproduct" element={<SingleProduct />}></Route>
             <Route path="/category" element={<Category />}></Route>
-            <Route path="/category/bangles" element={<Categorycart/>}></Route>
+            <Route path="/category/:category" element={<Categorycart/>}></Route>
             <Route path="/excelfile" element={<ExcelUploader/>}></Route>
           </Routes>
         </Layout>

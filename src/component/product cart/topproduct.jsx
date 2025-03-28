@@ -12,11 +12,20 @@ const products = [
 
 export default function TopProduct() {
   const [startIndex, setStartIndex] = useState(0);
-  const itemsPerPage = 4;
+  const [itemsPerPage, setItemsPerPage] = useState(4);
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true, easing: "ease-out-cubic" });
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+    return () => window.removeEventListener("resize", updateItemsPerPage);
   }, []);
+
+  const updateItemsPerPage = () => {
+    if (window.innerWidth < 640) setItemsPerPage(2);
+    else if (window.innerWidth < 1024) setItemsPerPage(3);
+    else setItemsPerPage(4);
+  };
 
   const scrollLeft = () => {
     setStartIndex((prev) => Math.max(prev - 1, 0));
@@ -29,80 +38,58 @@ export default function TopProduct() {
   return (
     <section className="py-16 bg-gradient-to-br from-cyan-50 via-white to-cyan-100 overflow-hidden">
       <div className="container mx-auto px-4">
-        {/* Header */}
         <div data-aos="zoom-in" className="text-center p-7 mb-12 relative">
-          <h2 className="text-4xl h-20 sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-cyan-600 via-cyan-700 to-cyan-800 bg-clip-text text-transparent relative z-10">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-cyan-600 via-cyan-700 to-cyan-800 bg-clip-text text-transparent relative z-10">
             Trending Jewellery
           </h2>
-          <div className="w-32 h-1 bg-cyan-600 mx-auto mt-4 rounded-full relative z-10" />
-          <div className="absolute inset-0 top-5 bg-cyan-200/20 h-24 -mt-12 rounded-full blur-3xl transform scale-150" />
+          <div className="w-32 h-1 bg-cyan-600 mx-auto mt-4 rounded-full" />
         </div>
 
-        {/* Scrollable Product List */}
         <div className="relative flex items-center">
-          {/* Scroll Left Button */}
           <button
             onClick={scrollLeft}
             disabled={startIndex === 0}
-            className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-cyan-600 text-white p-3 rounded-full shadow-lg z-10 transition ${
-              startIndex === 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-cyan-700"
-            }`}
+            className={`absolute left-2 md:left-0 top-1/2 transform -translate-y-1/2 bg-cyan-600 text-white p-3 rounded-full shadow-lg z-10 transition ${startIndex === 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-cyan-700"}`}
           >
             ◀
           </button>
 
-          <div className="flex space-x-6 overflow-hidden w-full justify-center p-4">
+          <div className="flex space-x-4 md:space-x-6 overflow-hidden w-full justify-center p-4">
             {products.slice(startIndex, startIndex + itemsPerPage).map((product, index) => (
               <div
                 key={product.id}
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
-                className="w-64 bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-cyan-100"
+                className="w-1/2 sm:w-64 bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-cyan-100"
               >
-                {/* Image */}
-                <div className="relative h-56 overflow-hidden">
+                <div className="relative h-40 sm:h-56 overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-
-                {/* Content */}
                 <div className="p-4">
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm text-cyan-600 font-medium bg-cyan-50 px-2 py-1 rounded-full capitalize">
+                    <span className="text-xs sm:text-sm text-cyan-600 font-medium bg-cyan-50 px-2 py-1 rounded-full capitalize">
                       {product.category}
                     </span>
                     <span className="text-xs text-cyan-500 font-mono bg-cyan-50 px-2 py-1 rounded-full">
                       {product.code}
                     </span>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-cyan-700 transition-colors line-clamp-2">
+                  <h3 className="text-sm sm:text-lg font-semibold text-gray-800 mb-2">
                     {product.title}
                   </h3>
-                 
-
-                  {/* Button */}
-                  <button className="w-full bg-gradient-to-r from-cyan-600 to-cyan-700 text-white py-2 px-4 rounded-lg font-medium text-sm transition-all duration-300 hover:from-cyan-700 hover:to-cyan-800 hover:shadow-lg transform hover:-translate-y-1 flex items-center justify-center gap-2">
-                    <span>Add to List</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                  </button>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Scroll Right Button */}
           <button
             onClick={scrollRight}
             disabled={startIndex >= products.length - itemsPerPage}
-            className={`absolute right-0 top-1/2 transform -translate-y-1/2 bg-cyan-600 text-white p-3 rounded-full shadow-lg z-10 transition ${
-              startIndex >= products.length - itemsPerPage ? "opacity-50 cursor-not-allowed" : "hover:bg-cyan-700"
-            }`}
+            className={`absolute right-2 md:right-0 top-1/2 transform -translate-y-1/2 bg-cyan-600 text-white p-3 rounded-full shadow-lg z-10 transition ${startIndex >= products.length - itemsPerPage ? "opacity-50 cursor-not-allowed" : "hover:bg-cyan-700"}`}
           >
             ▶
           </button>

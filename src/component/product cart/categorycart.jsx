@@ -1,30 +1,54 @@
-import { Link } from "react-router-dom";
-export default function Categorycart() {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-10">
-      <div className="p-6 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl relative">
-        <div className="relative w-full h-56">
-          <Link to="/singleproduct">
-            <img
-              src="https://media.istockphoto.com/id/1308181463/photo/indian-traditional-wedding-gold-bangles.jpg?s=612x612&w=0&k=20&c=z0YoAn0SwpGlePtQCqIN55DJPd9ZzyIk_xOrjQD2RYM="
-              alt="product"
-              className="w-full h-full object-cover rounded-lg"
-            />
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import BaseURL from "../../baseurl";
 
-            <span className="absolute top-2 left-2 bg-cyan-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
-              New
-            </span>
-          </Link>
+export default function CategoryPage() {
+  const { category } = useParams(); // Get category from URL
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await axios.get(`${BaseURL}/api/products/category/${category}`);
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setError("Failed to load products. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [category]);
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold text-center capitalize mb-6">{category}</h1>
+
+      {loading && <p className="text-center">Loading...</p>}
+      {error && <p className="text-center text-red-500">{error}</p>}
+
+      {!loading && !error && products.length === 0 && (
+        <p className="text-center">No products found in this category.</p>
+      )}
+
+      {!loading && !error && products.length > 0 && (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {products.map((product) => (
+            <div key={product._id} className="bg-white shadow-lg rounded-lg p-4">
+              <img className="w-full h-40 object-cover rounded-md" src={product.imageurl} alt={product.name} />
+              <h2 className="text-lg font-semibold mt-2">{product.name}</h2>
+              <p className="text-gray-600">{product.description}</p>
+            </div>
+          ))}
         </div>
-        <div className="mt-4 text-center">
-          <h3 className="text-lg font-bold text-gray-800">Bangeles</h3>
-          <p className="text-gray-600 text-sm mt-1">
-          </p>
-          <button className="mt-4 w-full bg-background-sky hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300">
-            Add To Cart
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
