@@ -7,6 +7,7 @@ i18n.use(initReactI18next).init({
       translation: {
         searchPlaceholder: "I'm shopping for...",
         SEARCH: "Search",
+        Category: "Category",
         Login: "Login",
         Language: "Language",
         Home: "Home",
@@ -111,6 +112,7 @@ i18n.use(initReactI18next).init({
         Anklets: "पायल",
         Bracelets: "कंगन",
         Earrings: "कान की बाली",
+        Category: "श्रेणी",
         Necklace: "हार",
         "Contact us": "संपर्क करें",
         "About us": "हमारे बारे में",

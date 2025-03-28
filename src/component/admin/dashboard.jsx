@@ -20,21 +20,21 @@ export default function Dashboard() {
       {/* Desktop Header */}
       <div className="hidden lg:flex justify-between items-center bg-black text-white py-6 px-8">
         <h1 className="text-2xl font-bold">Admin Control</h1>
-        <nav className="flex mx-24 gap-10">
+        <nav className="flex mx-24 gap-16">
           <Link to="/addproduct" className="flex items-center gap-2">
             <FilePlus /> Add Product
           </Link>
-          <Link to="/orderlist" className="flex items-center gap-2">
+          {/* <Link to="/orderlist" className="flex items-center gap-2">
             <View /> View Order
-          </Link>
+          </Link> */}
           <Link to="/userview" className="flex items-center gap-2">
             <UserRoundSearch /> View User
           </Link>
-          <Link to="/productlist" className="flex items-center gap-2">
+          {/* <Link to="/productlist" className="flex items-center gap-2">
             <TableProperties /> Product list
-          </Link>
+          </Link> */}
           <Link to="/excelfile" className="flex items-center gap-2">
-            <File/> Excel File Upload
+            <File /> Excel File Upload
           </Link>
         </nav>
       </div>
@@ -54,17 +54,14 @@ export default function Dashboard() {
           <Link to="/addproduct" className="flex items-center gap-2">
             <FilePlus /> Add Product
           </Link>
-          <Link to="/orderlist" className="flex items-center gap-2">
+          {/* <Link to="/orderlist" className="flex items-center gap-2">
             <View /> View Order
-          </Link>
+          </Link> */}
           <Link to="/userview" className="flex items-center gap-2">
             <UserRoundSearch /> View User
           </Link>
-          <Link to="/productlist" className="flex items-center gap-2">
-            <TicketPercent /> Productlist
-          </Link>
           <Link to="/excelfile" className="flex items-center gap-2">
-            <File/> Excel File Upload
+            <File /> Excel File Upload
           </Link>
         </div>
       )}

@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Menu } from "lucide-react";
 import { FaCartShopping } from "react-icons/fa6";
+import { Isauthanticate, Logout } from "../authantication/isauthanticat";
 
 import { IoCloseSharp } from "react-icons/io5";
-
 
 export default function Navbar1() {
   const { t, i18n } = useTranslation();
@@ -58,13 +58,20 @@ export default function Navbar1() {
           >
             {t("Language")}
           </button>
-          <Link to="/login" >
-          <button className="bg-black font-semibold rounded-sm text-white w-24 h-8 text-center ">
-          Login
-          </button>
-          
-          </Link>
-        
+          {Isauthanticate() ? (
+            <button
+              onClick={Logout}
+              className="bg-black font-semibold rounded-sm text-white w-24 h-8 text-center "
+            >
+              Logout
+            </button>
+          ) : (
+            <Link to="/login">
+              <button className="bg-black font-semibold rounded-sm text-white w-24 h-8 text-center ">
+                Login
+              </button>
+            </Link>
+          )}
         </div>
       </nav>
 
@@ -72,7 +79,7 @@ export default function Navbar1() {
       <nav className="h-20 flex justify-between px-6 items-center lg:hidden bg-background-sky">
         <div>
           <button onClick={togglesidemenu}>
-            <Menu className="h-8 w-10 hover:bg-cyan-600"/>
+            <Menu className="h-8 w-10 hover:bg-cyan-600" />
           </button>
         </div>
         <div>
@@ -84,8 +91,7 @@ export default function Navbar1() {
         </div>
         <div className="flex">
           <Link to="/cart">
-          <FaCartShopping className="h-8 w-10  hover:bg-cyan-600"/>
-            
+            <FaCartShopping className="h-8 w-10  hover:bg-cyan-600" />
           </Link>
         </div>
       </nav>
@@ -98,15 +104,30 @@ export default function Navbar1() {
             : "hidden"
         }`}
       >
+        {Isauthanticate() ? (
+          <button
+            onClick={Logout}
+            className="bg-black rounded-sm absolute top-10 left-12  text-white  w-32 h-10 text-center"
+          >
+            Logout
+          </button>
+        ) : (
+          <Link to="/login">
+            <button className="bg-black rounded-sm absolute top-10 left-12  text-white  w-32 h-10 text-center">
+              Login
+            </button>
+          </Link>
+        )}
+
         <button
           className="absolute h-12 w-12 p-2 top-6 right-6"
           onClick={togglesidemenu}
         >
-          <IoCloseSharp className="w-14 h-10 font-bold"/>
+          <IoCloseSharp className="w-14 h-10 font-bold" />
         </button>
         <div className="h-full flex flex-col items-start text-2xl text-button-orange gap-8 mt-32 ml-12 font-bold">
           <input
-            className="bg-white w-40 h-12 font-light rounded-2xl px-4"
+            className="bg-white w-40 h-12 font-light focus:outline-none px-4"
             placeholder="search"
             type="text"
           />
@@ -120,6 +141,9 @@ export default function Navbar1() {
           <Link>{t("Necklace")}</Link>
           <Link to="/contactus">{t("contactus")}</Link>
           <Link to="/aboutus">{t("AboutUs")}</Link>
+          <Link to="/dashboard">
+            <button className="bg-cyan-700 text-white  w-44 h-12 rounded-2xl ">Dashboard</button>
+          </Link>
         </div>
       </div>
     </div>

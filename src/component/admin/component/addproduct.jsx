@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Dashboard from "../dashboard";
+import BaseURL from "../../../baseurl";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
@@ -8,6 +11,7 @@ const AddProduct = () => {
     category: "",
     code: "",
   });
+  const navigate = useNavigate();
   const [image, setImage] = useState(null);
 
   const handleChange = (e) => {
@@ -16,7 +20,9 @@ const AddProduct = () => {
   };
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]); // Store file object
+    if (e.target.files.length > 0) {
+      setImage(e.target.files[0]);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -26,24 +32,33 @@ const AddProduct = () => {
     formData.append("name", product.name);
     formData.append("description", product.description);
     formData.append("category", product.category);
-    formData.append("price", product.price);
+    formData.append("code", product.code);
     if (image) {
       formData.append("image", image);
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/products", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await axios.post(
+        `${BaseURL}/api/products/admin/add`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-      if (response.ok) {
-        console.log("Product added successfully");
+      if (response.status === 201 || response.status === 200) {
+        console.log("Product added successfully:", response.data);
+        navigate("/dashboard");
       } else {
-        console.error("Failed to add product");
+        console.error("Failed to add product:", response);
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error(
+        "Error:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 
@@ -97,18 +112,25 @@ const AddProduct = () => {
 
           <div>
             <label className="block text-gray-700 font-medium">Category</label>
-            <input
-              type="text"
+            <select
               name="category"
               value={product.category}
               onChange={handleChange}
               className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none"
               required
-            />
+            >
+              <option value="">Select a category</option>
+              <option value="Ring">Ring</option>
+              <option value="Bracelet">Bracelet</option>
+              <option value="Earring">Earring</option>
+              <option value="Necklace">Necklace</option>
+            </select>
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium">Product Code</label>
+            <label className="block text-gray-700 font-medium">
+              Product Code
+            </label>
             <input
               name="code"
               value={product.code}
@@ -120,7 +142,7 @@ const AddProduct = () => {
 
           <button
             type="submit"
-            className="w-full bg-background-sky hover:bg-button-hover text-white p-2 rounded-lg transition duration-200"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition duration-200"
           >
             Add Product
           </button>

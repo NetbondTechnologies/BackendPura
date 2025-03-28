@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next"; // Import translation hook
 import Loader from "../loader/loader";
+import axios from "axios"
 import AOS from "aos";
 import "aos/dist/aos.css";
+import BaseURL from "../../baseurl";
 
 AOS.init();
 
@@ -28,14 +30,42 @@ export default function Signup() {
     setCredentials((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
+
     if (matchPassword !== credentials.password) {
       setError(t("password_mismatch"));
       return;
     }
+
     setError("");
-    console.log("User Data:", credentials);
+    setLoading(true);
+
+    try {
+      const { data } = await axios.post(
+        `${BaseURL}/api/users/register`,
+        credentials,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("User Registered:", data);
+      alert(t("signup_success"));
+
+      // Reset form fields
+      setCredentials({ name: "", email: "", password: "" });
+      setMatchPassword("");
+
+      // Redirect to login page (optional)
+      window.location.href = "/login";
+    } catch (error) {
+      setError(error.response?.data?.message || "Signup failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {

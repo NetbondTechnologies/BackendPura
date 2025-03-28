@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaYoutube } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa";
-
+import { IsAdmin } from "../authantication/isauthanticat";
 import { AiFillInstagram } from "react-icons/ai";
 
 export default function Navbar2() {
@@ -29,12 +29,29 @@ export default function Navbar2() {
           alt={t("CATEGORIES")}
         />
         <div className="text-button-orange flex font-bold gap-10 p-2 text-xl">
-          <Link className="hover:text-cyan-600" to="/">{t("Home")}</Link>
-          <Link className="hover:text-cyan-600" to="/shopall">{t("Shop All")}</Link>
-          <Link className="hover:text-cyan-600" to="/category">{t("Category")}</Link>
-          <Link className="hover:text-cyan-600" to="/aboutus">{t("About us")}</Link>
-          <Link className="hover:text-cyan-600" to="/contactus">{t("Contact us")}</Link>
-          <Link className="text-center  text-black " to="/dashboard">{t("Dashboard")}</Link>
+          <Link className="hover:text-cyan-600" to="/">
+            {t("Home")}
+          </Link>
+          <Link className="hover:text-cyan-600" to="/shopall">
+            {t("Shop All")}
+          </Link>
+          <Link className="hover:text-cyan-600" to="/category">
+            {t("Category")}
+          </Link>
+          <Link className="hover:text-cyan-600" to="/aboutus">
+            {t("About us")}
+          </Link>
+          <Link className="hover:text-cyan-600" to="/contactus">
+            {t("Contact us")}
+          </Link>
+          {IsAdmin() && (
+            <Link className="text-center text-lg " to="/dashboard">
+              <button className="bg-cyan-500 hover:bg-cyan-800 h-8 w-28 border-2 border-cyan-800 text-white">
+                {t("Dashboard")}
+              </button>
+            </Link>
+          )}
+
           <div className="flex  gap-4">
             <a
               target="_blank"

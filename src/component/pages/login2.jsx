@@ -1,32 +1,51 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next"; 
+import { useTranslation } from "react-i18next";
 import Loader from "../loader/loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import BaseURL from "../../baseurl";
 
 AOS.init();
 
 export default function Login2() {
-  const { t } = useTranslation(); 
-  const [loading, setloading] = useState(true);
-  const [logindata, setlogindata] = useState({ email: "", password: "" });
+  const { t } = useTranslation();
+  const [loading, setLoading] = useState(true);
 
-  function submitdata(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-    setlogindata({ ...logindata, [name]: value });
-    console.log(logindata);
+  const [logindata, setLogindata] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setLogindata({ ...logindata, [name]: value });
   }
 
-  function userlogin(e) {
+  async function userLogin(e) {
     e.preventDefault();
-    // API Call
+    setError("");
+    try {
+      const response = await axios.post(
+        `${BaseURL}/api/users/login`,
+        logindata
+      );
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("role",response.data.user.role)
+      console.log("Login Success:", response.data);
+      console.log(response.data.user.role)
+
+      
+        navigate("/")
+    } catch (err) {
+      console.error("Login Error:", err);
+      setError("Invalid credentials, please try again.");
+    }
   }
 
   useEffect(() => {
     setTimeout(() => {
-      setloading(false);
+      setLoading(false);
     }, 1000);
   }, []);
 
@@ -53,21 +72,22 @@ export default function Login2() {
           />
         </div>
         <form
-          onSubmit={userlogin}
+          onSubmit={userLogin}
           className="flex w-full bg-white flex-col h-full p-2 lg:w-1/2 gap-4 justify-center items-center"
         >
           <h1 className="text-2xl text-button-orange font-bold mt-4 lg:mt-0">
             {t("login")}
           </h1>
+          {error && <p className="text-red-500">{error}</p>}
           <input
-            onChange={submitdata}
+            onChange={handleChange}
             className="lg:w-60 w-40 p-2 h-10 border lg:text-lg focus:outline-buttext-button-orange border-gray-400 rounded-lg"
             type="email"
             name="email"
             placeholder={t("email_placeholder")}
           />
           <input
-            onChange={submitdata}
+            onChange={handleChange}
             className="lg:w-60 w-40 p-2 h-10 lg:h-10 border focus:outline-buttext-button-orange lg:text-lg border-gray-400 rounded-lg"
             type="password"
             name="password"
