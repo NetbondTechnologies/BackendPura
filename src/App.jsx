@@ -44,6 +44,7 @@ function App() {
             <Route path="/singleproduct" element={<SingleProduct />}></Route>
             <Route path="/category" element={<Category />}></Route>
             <Route path="/category/:category" element={<Categorycart/>}></Route>
+            <Route path="/singleproduct/:id" element={<SingleProduct/>}></Route>
             <Route path="/excelfile" element={<ExcelUploader/>}></Route>
           </Routes>
         </Layout>

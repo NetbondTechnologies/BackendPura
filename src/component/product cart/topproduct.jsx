@@ -81,6 +81,9 @@ export default function TopProduct() {
                   <h3 className="text-sm sm:text-lg font-semibold text-gray-800 mb-2">
                     {product.title}
                   </h3>
+                  <button className="mt-4 w-full bg-cyan-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105">
+                    Add To List
+                  </button>
                 </div>
               </div>
             ))}

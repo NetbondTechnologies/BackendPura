@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import BaseURL from "../../baseurl";
+import { Link } from "react-router-dom";
 
 export default function CategoryPage() {
   const { category } = useParams(); // Get category from URL
@@ -39,12 +40,39 @@ export default function CategoryPage() {
       )}
 
       {!loading && !error && products.length > 0 && (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {products.map((product) => (
-            <div key={product._id} className="bg-white shadow-lg rounded-lg p-4">
-              <img className="w-full h-40 object-cover rounded-md" src={product.imageurl} alt={product.name} />
-              <h2 className="text-lg font-semibold mt-2">{product.name}</h2>
-              <p className="text-gray-600">{product.description}</p>
+            <div
+              key={product._id}
+              className="bg-white p-6 rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative overflow-hidden"
+              data-aos="zoom-in"
+              data-aos-duration="500"
+            >
+              <div className="relative w-full h-36">
+                <Link to={`/singleproduct/${product._id}`}>
+                  <img
+                    src={product.imageurl}
+                    alt={product.name}
+                    className="w-full h-full object-cover rounded-lg transform hover:scale-105 transition-all duration-500"
+                  />
+                </Link>
+                <span className="absolute top-3 left-3 bg-cyan-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md animate-pulse">
+                  New
+                </span>
+              </div>
+
+              <div className="mt-6 text-center">
+                <h3 className="text-xl font-bold text-cyan-800 tracking-tight">{product.name}</h3>
+                <p className="text-sm text-cyan-600 mt-1">{product.category}</p>
+                <p className="text-xs text-cyan-500 mt-2 font-medium">
+                  Design Code: <span className="font-semibold">{product.designCode}</span>
+                </p>
+                <button className="mt-4 w-full bg-cyan-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105">
+                  Add To List
+                </button>
+              </div>
+
+              <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-100 rounded-full -mr-12 -mt-12 opacity-50" />
             </div>
           ))}
         </div>
