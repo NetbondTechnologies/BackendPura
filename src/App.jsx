@@ -3,7 +3,8 @@ import Contactus from "./component/pages/contactus";
 import Sign2 from "./component/pages/sign2";
 import Home from "./component/pages/home";
 import Login2 from "./component/pages/login2";
-import Checkout from "../src/component/newcomponent/checkout"
+import Checkout from "../src/component/newcomponent/checkout";
+import { CartProvider } from "./component/newcomponent/cartcontext";
 
 import Aboutus from "./component/pages/aboutus";
 import Layout from "./component/layout/layout";
@@ -23,30 +24,38 @@ function App() {
     <>
       <Router>
         <Layout>
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/login" element={<Login2 />}></Route>
-            <Route path="/signup" element={<Sign2 />}></Route>
-            <Route path="/cart" element={<Checkout/>}></Route>
-            <Route path="/shopall" element={<Shopall />}></Route>
-           
-            <Route path="/aboutus" element={<Aboutus />}></Route>
-            <Route path="/contactus" element={<Contactus />}></Route>
-            <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/userview" element={<AdminUserView />}></Route>
+          <CartProvider>
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/login" element={<Login2 />}></Route>
+              <Route path="/signup" element={<Sign2 />}></Route>
+              <Route path="/cart" element={<Checkout />}></Route>
+              <Route path="/shopall" element={<Shopall />}></Route>
 
-            {/* admin routes */}
+              <Route path="/aboutus" element={<Aboutus />}></Route>
+              <Route path="/contactus" element={<Contactus />}></Route>
+              <Route path="/profile" element={<Profile />}></Route>
+              <Route path="/userview" element={<AdminUserView />}></Route>
 
-            <Route path="/dashboard" element={<Adminhome />}></Route>
-            <Route path="/addproduct" element={<AddProduct />}></Route>
-            <Route path="/orderlist" element={<OrderList />}></Route>
-            <Route path="/productlist" element={<AdminProductList />}></Route>
-            <Route path="/singleproduct" element={<SingleProduct />}></Route>
-            <Route path="/category" element={<Category />}></Route>
-            <Route path="/category/:category" element={<Categorycart/>}></Route>
-            <Route path="/singleproduct/:id" element={<SingleProduct/>}></Route>
-            <Route path="/excelfile" element={<ExcelUploader/>}></Route>
-          </Routes>
+              {/* admin routes */}
+
+              <Route path="/dashboard" element={<Adminhome />}></Route>
+              <Route path="/addproduct" element={<AddProduct />}></Route>
+              <Route path="/orderlist" element={<OrderList />}></Route>
+              <Route path="/productlist" element={<AdminProductList />}></Route>
+              <Route path="/singleproduct" element={<SingleProduct />}></Route>
+              <Route path="/category" element={<Category />}></Route>
+              <Route
+                path="/category/:category"
+                element={<Categorycart />}
+              ></Route>
+              <Route
+                path="/singleproduct/:id"
+                element={<SingleProduct />}
+              ></Route>
+              <Route path="/excelfile" element={<ExcelUploader />}></Route>
+            </Routes>
+          </CartProvider>
         </Layout>
       </Router>
     </>

@@ -10,7 +10,7 @@ export default function Shopall() {
   useEffect(() => {
     setTimeout(() => {
       setloading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
   if (loading) {

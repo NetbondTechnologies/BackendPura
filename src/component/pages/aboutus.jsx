@@ -18,7 +18,7 @@ export default function Aboutus() {
   useEffect(() => {
     setTimeout(() => {
       setloading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
   if (loading) {

@@ -13,7 +13,9 @@ export default function Navbar1() {
   const { t, i18n } = useTranslation();
   const [sidemenu, setsidemenu] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [mobileSearchTerm, setMobileSearchTerm] = useState(""); // State for mobile search
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [mobileFilteredProducts, setMobileFilteredProducts] = useState([]); // State for mobile search results
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -21,12 +23,12 @@ export default function Navbar1() {
     setsidemenu(!sidemenu);
   }
 
-  function changeLanguage(lang) {
-    i18n.changeLanguage(lang);
-  }
-
-  async function fetchProducts(query) {
-    if (!query.trim()) return setFilteredProducts([]);
+  async function fetchProducts(query, isMobile = false) {
+    if (!query.trim()) {
+      if (isMobile) setMobileFilteredProducts([]);
+      else setFilteredProducts([]);
+      return;
+    }
 
     setLoading(true);
     setError("");
@@ -35,11 +37,14 @@ export default function Navbar1() {
       const response = await axios.get(
         `${BaseURL}/api/products/product?search=${query}`
       );
-      setFilteredProducts(response.data);
+
+      if (isMobile) setMobileFilteredProducts(response.data);
+      else setFilteredProducts(response.data);
     } catch (err) {
       console.error("Error fetching products:", err);
       setError("Failed to fetch products.");
-      setFilteredProducts([]);
+      if (isMobile) setMobileFilteredProducts([]);
+      else setFilteredProducts([]);
     } finally {
       setLoading(false);
     }
@@ -53,9 +58,17 @@ export default function Navbar1() {
     return () => clearTimeout(delayDebounceFn);
   }, [searchTerm]);
 
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      fetchProducts(mobileSearchTerm, true);
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [mobileSearchTerm]);
+
   return (
     <div>
-      {/* Navbar for desktop */}
+      {/* Desktop Navbar */}
       <nav className="w-full hidden lg:flex h-32 items-center bg-background-sky">
         <img
           className="h-20 w-48 p-2 ml-6"
@@ -110,8 +123,8 @@ export default function Navbar1() {
           <button
             onClick={() =>
               i18n.language === "en"
-                ? changeLanguage("hi")
-                : changeLanguage("en")
+                ? i18n.changeLanguage("hi")
+                : i18n.changeLanguage("en")
             }
             className="text-white w-32 h-8 rounded-sm bg-button-orange text-lg"
           >
@@ -134,7 +147,7 @@ export default function Navbar1() {
         </div>
       </nav>
 
-      {/* Navbar for phone */}
+      {/* Mobile Navbar */}
       <nav className="h-20 flex justify-between px-6 items-center lg:hidden bg-background-sky">
         <button onClick={togglesidemenu}>
           <Menu className="h-8 w-10 hover:bg-cyan-600" />
@@ -153,20 +166,6 @@ export default function Navbar1() {
             : "hidden"
         }`}
       >
-        {Isauthanticate() ? (
-          <button
-            onClick={Logout}
-            className="bg-black rounded-sm absolute top-10 left-12 text-white w-32 h-10 text-center"
-          >
-            Logout
-          </button>
-        ) : (
-          <Link to="/login">
-            <button className="bg-black rounded-sm absolute top-10 left-12 text-white w-32 h-10 text-center">
-              Login
-            </button>
-          </Link>
-        )}
         <button
           className="absolute h-12 w-12 p-2 top-6 right-6"
           onClick={togglesidemenu}
@@ -174,18 +173,67 @@ export default function Navbar1() {
           <IoCloseSharp className="w-14 h-10 font-bold" />
         </button>
         <div className="h-full flex flex-col items-start text-2xl text-button-orange gap-8 mt-32 ml-12 font-bold">
+          {Isauthanticate() ? (
+            <Link onClick={Logout}>
+              <button className="bg-black text-white w-36 text-lg h-10">
+                Logout
+              </button>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <button className="bg-black text-white w-36 text-lg h-10">
+                Login
+              </button>
+            </Link>
+          )}
+
+          {/* Mobile Search Input */}
           <input
-            className="bg-white w-40 h-12 font-light focus:outline-none px-4"
-            placeholder="search"
+            className="bg-white  w-40 h-12 font-light focus:outline-none px-4"
+            placeholder="Search"
             type="text"
+            value={mobileSearchTerm}
+            onChange={(e) => setMobileSearchTerm(e.target.value)}
           />
+          {mobileSearchTerm.trim() !== "" && (
+            <div className="absolute bg-white shadow-lg top-48 left-5  w-60 mt-2 max-h-60 overflow-y-auto z-10">
+              {loading ? (
+                <div className="p-2 text-gray-500 text-center">Loading...</div>
+              ) : error ? (
+                <div className="p-2 text-red-500 text-center">{error}</div>
+              ) : mobileFilteredProducts.length > 0 ? (
+                mobileFilteredProducts.map((product) => (
+                  <Link
+                    key={product.id}
+                    to={`/singleproduct/${product._id}`}
+                    className="flex items-center p-2 hover:bg-gray-100 border-b"
+                    onClick={() => setMobileSearchTerm("")}
+                  >
+                    <img
+                      src={product.imageurl}
+                      alt={product.name}
+                      className="h-10 w-10 object-cover mr-4"
+                    />
+                    <span>{product.name}</span>
+                  </Link>
+                ))
+              ) : (
+                <div className="p-2 text-gray-500 text-center">
+                  No product found
+                </div>
+              )}
+            </div>
+          )}
           <Link to="/">{t("Home")}</Link>
           <Link to="/shopall">{t("ShopAll")}</Link>
           <Link to="/contactus">{t("contactus")}</Link>
           <Link to="/aboutus">{t("AboutUs")}</Link>
           {IsAdmin() && (
-            <Link to="/dashboard">
-              <button className="bg-cyan-700 text-white w-44 h-12 rounded-2xl">
+            <Link to="dashboard">
+              <button
+                className="bg-cyan-900 border-black text-lg w-44 h-10 text-white
+              "
+              >
                 Dashboard
               </button>
             </Link>

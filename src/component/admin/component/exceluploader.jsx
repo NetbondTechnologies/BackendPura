@@ -47,7 +47,7 @@ export default function ExcelUploader() {
   };
 
   return (
-    <div className="bg-cyan-100 min-h-screen flex flex-col items-center">
+    <div className="bg-cyan-100 min-h-screen  w-full  items-center">
       <Dashboard />
       <div className="flex flex-col items-center justify-center h-[50vh] lg:h-[70vh] p-8 gap-6">
         <h1 className="font-extrabold text-3xl text-cyan-700">

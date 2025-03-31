@@ -1,7 +1,6 @@
-
-
 import Collection from "../product cart/collection";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
+import WhoWeAre from "../newcomponent/woweare";
 import Loader from "../loader/loader";
 export default function Category() {
   const [loading, setloading] = useState(true);
@@ -9,7 +8,7 @@ export default function Category() {
   useEffect(() => {
     setTimeout(() => {
       setloading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
   if (loading) {
@@ -22,7 +21,7 @@ export default function Category() {
   return (
     <div>
       <Collection />
-      
+      <WhoWeAre />
     </div>
   );
 }

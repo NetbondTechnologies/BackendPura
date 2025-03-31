@@ -20,13 +20,6 @@ export default function Footer() {
           </div>
 
           <div className="flex w-1/4 flex-col h-36 ml-10 mt-8 gap-2 items-start">
-            <button className="text-lg">{t("INFORMATION")}</button>
-            <button>{t("Shop")}</button>
-            <button>{t("Order Tracking")}</button>
-            <button>{t("Shopping Cart")}</button>
-          </div>
-
-          <div className="flex w-1/4 flex-col h-36 ml-10 mt-8 gap-2 items-start">
             <button className="text-lg">{t("MyAccount")}</button>
             <button>{t("Privacy")}</button>
             <button>{t("Checkout")}</button>
@@ -35,9 +28,15 @@ export default function Footer() {
 
           <div className="flex w-1/4 flex-col h-36 ml-10 mt-8 gap-2 items-start">
             <button className="text-lg">{t("CATEGORIES")}</button>
-            <button>{t("Earrings")}</button>
-            <button>{t("Necklaces")}</button>
-            <button>{t("Bracelet")}</button>
+            <Link to={`/category/Rings`}>
+              <button>{t("Rings")}</button>
+            </Link>
+            <Link to={`/category/Necklaces`}>
+              <button>{t("Necklaces")}</button>
+            </Link>
+            <Link to={`/category/Necklaces`}>
+              <button>{t("Bracelet")}</button>
+            </Link>
           </div>
         </div>
 
@@ -100,7 +99,7 @@ export default function Footer() {
           </div>
           <div className="w-1/2 flex flex-col gap-4">
             <input
-              placeholder={t("Enter email id")} 
+              placeholder={t("Enter email id")}
               className="w-36 font-bold text-gray-500 p-2 h-6 focus:outline-0 bg-white"
               type="text"
             />

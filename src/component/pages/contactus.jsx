@@ -15,7 +15,7 @@ export default function Contactus() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
   if (loading) {

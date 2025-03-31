@@ -9,10 +9,10 @@ export default function Collection() {
   const { t } = useTranslation();
 
   const categories = [
-    { name: t("Rings"), img: "/ring.jpg", slug: "ring" },
-    { name: t("Bracelet"), img: "https://cdn.pixabay.com/photo/2015/03/09/14/03/gold-665722_1280.jpg", slug: "bracelet" },
-    { name: t("Earring"), img: "https://smarsjewelry.com/cdn/shop/files/909.1.jpg?v=1711633887", slug: "earring" },
-    { name: t("Necklace"), img: "https://thumbs.dreamstime.com/b/indian-jewellery-made-gold-one-neckless-earrings-193593857.jpg?w=768", slug: "necklace" },
+    { name: t("Rings"), img: "https://i.postimg.cc/3w555Gxw/RS0193.jpg", slug: "ring" },
+    { name: t("Bracelets"), img: "https://cdn.pixabay.com/photo/2015/03/09/14/03/gold-665722_1280.jpg", slug: "bracelet" },
+    { name: t("Earrings"), img: "https://i.postimg.cc/kGtB48Kp/COL0032E.jpg", slug: "earring" },
+    { name: t("Necklaces"), img: "https://i.postimg.cc/zXQY76mK/NS0242.jpg", slug: "necklace" },
   ];
 
   return (

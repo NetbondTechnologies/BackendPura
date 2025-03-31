@@ -46,7 +46,7 @@ export default function Login2() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
   if (loading) {

@@ -1,49 +1,67 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
+import { useCart } from "./cartcontext";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
-  const [items, setItems] = useState([
-    {
-      id: 0,
-      name: "925 Sterling Silver Stud Earrings",
-      description: "Gold Plated with Aqua Chalcedony",
-      sku: "ES0396",
-      image: "https://img.freepik.com/free-psd/elegant-gold-diamond-engagement-ring_191095-83454.jpg",
-      quantity: 1,
-    },
-    {
-      id: 1,
-      name: "Dummy Silver Bracelet",
-      description: "Elegant Silver Chain Bracelet",
-      sku: "DB1234",
-      image: "https://img.freepik.com/free-photo/beautiful-elegant-bracelet_123827-20723.jpg",
-      quantity: 1,
-    },
-  ]);
-
+  const { cartItems, updateQuantity, removeFromCart } = useCart();
+  const navigate = useNavigate()
+  
   const [formData, setFormData] = useState({
     firstName: "",
     email: "",
     phone: "",
     message: "",
   });
+  
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleQuantityChange = (id, value) => {
-    setItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, quantity: Math.max(1, value) } : item))
-    );
+    if (value < 50) {
+      setErrors((prev) => ({ ...prev, [id]: "Minimum order quantity is 50" }));
+    } else {
+      setErrors((prev) => ({ ...prev, [id]: "" }));
+      updateQuantity(id, value);
+    }
   };
 
   const handleRemoveItem = (id) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
+    removeFromCart(id);
+    setErrors((prev) => {
+      const newErrors = { ...prev };
+      delete newErrors[id];
+      return newErrors;
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", { ...formData, items });
+
+    const templateParams = {
+      from_name: formData.firstName,
+      email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+      order_details: cartItems
+        .map((item) => `<p><strong>${item.name}</strong> (SKU: ${item.sku}) - Qty: ${item.quantity}</p>`)
+        .join(""),
+    };
+
+    try {
+      await emailjs.send("service_bncdgoe", "template_ms65flp", templateParams, "Cogpdn_jl8tc_IHpG");
+      cartItems.forEach((item) => removeFromCart(item._id));
+
+      alert("Order request sent successfully!");
+      navigate("/")
+
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      alert("Failed to send order request. Try again.");
+    }
   };
 
   return (
@@ -51,98 +69,64 @@ const Checkout = () => {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 shadow-2xl rounded-3xl overflow-hidden bg-white">
         {/* Left Section - Selected Items */}
         <div className="lg:w-1/2 p-8 bg-gradient-to-br from-white to-cyan-50 w-full">
-          <h2 className="text-3xl font-extrabold text-cyan-600 mb-6 tracking-tight text-center sm:text-left">Selected Items</h2>
-          {items.map((item) => (
-            <div key={item.id} className="border border-cyan-200 p-6 rounded-xl flex flex-col sm:flex-row items-center gap-6 bg-white shadow-md transition-all duration-300 hover:shadow-lg mb-4">
-              <img
-                src={item.image}
-                alt="Product"
-                className="w-24 h-24 object-cover rounded-lg shadow-sm transform hover:scale-105 transition-all duration-300"
-              />
-              <div className="flex-grow text-center sm:text-left">
-                <p className="font-semibold text-xl text-cyan-800 leading-tight">{item.name}</p>
-                <p className="text-sm text-cyan-600 mt-1">{item.description}</p>
-                <p className="text-xs text-cyan-500 mt-2 italic">SKU: {item.sku}</p>
+          <h2 className="text-3xl font-extrabold text-cyan-600 mb-6 text-center sm:text-left">Selected Items</h2>
+          {cartItems.length === 0 ? (
+            <p className="text-center text-gray-500">No items in the cart.</p>
+          ) : (
+            cartItems.map((item) => (
+              <div key={item.id} className="border border-cyan-200 p-6 rounded-xl flex flex-col sm:flex-row items-center gap-6 bg-white shadow-md hover:shadow-lg mb-4">
+                <img src={item.imageurl} alt="Product" className="w-24 h-24 object-cover rounded-lg shadow-sm transform hover:scale-105" />
+                <div className="flex-grow text-center sm:text-left">
+                  <p className="font-semibold text-xl text-cyan-800">{item.name}</p>
+                  <p className="text-sm text-cyan-600 mt-1">{item.description}</p>
+                  <p className="text-xs text-cyan-500 mt-2 italic">SKU: {item.code}</p>
+                </div>
+                <div className="flex items-center gap-2 sm:gap-4 mt-4 sm:mt-0 relative">
+                  <button onClick={() => handleQuantityChange(item.id, item.quantity - 1)} className="p-2 bg-cyan-100 text-cyan-600 rounded-full hover:bg-cyan-200" disabled={item.quantity <= 50}>-</button>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      required
+                      className="w-12 sm:w-16 border border-cyan-300 rounded-lg text-center py-2 bg-white text-cyan-700 font-medium"
+                      min={50}
+                      value={item.quantity}
+                      onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))}
+                    />
+                    {errors[item.id] && (
+                      <p className="text-red-500 text-xs absolute top-12 left-0">{errors[item.id]}</p>
+                    )}
+                  </div>
+                  <button onClick={() => handleQuantityChange(item.id, item.quantity + 1)} className="p-2 bg-cyan-100 text-cyan-600 rounded-full hover:bg-cyan-200">+</button>
+                  <button onClick={() => handleRemoveItem(item._id)} className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600">×</button>
+                </div>
               </div>
-              <div className="flex items-center gap-2 sm:gap-4 mt-4 sm:mt-0">
-                <button
-                  onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                  className="p-2 bg-cyan-100 text-cyan-600 rounded-full hover:bg-cyan-200 transition-all duration-200 shadow-sm"
-                >
-                  -
-                </button>
-                <input
-                  type="number"
-                  className="w-12 sm:w-16 border border-cyan-300 rounded-lg text-center py-2 bg-white text-cyan-700 font-medium"
-                  value={item.quantity}
-                  onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))}
-                />
-                <button
-                  onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                  className="p-2 bg-cyan-100 text-cyan-600 rounded-full hover:bg-cyan-200 transition-all duration-200 shadow-sm"
-                >
-                  +
-                </button>
-                <button
-                  onClick={() => handleRemoveItem(item.id)}
-                  className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all duration-200 shadow-sm"
-                >
-                  ×
-                </button>
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
+        {/* Right Section - Order Form */}
         <div className="lg:w-1/2 p-8 bg-white w-full">
-          <h2 className="text-3xl font-extrabold text-cyan-600 mb-6 tracking-tight text-center sm:text-left">Your Design Selection</h2>
+          <h2 className="text-3xl font-extrabold text-cyan-600 mb-6 text-center sm:text-left">Your Design Selection</h2>
           <form onSubmit={handleSubmit} className="space-y-7">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-cyan-700">First Name *</label>
-                <input
-                  type="text"
-                  name="firstName"
-                  className="w-full border border-cyan-300 rounded-lg p-3 mt-2"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  required
-                />
+                <input type="text" name="firstName" className="w-full border border-cyan-300 rounded-lg p-3 mt-2" value={formData.firstName} onChange={handleChange} required />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-cyan-700">Email *</label>
-                <input
-                  type="email"
-                  name="email"
-                  className="w-full border border-cyan-300 rounded-lg p-3 mt-2"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
+                <input type="email" name="email" className="w-full border border-cyan-300 rounded-lg p-3 mt-2" value={formData.email} onChange={handleChange} required />
               </div>
             </div>
             <div>
               <label className="block text-sm font-semibold text-cyan-700">Phone Number</label>
-              <input
-                type="text"
-                name="phone"
-                className="w-full border border-cyan-300 rounded-lg p-3 mt-2"
-                value={formData.phone}
-                onChange={handleChange}
-              />
+              <input type="text" name="phone" className="w-full border border-cyan-300 rounded-lg p-3 mt-2" value={formData.phone} onChange={handleChange} />
             </div>
             <div>
               <label className="block text-sm font-semibold text-cyan-700">Message</label>
-              <textarea
-                name="message"
-                className="w-full border border-cyan-300 rounded-lg p-3 mt-2 min-h-[120px]"
-                value={formData.message}
-                onChange={handleChange}
-              />
+              <textarea name="message" className="w-full border border-cyan-300 rounded-lg p-3 mt-2 min-h-[120px]" value={formData.message} onChange={handleChange} />
             </div>
-            <button type="submit" className="w-full bg-cyan-500 text-white py-3 rounded-lg hover:bg-cyan-600">
-              Send Your Request
-            </button>
+            <button type="submit" className="w-full bg-cyan-500 text-white py-3 rounded-lg hover:bg-cyan-600">Send Your Request</button>
           </form>
         </div>
       </div>
