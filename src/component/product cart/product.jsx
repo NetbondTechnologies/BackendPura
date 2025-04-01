@@ -83,12 +83,12 @@ const ProductCard = () => {
             data-aos="zoom-in"
             data-aos-duration="500"
           >
-            <div className="relative w-full h-36">
+            <div className="relative  w-full h-36">
               <Link to={`/singleproduct/${product._id}`}>
                 <img
                   src={product.image ? product.image : product.imageurl}
                   alt={product.name}
-                  className="w-44 h-full  rounded-lg transform hover:scale-105 transition-all duration-500"
+                  className="w-full h-full object-contain  rounded-lg transform hover:scale-105 transition-all duration-500"
                 />
               </Link>
               <span className="absolute top-3 left-3 bg-cyan-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md animate-pulse">

@@ -4,12 +4,14 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import BaseURL from "../../baseurl";
 import WhoWeAre from "../newcomponent/woweare";
+import { useCart } from "../newcomponent/cartcontext";
 
 export default function SingleProduct() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
+  const {addToCart} = useCart()
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -67,7 +69,7 @@ export default function SingleProduct() {
             </h1>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <button className="bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-white px-6 py-4 rounded-xl font-bold shadow-lg transform transition-all duration-300 hover:scale-105 w-full">
+              <button onClick={()=>{addToCart(product)}} className="bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-white px-6 py-4 rounded-xl font-bold shadow-lg transform transition-all duration-300 hover:scale-105 w-full">
                 Add to List
               </button>
             </div>

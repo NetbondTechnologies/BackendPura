@@ -47,7 +47,7 @@ export default function TopProduct() {
     <section className="py-16 bg-gradient-to-br from-cyan-50 via-white to-cyan-100 overflow-hidden">
       <div className="container mx-auto px-4">
         <div data-aos="zoom-in" className="text-center p-7 mb-12 relative">
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-cyan-600 via-cyan-700 to-cyan-800 bg-clip-text text-transparent relative z-10">
+          <h2 className="text-3xl p-4 sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-cyan-600 via-cyan-700 to-cyan-800 bg-clip-text text-transparent relative z-10">
             Trending Jewellery
           </h2>
           <div className="w-32 h-1 bg-cyan-600 mx-auto mt-4 rounded-full" />
@@ -77,11 +77,11 @@ export default function TopProduct() {
                   className="w-1/2 sm:w-64 bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-cyan-100"
                 >
                   <Link to={`/singleproduct/${product._id}`}>
-                    <div className="relative h-40 sm:h-56 overflow-hidden">
+                    <div className="relative flex justify-between items-center h-40 sm:h-56 overflow-hidden">
                       <img
-                        src={product.imageurl}
+                         src={product.image ? product.image : product.imageurl}
                         alt={product.title}
-                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                        className="w-full  h-full object-contain  transition-transform duration-700 hover:scale-110"
                       />
                     </div>
                   </Link>

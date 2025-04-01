@@ -10,7 +10,7 @@ export default function Collection() {
 
   const categories = [
     { name: t("Rings"), img: "https://i.postimg.cc/3w555Gxw/RS0193.jpg", slug: "ring" },
-    { name: t("Bracelets"), img: "https://cdn.pixabay.com/photo/2015/03/09/14/03/gold-665722_1280.jpg", slug: "bracelet" },
+    { name: t("Bracelets"), img: "https://i.postimg.cc/SxwqS5Dk/ND008-B-PMS.jpg", slug: "bracelet" },
     { name: t("Earrings"), img: "https://i.postimg.cc/kGtB48Kp/COL0032E.jpg", slug: "earring" },
     { name: t("Necklaces"), img: "https://i.postimg.cc/zXQY76mK/NS0242.jpg", slug: "necklace" },
   ];

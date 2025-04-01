@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import BaseURL from "../../baseurl";
 import { Link } from "react-router-dom";
+import { useCart } from "../newcomponent/cartcontext";
 
 export default function CategoryPage() {
   const { category } = useParams(); // Get category from URL
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const {addToCart} = useCart()
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -53,7 +55,7 @@ export default function CategoryPage() {
                   <img
                     src={product.imageurl}
                     alt={product.name}
-                    className="w-full h-full object-cover rounded-lg transform hover:scale-105 transition-all duration-500"
+                    className="w-full object-contain h-full   rounded-lg transform hover:scale-105 transition-all duration-500"
                   />
                 </Link>
                 <span className="absolute top-3 left-3 bg-cyan-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md animate-pulse">
@@ -67,7 +69,7 @@ export default function CategoryPage() {
                 <p className="text-xs text-cyan-500 mt-2 font-medium">
                   Design Code: <span className="font-semibold">{product.designCode}</span>
                 </p>
-                <button className="mt-4 w-full bg-cyan-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105">
+                <button onClick={()=>{addToCart(product)}} className="mt-4 w-full bg-cyan-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105">
                   Add To List
                 </button>
               </div>
