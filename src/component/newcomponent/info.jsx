@@ -3,7 +3,7 @@ const InfoCards = () => {
     {
       icon: (
         <svg
-          className="w-12 h-12 text-cyan-600"
+          className="w-12 h-12 text-cyan-700"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -18,12 +18,12 @@ const InfoCards = () => {
       ),
       title: "Jewelry Designs",
       description:
-        "Each jewelry piece is a masterpiece, a blend of artistry and craftsmanship, designed to captivate hearts.",
+        "Uncover stunning jewelry that fuses timeless elegance with innovative craftsmanship, crafted to enchant.",
     },
     {
       icon: (
         <svg
-          className="w-12 h-12 text-cyan-600"
+          className="w-12 h-12 text-cyan-700"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -38,12 +38,12 @@ const InfoCards = () => {
       ),
       title: "About Us",
       description:
-        "We are more than a jewelry manufacturer; we are storytellers, crafting beauty with every piece.",
+        "We are dedicated craftsmen weaving narratives through jewelry, merging tradition with creativity.",
     },
     {
       icon: (
         <svg
-          className="w-12 h-12 text-cyan-600"
+          className="w-12 h-12 text-cyan-700"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -58,12 +58,12 @@ const InfoCards = () => {
       ),
       title: "Our Blog",
       description:
-        "Dive into the world of precious and semi-precious gemstones and discover their mesmerizing beauty.",
+        "Delve into the allure of gemstones, trends, and the artistry of jewelry in our captivating blog.",
     },
     {
       icon: (
         <svg
-          className="w-12 h-12 text-cyan-600"
+          className="w-12 h-12 text-cyan-700"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -78,39 +78,47 @@ const InfoCards = () => {
       ),
       title: "Visit Jaipur",
       description:
-        "Plan your journey to the Pink City, Jaipur, where tradition meets craftsmanship.",
+        "Journey to Jaipur, where rich heritage and masterful craftsmanship create an unforgettable experience.",
     },
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-cyan-50 to-white">
+    <section className="py-16 md:py-20 bg-gradient-to-br from-cyan-200 to-cyan-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-cyan-900 mb-10 sm:mb-12 drop-shadow-lg">
+          Explore More
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {cards.map((card, index) => (
             <div
               key={index}
-              className="group relative bg-white p-6 rounded-2xl shadow-lg text-center flex flex-col items-center transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden"
+              className="relative group overflow-hidden rounded-xl bg-white/80 backdrop-blur-md border border-cyan-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
             >
-              {/* Gradient Overlay on Hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-cyan-100 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+              {/* Glassmorphism Background Effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-100/50 to-teal-200/50 opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-              {/* Icon Container */}
-              <div className="relative z-10 p-4 rounded-full bg-cyan-50 group-hover:bg-cyan-100 group-hover:scale-110 transition-all duration-300">
-                {card.icon}
+              {/* Card Content */}
+              <div className="relative z-10 p-6 text-center">
+                <div className="flex justify-center mb-5">
+                  <div className="p-4 bg-cyan-100 rounded-full shadow-md">
+                    {card.icon}
+                  </div>
+                </div>
+
+                <h3 className="text-lg sm:text-xl font-semibold text-cyan-800 mb-3 group-hover:text-cyan-900 transition-colors duration-300">
+                  {card.title}
+                </h3>
+
+                <p className="text-gray-700 text-sm sm:text-base leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
+                  {card.description}
+                </p>
               </div>
 
-              {/* Title */}
-              <h3 className="relative z-10 text-xl font-bold text-cyan-800 mt-5 group-hover:text-cyan-900 transition-colors duration-300">
-                {card.title}
-              </h3>
+              {/* Hover Glow Effect */}
+              <div className="absolute inset-0 bg-cyan-400/10 blur-md scale-95 group-hover:scale-100 transition-transform duration-300"></div>
 
-              {/* Description */}
-              <p className="relative z-10 mt-3 text-sm text-gray-600 leading-relaxed px-2">
-                {card.description}
-              </p>
-
-              {/* Decorative Border */}
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-cyan-400 rounded-t-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              {/* Bottom Accent Line */}
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-teal-500"></div>
             </div>
           ))}
         </div>

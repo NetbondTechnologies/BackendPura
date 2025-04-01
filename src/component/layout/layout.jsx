@@ -1,22 +1,38 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom"; // Import useLocation
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar1 from "../navbar/navbar1";
 import Navbar2 from "../navbar/navbar2";
 import Footer from "../footer/footer";
 import WhatsAppButton from "../newcomponent/whatsappbutton";
+import Loader from "../loader/loader";
 
 const Layout = ({ children }) => {
-  const location = useLocation(); // Get the current route
+  const location = useLocation();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]); // Scroll to top when the route changes
+    setLoading(true);
+    window.scrollTo(0, 0); 
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 400);
+
+    return () => clearTimeout(timer); // Cleanup timeout on unmount
+  }, [location.pathname]); // Run on route change
 
   return (
     <div>
       <Navbar1 />
       <Navbar2 />
-      <main>{children}</main>
+      <main>
+        {loading ? (
+          <div className="flex justify-center items-center h-[65vh]">
+            <Loader />
+          </div>
+        ) : (
+          children
+        )}
+      </main>
       <WhatsAppButton />
       <Footer />
     </div>

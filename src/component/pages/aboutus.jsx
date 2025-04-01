@@ -1,11 +1,8 @@
-import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import FairTradePrinciples from "../newcomponent/tradeinfromation";
 import TradeBanner from "../newcomponent/tradebanner";
 import VideoSection from "../newcomponent/youtubevideo";
 import HelpSection from "../newcomponent/help";
-
-import Loader from "../loader/loader";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -13,22 +10,6 @@ AOS.init();
 
 export default function Aboutus() {
   const { t } = useTranslation(); // Initialize translation
-  const [loading, setloading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setloading(false);
-    }, 500);
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex w-full justify-center items-center h-[65vh]">
-        <Loader />
-      </div>
-    );
-  }
-
   return (
     <div>
       {/* WHY ARAWALI JEWELLERS SECTION */}

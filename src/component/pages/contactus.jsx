@@ -1,34 +1,50 @@
 import { Mail, PhoneCall } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Loader from "../loader/loader";
+import emailjs from "@emailjs/browser";
+import { useNavigate } from "react-router-dom";
 
 export default function Contactus() {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(true);
+  const navigate =useNavigate()
+  
   const [contactdata, setContactData] = useState({
     name: "",
     email: "",
     message: "",
   });
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex w-full justify-center items-center h-[65vh] bg-gradient-to-br from-gray-50 to-gray-100">
-        <Loader />
-      </div>
-    );
-  }
+  
+  const [showPopup, setShowPopup] = useState(false); // State for controlling popup visibility
 
   function handleSubmit(e) {
     e.preventDefault();
-    // api
+
+    // Replace these values with your own Email.js details
+    const serviceID = "service_bncdgoe";
+    const templateID = "template_4n9065m";
+    const userID = "xM_ia1stj7vn6JB_o";
+
+    // Send the email via Email.js
+    emailjs.send(serviceID, templateID, contactdata, userID)
+      .then(
+        (response) => {
+          console.log("SUCCESS", response.status, response.text);
+          // Optionally reset the form after successful submission
+          setContactData({ name: "", email: "", message: "" });
+          
+          
+          setShowPopup(true);
+          setTimeout(() => {
+            setShowPopup(false);
+            navigate("/")
+          }, 3000);
+         
+
+        },
+        (error) => {
+          console.log("FAILED", error);
+        }
+      );
   }
 
   function handleContactData(e) {
@@ -38,6 +54,22 @@ export default function Contactus() {
 
   return (
     <div>
+  {showPopup && (
+  <div
+    className="fixed h-44 w-[50rem] top-1/2 left-1/2 bg-opacity-50 bg-cyan-200 flex justify-center items-center z-50"
+    style={{
+      transform: "translate(-50%, -50%)",
+      zIndex: 999,
+    }}
+  >
+    <div>
+      <h2 className="text-lg font-semibold text-center">
+        {t("Thanks for reaching out! We’ll get back to you soon.")}
+      </h2>
+    </div>
+  </div>
+)}
+
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12">
@@ -61,6 +93,7 @@ export default function Contactus() {
                     name="name"
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg"
                     placeholder={t("enter_name")}
+                    value={contactdata.name}
                     required
                   />
                 </div>
@@ -79,6 +112,7 @@ export default function Contactus() {
                     name="email"
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg"
                     placeholder={t("enter_email")}
+                    value={contactdata.email}
                     required
                   />
                 </div>
@@ -97,6 +131,7 @@ export default function Contactus() {
                     rows="4"
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg"
                     placeholder={t("enter_message")}
+                    value={contactdata.message}
                     required
                   />
                 </div>
@@ -149,12 +184,8 @@ export default function Contactus() {
           />
         </div>
         <div className="lg:w-1/2 flex items-center flex-col">
-          <h1 className="text-3xl text-black font-bold ">
-            {t("offline_store")}
-          </h1>
-          <p className="m-12 text-xl font-semibold text-black">
-            {t("store_address")}
-          </p>
+          <h1 className="text-3xl text-black font-bold ">{t("offline_store")}</h1>
+          <p className="m-12 text-xl font-semibold text-black">{t("store_address")}</p>
           <p className="lg:text-xl font-semibold text-black">
             {t("phone")}: 1414911855, +91 7023555055
           </p>

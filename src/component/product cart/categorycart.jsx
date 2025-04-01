@@ -10,7 +10,8 @@ export default function CategoryPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const {addToCart} = useCart()
+  const [addedProductId, setAddedProductId] = useState(null); // Track added product
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -29,6 +30,17 @@ export default function CategoryPage() {
 
     fetchProducts();
   }, [category]);
+
+  // Handle Add to Cart button click
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    setAddedProductId(product._id);
+
+    // Reset the button text after 4 seconds
+    setTimeout(() => {
+      setAddedProductId(null);
+    }, 4000);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -55,7 +67,7 @@ export default function CategoryPage() {
                   <img
                     src={product.imageurl}
                     alt={product.name}
-                    className="w-full object-contain h-full   rounded-lg transform hover:scale-105 transition-all duration-500"
+                    className="w-full object-contain h-full rounded-lg transform hover:scale-105 transition-all duration-500"
                   />
                 </Link>
                 <span className="absolute top-3 left-3 bg-cyan-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md animate-pulse">
@@ -69,8 +81,11 @@ export default function CategoryPage() {
                 <p className="text-xs text-cyan-500 mt-2 font-medium">
                   Design Code: <span className="font-semibold">{product.designCode}</span>
                 </p>
-                <button onClick={()=>{addToCart(product)}} className="mt-4 w-full bg-cyan-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105">
-                  Add To List
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  className="mt-4 w-full bg-cyan-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105"
+                >
+                  {addedProductId === product._id ? "Product Added" : "Add To List"}
                 </button>
               </div>
 

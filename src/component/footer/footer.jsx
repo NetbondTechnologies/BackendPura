@@ -90,7 +90,7 @@ export default function Footer() {
             <button>{t("SERVICES")}</button>
             <button>{t("Blog")}</button>
             <Link to="/contactus">{t("Contact us")}</Link>
-            <Link to="/wishlist">{t("Wishlist Product")}</Link>
+            <Link to="/cart">{t("Wishlist Product")}</Link>
           </div>
           <div className="flex w-1/2 flex-col text-sm gap-2">
             <button>{t("MY ACCOUNT")}</button>

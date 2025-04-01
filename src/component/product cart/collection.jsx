@@ -16,12 +16,12 @@ export default function Collection() {
   ];
 
   return (
-    <div className="px-4">
+    <div className="px-4 text-cyan-700">
       <div data-aos="fade-down" data-aos-duration="600">
         <h1 className="text-3xl sm:text-4xl m-6 sm:m-10 font-bold text-center">
-          {t("Collections")}
+          {t("Categories")}
         </h1>
-        <div className="w-full grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-6 justify-items-center">
+        <div className="w-full text-center grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-6 justify-items-center">
           {categories.map((item, index) => (
             <div
               key={index}

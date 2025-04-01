@@ -15,6 +15,8 @@ const ProductCard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { addToCart } = useCart();
+  const [addedProduct, setAddedProduct] = useState(null); // Track clicked product
+  const [visibleProducts, setVisibleProducts] = useState(8); // Initially show 9 products
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -38,6 +40,15 @@ const ProductCard = () => {
     return 0;
   });
 
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    setAddedProduct(product._id); // Set the clicked product ID
+
+    setTimeout(() => {
+      setAddedProduct(null); // Reset after 4 seconds
+    }, 4000);
+  };
+
   return (
     <div
       data-aos="fade-down"
@@ -46,7 +57,7 @@ const ProductCard = () => {
     >
       <div className="w-full text-center mb-12">
         <h1 className="text-4xl font-extrabold text-cyan-600 tracking-tight">
-          New Collection
+          The Latest Gems
         </h1>
         <p className="text-lg font-medium text-cyan-800 mt-2 italic max-w-2xl mx-auto">
           “Exquisite craftsmanship meets timeless elegance – shop our stunning
@@ -76,7 +87,7 @@ const ProductCard = () => {
       {error && <p className="text-center text-red-500">{error}</p>}
 
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-        {sortedProducts.map((product) => (
+        {sortedProducts.slice(0, visibleProducts).map((product) => (
           <div
             key={product._id}
             className="bg-white p-6 rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative overflow-hidden"
@@ -98,7 +109,7 @@ const ProductCard = () => {
 
             <div className="mt-6 text-center">
               <Link to={`/singleproduct/${product._id}`}>
-                <h3 className="text-xl font-bold text-cyan-800 tracking-tight">
+                <h3 className="text-lg line-clamp-1 font-bold text-cyan-800 tracking-tight">
                   {product.name}
                 </h3>
                 <p className="text-sm text-cyan-600 mt-1">{product.category}</p>
@@ -108,10 +119,10 @@ const ProductCard = () => {
                 </p>
               </Link>
               <button
-                onClick={() => addToCart(product)}
+                onClick={() => handleAddToCart(product)}
                 className="mt-4 w-full bg-cyan-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105"
               >
-                Add To List
+                {addedProduct === product._id ? "Product Added! ✅" : "Add To List"}
               </button>
             </div>
 
@@ -119,6 +130,17 @@ const ProductCard = () => {
           </div>
         ))}
       </div>
+
+      {visibleProducts < products.length && (
+        <div className="text-center mt-8">
+          <Link
+            to="/shopall"
+            className="bg-cyan-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105"
+          >
+            Explore More
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

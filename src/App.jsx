@@ -31,7 +31,6 @@ function App() {
               <Route path="/signup" element={<Sign2 />}></Route>
               <Route path="/cart" element={<Checkout />}></Route>
               <Route path="/shopall" element={<Shopall />}></Route>
-
               <Route path="/aboutus" element={<Aboutus />}></Route>
               <Route path="/contactus" element={<Contactus />}></Route>
               <Route path="/profile" element={<Profile />}></Route>

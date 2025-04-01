@@ -70,11 +70,12 @@ export default function Navbar1() {
     <div>
       {/* Desktop Navbar */}
       <nav className="w-full hidden lg:flex h-32 items-center bg-background-sky">
+        <Link to="/">
         <img
           className="h-20 w-48 p-2 ml-6"
           src="/puramente logo.png"
           alt="logo"
-        />
+        /></Link>
         <div className="w-[70%] relative">
           <input
             className="bg-white h-11 w-[70%] focus:outline-0 ml-8 p-4"
@@ -152,7 +153,10 @@ export default function Navbar1() {
         <button onClick={togglesidemenu}>
           <Menu className="h-8 w-10 hover:bg-cyan-600" />
         </button>
+        <Link to="/">
         <img className="h-14 w-40" src="/puramente logo.png" alt="jewellers" />
+        </Link>
+        
         <Link to="/cart">
           <FaCartShopping className="h-8 w-10 hover:bg-cyan-600" />
         </Link>
@@ -196,7 +200,7 @@ export default function Navbar1() {
             onChange={(e) => setMobileSearchTerm(e.target.value)}
           />
           {mobileSearchTerm.trim() !== "" && (
-            <div className="absolute bg-white shadow-lg top-48 left-5  w-60 mt-2 max-h-60 overflow-y-auto z-10">
+            <div className="absolute bg-white shadow-lg top-64 left-5  w-60 mt-2 max-h-60 overflow-y-auto z-10">
               {loading ? (
                 <div className="p-2 text-gray-500 text-center">Loading...</div>
               ) : error ? (
@@ -225,9 +229,9 @@ export default function Navbar1() {
             </div>
           )}
           <Link to="/">{t("Home")}</Link>
-          <Link to="/shopall">{t("ShopAll")}</Link>
-          <Link to="/contactus">{t("contactus")}</Link>
-          <Link to="/aboutus">{t("AboutUs")}</Link>
+          <Link>"Jewellery Design </Link>
+          <Link to="/contactus">{t("Contact Us")}</Link>
+          <Link to="/aboutus">{t("About Us")}</Link>
           {IsAdmin() && (
             <Link to="dashboard">
               <button

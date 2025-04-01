@@ -142,7 +142,7 @@ const AddProduct = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition duration-200"
+            className="w-full bg-cyan-600 hover:bg-cyan-700 text-white p-2 rounded-lg transition duration-200"
           >
             Add Product
           </button>

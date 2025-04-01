@@ -11,7 +11,9 @@ export default function SingleProduct() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
-  const {addToCart} = useCart()
+  const { addToCart } = useCart();
+
+  const [buttonText, setButtonText] = useState("Add to List");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -33,6 +35,14 @@ export default function SingleProduct() {
 
     fetchProduct();
   }, [id]);
+
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    setButtonText("Product Added");
+    setTimeout(() => {
+      setButtonText("Add to List");
+    }, 4000); // Reset button text after 4 seconds
+  };
 
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;
@@ -69,8 +79,11 @@ export default function SingleProduct() {
             </h1>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <button onClick={()=>{addToCart(product)}} className="bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-white px-6 py-4 rounded-xl font-bold shadow-lg transform transition-all duration-300 hover:scale-105 w-full">
-                Add to List
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-white px-6 py-4 rounded-xl font-bold shadow-lg transform transition-all duration-300 hover:scale-105 w-full"
+              >
+                {buttonText}
               </button>
             </div>
 
@@ -158,3 +171,4 @@ export default function SingleProduct() {
     </div>
   );
 }
+  
