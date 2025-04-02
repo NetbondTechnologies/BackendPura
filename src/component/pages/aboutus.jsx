@@ -3,18 +3,20 @@ import FairTradePrinciples from "../newcomponent/tradeinfromation";
 import TradeBanner from "../newcomponent/tradebanner";
 import VideoSection from "../newcomponent/youtubevideo";
 import HelpSection from "../newcomponent/help";
+import InfoFairTrade from "../newcomponent/infofairtrade";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import VisitJaipur from "../newcomponent/visitjaipur";
 
 AOS.init();
 
 export default function Aboutus() {
   const { t } = useTranslation(); // Initialize translation
   return (
-    <div>
+    <div >
       {/* WHY ARAWALI JEWELLERS SECTION */}
       <div className="h-screen w-full flex flex-col lg:mt-0 lg:flex-row">
-        <div className="w-full lg:w-1/2 flex flex-col justify-center lg:m-10 items-center">
+        <div className="w-full lg:w-1/2 py-10 flex flex-col justify-center lg:m-10 items-center">
           <h1 className="text-2xl font-bold text-black">
             {t("Why Puramente International")}
           </h1>
@@ -42,7 +44,7 @@ export default function Aboutus() {
       <div
         data-aos="fade-up"
         data-aos-duration="600"
-        className="h-screen w-full flex flex-col lg:flex-row mt-10 lg:mt-2"
+        className="h-screen md:pb-6 w-full flex flex-col lg:flex-row mt-10 lg:mt-2"
       >
         <div className="w-full lg:w-1/2 flex flex-col justify-center lg:m-10 items-center">
           <h1 className="text-2xl font-bold text-black">{t("OUR STORY")}</h1>
@@ -59,16 +61,19 @@ export default function Aboutus() {
         </div>
         <div className="lg:w-1/2 lg:mt-5 w-full">
           <img
-            className="h-full w-full"
-            src="https://images.unsplash.com/photo-1610223515982-5bae48b7c2c2?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fA%3D%3D"
+            className="h-[50vh] lg:h-[90vh] w-full"
+            src="https://i.postimg.cc/NfD50gHY/IMG-6855.jpg"
             alt=""
           />
         </div>
       </div>
+      <VisitJaipur/>
       <TradeBanner />
+      <InfoFairTrade/>
       <FairTradePrinciples />
       <VideoSection />
       <HelpSection />
+     
     </div>
   );
 }

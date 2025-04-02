@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const InfoCards = () => {
   const cards = [
     {
@@ -19,6 +20,7 @@ const InfoCards = () => {
       title: "Jewelry Designs",
       description:
         "Uncover stunning jewelry that fuses timeless elegance with innovative craftsmanship, crafted to enchant.",
+      page: "/shopall",
     },
     {
       icon: (
@@ -39,6 +41,7 @@ const InfoCards = () => {
       title: "About Us",
       description:
         "We are dedicated craftsmen weaving narratives through jewelry, merging tradition with creativity.",
+      page: "/aboutus",
     },
     {
       icon: (
@@ -56,9 +59,10 @@ const InfoCards = () => {
           />
         </svg>
       ),
-      title: "Our Blog",
+      title: "Fair Trade",
       description:
-        "Delve into the allure of gemstones, trends, and the artistry of jewelry in our captivating blog.",
+        "Fair trade is a social and economic movement aimed at ensuring ethical and sustainable practices in global trade.",
+      page: "/fairtrade",
     },
     {
       icon: (
@@ -79,6 +83,7 @@ const InfoCards = () => {
       title: "Visit Jaipur",
       description:
         "Journey to Jaipur, where rich heritage and masterful craftsmanship create an unforgettable experience.",
+      page: "/visitjaipur",
     },
   ];
 
@@ -90,6 +95,7 @@ const InfoCards = () => {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {cards.map((card, index) => (
+            <Link to={card.page} >
             <div
               key={index}
               className="relative group overflow-hidden rounded-xl bg-white/80 backdrop-blur-md border border-cyan-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
@@ -119,7 +125,7 @@ const InfoCards = () => {
 
               {/* Bottom Accent Line */}
               <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-teal-500"></div>
-            </div>
+            </div></Link>
           ))}
         </div>
       </div>

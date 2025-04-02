@@ -5,6 +5,7 @@ import axios from "axios";
 import BaseURL from "../../baseurl";
 import WhoWeAre from "../newcomponent/woweare";
 import { useCart } from "../newcomponent/cartcontext";
+import { Link } from "react-router-dom";
 
 export default function SingleProduct() {
   const [product, setProduct] = useState(null);
@@ -108,15 +109,31 @@ export default function SingleProduct() {
         <div className="mt-16 p-8 bg-gradient-to-br from-cyan-100 to-cyan-50 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-102">
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="w-full md:w-1/2">
-              <h2 className="text-3xl font-bold text-cyan-800 mb-6 animate-slide-up">Product Quality</h2>
+              <h2 className="text-3xl font-bold text-cyan-800 mb-6 animate-slide-up">
+                Product Quality
+              </h2>
               <p className="text-gray-700 leading-relaxed text-lg animate-fade-in">
-                At our core, we are committed to delivering products of the highest quality. Each {product.name} undergoes rigorous testing and inspection to ensure it meets our strict standards. We use premium materials and cutting-edge technology to guarantee durability, performance, and customer satisfaction. Our products are designed to last, providing you with reliability and value for your investment.
+                At our core, we are committed to delivering products of the
+                highest quality. Each {product.name} undergoes rigorous testing
+                and inspection to ensure it meets our strict standards. We use
+                premium materials and cutting-edge technology to guarantee
+                durability, performance, and customer satisfaction. Our products
+                are designed to last, providing you with reliability and value
+                for your investment.
               </p>
               <ul className="list-disc list-inside mt-6 text-gray-700 space-y-2">
-                <li className="text-lg">Premium materials for long-lasting performance</li>
-                <li className="text-lg">State-of-the-art manufacturing processes</li>
-                <li className="text-lg">Environmentally friendly and sustainable production</li>
-                <li className="text-lg">Consistent quality control at every stage</li>
+                <li className="text-lg">
+                  Premium materials for long-lasting performance
+                </li>
+                <li className="text-lg">
+                  State-of-the-art manufacturing processes
+                </li>
+                <li className="text-lg">
+                  Environmentally friendly and sustainable production
+                </li>
+                <li className="text-lg">
+                  Consistent quality control at every stage
+                </li>
               </ul>
             </div>
             <div className="w-full md:w-1/2 flex justify-center">
@@ -133,15 +150,29 @@ export default function SingleProduct() {
         <div className="mt-16 p-8 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-102">
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="w-full md:w-1/2">
-              <h2 className="text-3xl font-bold text-cyan-800 mb-6 animate-slide-up">Quality Assurance</h2>
+              <h2 className="text-3xl font-bold text-cyan-800 mb-6 animate-slide-up">
+                Quality Assurance
+              </h2>
               <p className="text-gray-700 leading-relaxed text-lg animate-fade-in">
-                Our Quality Assurance process is designed to give you peace of mind. We have a dedicated team of experts who oversee every aspect of production, from raw materials to final packaging. We adhere to international standards and certifications to ensure that every {product.name} not only meets but exceeds your expectations. Your trust is our priority, and we stand behind the quality of our products with a comprehensive warranty.
+                Our Quality Assurance process is designed to give you peace of
+                mind. We have a dedicated team of experts who oversee every
+                aspect of production, from raw materials to final packaging. We
+                adhere to international standards and certifications to ensure
+                that every {product.name} not only meets but exceeds your
+                expectations. Your trust is our priority, and we stand behind
+                the quality of our products with a comprehensive warranty.
               </p>
               <ul className="list-disc list-inside mt-6 text-gray-700 space-y-2">
-                <li className="text-lg">ISO-certified manufacturing facilities</li>
+                <li className="text-lg">
+                  ISO-certified manufacturing facilities
+                </li>
                 <li className="text-lg">Regular audits and quality checks</li>
-                <li className="text-lg">Customer feedback integration for continuous improvement</li>
-                <li className="text-lg">24/7 support for any quality concerns</li>
+                <li className="text-lg">
+                  Customer feedback integration for continuous improvement
+                </li>
+                <li className="text-lg">
+                  24/7 support for any quality concerns
+                </li>
               </ul>
             </div>
             <div className="w-full md:w-1/2 flex justify-center">
@@ -156,14 +187,22 @@ export default function SingleProduct() {
 
         {/* Additional Product Information */}
         <div className="mt-16 p-8 bg-gradient-to-br from-cyan-100 to-cyan-50 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-102">
-          <h2 className="text-3xl font-bold text-cyan-800 mb-6 animate-slide-up">Why Choose Us?</h2>
+          <h2 className="text-3xl font-bold text-cyan-800 mb-6 animate-slide-up">
+            Why Choose Us?
+          </h2>
           <p className="text-gray-700 leading-relaxed text-lg animate-fade-in">
-            Choosing {product.name} means choosing excellence. Our products are backed by years of expertise, innovative design, and a passion for perfection. Whether you're looking for functionality, aesthetics, or durability, we’ve got you covered. Join thousands of satisfied customers who trust us for their needs.
+            Choosing {product.name} means choosing excellence. Our products are
+            backed by years of expertise, innovative design, and a passion for
+            perfection. Whether you're looking for functionality, aesthetics, or
+            durability, we’ve got you covered. Join thousands of satisfied
+            customers who trust us for their needs.
           </p>
           <div className="mt-8">
-            <button className="bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-white px-8 py-4 rounded-xl font-bold shadow-lg transform transition-all duration-300 hover:scale-105">
-              Learn More About Our Commitment
-            </button>
+            <Link to="/aboutus">
+              <button className="bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-white px-8 py-4 rounded-xl font-bold shadow-lg transform transition-all duration-300 hover:scale-105">
+                Learn More About Our Commitment
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -171,4 +210,3 @@ export default function SingleProduct() {
     </div>
   );
 }
-  

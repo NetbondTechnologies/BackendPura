@@ -8,6 +8,7 @@ import { Menu } from "lucide-react";
 import { IoCloseSharp } from "react-icons/io5";
 import { FaCartShopping } from "react-icons/fa6";
 import { IsAdmin } from "../authantication/isauthanticat";
+import { useCart } from "../newcomponent/cartcontext";
 
 export default function Navbar1() {
   const { t, i18n } = useTranslation();
@@ -18,6 +19,7 @@ export default function Navbar1() {
   const [mobileFilteredProducts, setMobileFilteredProducts] = useState([]); // State for mobile search results
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { cartItems } = useCart();
 
   function togglesidemenu() {
     setsidemenu(!sidemenu);
@@ -71,11 +73,12 @@ export default function Navbar1() {
       {/* Desktop Navbar */}
       <nav className="w-full hidden lg:flex h-32 items-center bg-background-sky">
         <Link to="/">
-        <img
-          className="h-20 w-48 p-2 ml-6"
-          src="/puramente logo.png"
-          alt="logo"
-        /></Link>
+          <img
+            className="h-20 w-48 p-2 ml-6"
+            src="/puramente logo.png"
+            alt="logo"
+          />
+        </Link>
         <div className="w-[70%] relative">
           <input
             className="bg-white h-11 w-[70%] focus:outline-0 ml-8 p-4"
@@ -117,10 +120,17 @@ export default function Navbar1() {
             </div>
           )}
         </div>
-        <div className="flex items-center w-72 mr-16 gap-1">
-          <Link to="/cart" className="w-10 h-10">
+        <div className="flex items-center w-72 mr-10 gap-4">
+          {/* Cart Button */}
+          <Link to="/cart" className="relative w-10 h-10">
             <img className="w-10 h-10" src="/cart2.svg" alt="cart" />
+            {cartItems.length > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                {cartItems.length}
+              </span>
+            )}
           </Link>
+
           <button
             onClick={() =>
               i18n.language === "en"
@@ -154,11 +164,21 @@ export default function Navbar1() {
           <Menu className="h-8 w-10 hover:bg-cyan-600" />
         </button>
         <Link to="/">
-        <img className="h-14 w-40" src="/puramente logo.png" alt="jewellers" />
+          <img
+            className="h-14 w-40"
+            src="/puramente logo.png"
+            alt="jewellers"
+          />
         </Link>
-        
-        <Link to="/cart">
-          <FaCartShopping className="h-8 w-10 hover:bg-cyan-600" />
+
+        {/* cartbutton */}
+        <Link to="/cart" className="relative flex items-center">
+          <FaCartShopping className="h-8 w-10 text-gray-800 hover:text-cyan-600 transition duration-300" />
+          {cartItems.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+              {cartItems.length}
+            </span>
+          )}
         </Link>
       </nav>
 
@@ -166,7 +186,7 @@ export default function Navbar1() {
       <div
         className={`${
           sidemenu
-            ? "flex shadow-2xl z-30 absolute top-0 h-screen w-[70%] bg-background-sky"
+            ? "flex fixed shadow-2xl z-30 top-0 h-screen w-[70%] bg-background-sky"
             : "hidden"
         }`}
       >
@@ -228,10 +248,12 @@ export default function Navbar1() {
               )}
             </div>
           )}
-          <Link to="/">{t("Home")}</Link>
-          <Link>"Jewellery Design </Link>
-          <Link to="/contactus">{t("Contact Us")}</Link>
-          <Link to="/aboutus">{t("About Us")}</Link>
+          <Link onClick={togglesidemenu} to="/">{t("Home")}</Link>
+          <Link onClick={togglesidemenu} to="shopall">Jewellery Design </Link>
+          <Link onClick={togglesidemenu} to="/contactus">{t("Contact Us")}</Link>
+          <Link onClick={togglesidemenu} to="/aboutus">{t("About Us")}</Link>
+          <Link onClick={togglesidemenu} to="/faq">FAQ</Link>
+          <Link onClick={togglesidemenu} to="/privacy"> Privacy</Link>
           {IsAdmin() && (
             <Link to="dashboard">
               <button
@@ -242,6 +264,14 @@ export default function Navbar1() {
               </button>
             </Link>
           )}
+
+          <Link onClick={togglesidemenu} to="/">
+            <img
+              className="absolute bottom-5 h-16 w-48"
+              src="/puramente logo.png"
+              alt=""
+            />
+          </Link>
         </div>
       </div>
     </div>

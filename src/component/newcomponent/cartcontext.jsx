@@ -21,17 +21,17 @@ export const CartProvider = ({ children }) => {
       if (existingItem) {
         return prevCart.map((item) =>
           item._id === product._id
-            ? { ...item, quantity: Math.max(50, item.quantity + 1) } // Ensure min 50
+            ? { ...item, quantity: Math.max(1, item.quantity + 1) } // Ensure min 50
             : item
         );
       }
 
-      return [...prevCart, { ...product, quantity: 50 }]; // Set min 50 for new item
+      return [...prevCart, { ...product, quantity: 1 }]; // Set min 50 for new item
     });
   };
 
   const updateQuantity = (_id, quantity) => {
-    const newQuantity = Math.max(50, quantity); // Ensure minimum 50
+    const newQuantity = Math.max(1, quantity); // Ensure minimum 50
 
     setCartItems((prevCart) =>
       prevCart.map((item) =>

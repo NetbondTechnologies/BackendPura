@@ -5,7 +5,7 @@ import Home from "./component/pages/home";
 import Login2 from "./component/pages/login2";
 import Checkout from "../src/component/newcomponent/checkout";
 import { CartProvider } from "./component/newcomponent/cartcontext";
-
+import Fairtradepage from "./component/pages/fairtradepage";
 import Aboutus from "./component/pages/aboutus";
 import Layout from "./component/layout/layout";
 import Profile from "./component/pages/profile";
@@ -16,15 +16,18 @@ import AdminUserView from "./component/admin/component/adminusersview";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Adminhome from "./component/admin/component/adminhome";
 import SingleProduct from "./component/product cart/singleproduct";
+import Faqsection from "./component/newcomponent/faq";
 import Category from "./component/pages/category";
+import VisitJaipur from "./component/newcomponent/visitjaipur";
 import Categorycart from "./component/product cart/categorycart";
 import ExcelUploader from "./component/admin/component/exceluploader";
+import PrivacyPolicy from "./component/newcomponent/privacy";
 function App() {
   return (
     <>
       <Router>
-        <Layout>
-          <CartProvider>
+        <CartProvider>
+          <Layout>
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/login" element={<Login2 />}></Route>
@@ -44,6 +47,10 @@ function App() {
               <Route path="/productlist" element={<AdminProductList />}></Route>
               <Route path="/singleproduct" element={<SingleProduct />}></Route>
               <Route path="/category" element={<Category />}></Route>
+              <Route path="/fairtrade" element={<Fairtradepage />}></Route>
+              <Route path="privacy" element={<PrivacyPolicy/>}></Route>
+              <Route path="faq"element={<Faqsection/>}></Route>
+              <Route path="visitjaipur"element={<VisitJaipur/>}></Route>
               <Route
                 path="/category/:category"
                 element={<Categorycart />}
@@ -54,8 +61,8 @@ function App() {
               ></Route>
               <Route path="/excelfile" element={<ExcelUploader />}></Route>
             </Routes>
-          </CartProvider>
-        </Layout>
+          </Layout>
+        </CartProvider>
       </Router>
     </>
   );

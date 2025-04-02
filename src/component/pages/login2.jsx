@@ -1,8 +1,8 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Loader from "../loader/loader";
+
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import BaseURL from "../../baseurl";
@@ -11,7 +11,6 @@ AOS.init();
 
 export default function Login2() {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(true);
 
   const [logindata, setLogindata] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
@@ -31,30 +30,15 @@ export default function Login2() {
         logindata
       );
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("role",response.data.user.role)
+      localStorage.setItem("role", response.data.user.role);
       console.log("Login Success:", response.data);
-      console.log(response.data.user.role)
+      console.log(response.data.user.role);
 
-      
-        navigate("/")
+      navigate("/");
     } catch (err) {
       console.error("Login Error:", err);
       setError("Invalid credentials, please try again.");
     }
-  }
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex w-full justify-center items-center h-[65vh]">
-        <Loader />
-      </div>
-    );
   }
 
   return (

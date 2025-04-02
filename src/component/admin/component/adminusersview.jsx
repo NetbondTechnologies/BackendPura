@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Dashboard from "../dashboard";
 import axios from "axios";
 import BaseURL from "../../../baseurl";
+import { FlagIcon } from "react-flag-kit";
 
 export default function AdminUserView() {
   const [users, setUsers] = useState([]);
@@ -15,7 +16,7 @@ export default function AdminUserView() {
         const response = await axios.get(`${BaseURL}/api/users/all`);
         setUsers(response.data);
       } catch (err) {
-        setError( err,"Failed to fetch users");
+        setError("Failed to fetch users");
       } finally {
         setLoading(false);
       }
@@ -58,30 +59,53 @@ export default function AdminUserView() {
                     <th className="py-3 px-6 text-left border border-gray-300">
                       Email
                     </th>
+                    <th className="py-3 px-6 text-left border border-gray-300">
+                      Phone
+                    </th>
+                    <th className="py-3 px-6 text-left border border-gray-300">
+                      Country
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredUsers.map((user, index) => (
-                    <tr
-                      key={user._id}
-                      className={`${
-                        index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                      } hover:bg-gray-200 transition-all`}
-                    >
-                      <td className="py-3 px-6 border border-gray-300 font-medium text-gray-700">
-                        {user.name}
-                      </td>
-                      <td className="py-3 px-6 border border-gray-300 text-gray-600">
-                        {user.email}
-                      </td>
-                    </tr>
-                  ))}
+                  {filteredUsers.map((user, index) => {
+                    const countryCode = user.countryCode;
+                    return (
+                      <tr
+                        key={user._id}
+                        className={`${
+                          index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                        } hover:bg-gray-200 transition-all`}
+                      >
+                        <td className="py-3 px-6 border border-gray-300 font-medium text-gray-700">
+                          {user.name}
+                        </td>
+                        <td className="py-3 px-6 border border-gray-300 text-gray-600">
+                          {user.email}
+                        </td>
+                        <td className="py-3 px-6 border border-gray-300 text-gray-600">
+                          {user.contactNumber || "N/A"}
+                        </td>
+                        <td className="py-3 px-6 border border-gray-300 text-gray-600 flex items-center gap-2">
+                          
+                          {/* Debugging Log */}
+                          {user.country ? (
+                            <FlagIcon
+                              code={user.country.toUpperCase()}
+                              size={24}
+                            />
+                          ) : (
+                            <span className="text-gray-400">🌍</span>
+                          )}
+                          {user.country || "N/A"}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
               {filteredUsers.length === 0 && (
-                <p className="text-gray-500 text-center py-4">
-                  No users found
-                </p>
+                <p className="text-gray-500 text-center py-4">No users found</p>
               )}
             </>
           )}

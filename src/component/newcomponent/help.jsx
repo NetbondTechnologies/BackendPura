@@ -69,14 +69,16 @@ const HelpSection = () => {
             <div className="relative flex flex-col items-center text-center">
               <BookOpen className="w-14 h-14 text-cyan-600 mb-4" />
               <h2 className="text-3xl font-bold text-cyan-800 mb-3">
-                News & Blogs
+                About Us
               </h2>
               <p className="text-cyan-700 mb-6">
                 Stay updated with the latest trends, jewelry tips, insights.
               </p>
-              <button className="bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-cyan-700 transition-colors duration-300 shadow-md hover:shadow-lg">
-                Read Now
-              </button>
+              <Link to="/aboutus">
+                <button className="bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-cyan-700 transition-colors duration-300 shadow-md hover:shadow-lg">
+                  Read Now
+                </button>
+              </Link>
             </div>
           </div>
         </div>

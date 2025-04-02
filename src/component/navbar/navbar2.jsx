@@ -5,9 +5,15 @@ import { FaYoutube } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa";
 import { IsAdmin } from "../authantication/isauthanticat";
 import { AiFillInstagram } from "react-icons/ai";
-import { Menu } from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 
 export default function Navbar2() {
+  const categories = [
+    { name: "Necklace", category: "Necklaces" },
+    { name: "Earring", category: "Earrings" },
+    { name: "Bracelet", category: "Bracelets" },
+    { name: "Ring", category: "Rings" },
+  ];
   const [menu, setmenu] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const { t } = useTranslation();
@@ -18,7 +24,7 @@ export default function Navbar2() {
 
   return (
     <div>
-      <nav className="relative hidden lg:flex gap-2 items-center h-12 w-full">
+      <nav className="relative hidden lg:flex gap-8 items-center h-12 w-full">
         <button
           onClick={menutoggle}
           className="text-lg w-72 rounded-sm ml-5 text-black font-semibold bg-background-sky h-10"
@@ -34,11 +40,22 @@ export default function Navbar2() {
           >
             {t("Home")}
           </Link>
+          <Link
+            onMouseEnter={() => setDropdown(false)}
+            className="hover:text-cyan-600"
+            to="/aboutus"
+          >
+            {t("About us")}
+          </Link>
 
           {/* Jewellery Design Dropdown */}
           <div className="relative" onMouseEnter={() => setDropdown(true)}>
-            <Link to="/shopall" className="hover:text-cyan-600 cursor-pointer">
+            <Link
+              to="/shopall"
+              className="hover:text-cyan-600 flex items-center cursor-pointer"
+            >
               Jewellery Design
+              <ChevronDown />
             </Link>
             {dropdown && (
               <ul
@@ -47,13 +64,13 @@ export default function Navbar2() {
                 }}
                 className="absolute z-50 left-0  mt-2 w-48 bg-white shadow-lg rounded-md "
               >
-                {["Necklaces", "Earrings", "Bracelets", "Rings"].map((item) => (
-                  <li key={item}>
+                {categories.map((item) => (
+                  <li key={item.category}>
                     <Link
-                      to={`/category/${item}`}
+                      to={`/category/${item.category}`}
                       className="block px-4 py-2 hover:bg-cyan-100 text-black"
                     >
-                      {item}
+                      {item.name}
                     </Link>
                   </li>
                 ))}
@@ -64,13 +81,11 @@ export default function Navbar2() {
           <Link
             onMouseEnter={() => setDropdown(false)}
             className="hover:text-cyan-600"
-            to="/category"
+            to="/fairtrade"
           >
-            Categories
+            Fair Trade
           </Link>
-          <Link className="hover:text-cyan-600" to="/aboutus">
-            {t("About us")}
-          </Link>
+
           <Link className="hover:text-cyan-600" to="/contactus">
             {t("Contact us")}
           </Link>
@@ -83,7 +98,7 @@ export default function Navbar2() {
             </Link>
           ) : (
             // socialmedialink
-            <div className="flex gap-4">
+            <div className=" flex gap-4">
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -107,8 +122,6 @@ export default function Navbar2() {
               </a>
             </div>
           )}
-
-         
         </div>
       </nav>
 

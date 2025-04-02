@@ -10,6 +10,7 @@ import TradeBanner from "../newcomponent/tradebanner";
 import VideoSection from "../newcomponent/youtubevideo";
 import HomeProductCard from "../product cart/homeproduct";
 import Infofairtrade from "../newcomponent/infofairtrade";
+import Faqsection from "../newcomponent/faq";
 export default function Home() {
   return (
     <div>
@@ -24,6 +25,7 @@ export default function Home() {
       <Jewelryinfo />
       <InfoCards />
       <VideoSection />
+      <Faqsection/>
       <HelpSection />
     </div>
   );

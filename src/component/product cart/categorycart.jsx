@@ -76,10 +76,10 @@ export default function CategoryPage() {
               </div>
 
               <div className="mt-6 text-center">
-                <h3 className="text-xl font-bold text-cyan-800 tracking-tight">{product.name}</h3>
+                <h3 className=" text-sm lg:text-xl font-bold text-cyan-800 line-clamp-1 tracking-tight">{product.name}</h3>
                 <p className="text-sm text-cyan-600 mt-1">{product.category}</p>
                 <p className="text-xs text-cyan-500 mt-2 font-medium">
-                  Design Code: <span className="font-semibold">{product.designCode}</span>
+                  Design Code: <span className="font-semibold">{product.code}</span>
                 </p>
                 <button
                   onClick={() => handleAddToCart(product)}

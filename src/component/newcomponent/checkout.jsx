@@ -2,11 +2,34 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { useCart } from "./cartcontext";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
+import { FlagIcon } from "react-flag-kit";
+
+// Country options with flags and codes
+const countryOptions = [
+  { value: "US", label: "United States", flag: "US" },
+  { value: "IN", label: "India", flag: "IN" },
+  { value: "UK", label: "United Kingdom", flag: "GB" },
+  { value: "CA", label: "Canada", flag: "CA" },
+  { value: "AU", label: "Australia", flag: "AU" },
+  { value: "DE", label: "Germany", flag: "DE" },
+  { value: "FR", label: "France", flag: "FR" },
+  { value: "IT", label: "Italy", flag: "IT" },
+  { value: "ES", label: "Spain", flag: "ES" },
+  { value: "JP", label: "Japan", flag: "JP" },
+  { value: "BR", label: "Brazil", flag: "BR" },
+  { value: "CN", label: "China", flag: "CN" },
+  { value: "RU", label: "Russia", flag: "RU" },
+  { value: "ZA", label: "South Africa", flag: "ZA" },
+  { value: "MX", label: "Mexico", flag: "MX" },
+  { value: "KR", label: "South Korea", flag: "KR" },
+  { value: "SG", label: "Singapore", flag: "SG" },
+  // Add more countries as needed
+];
 
 const Checkout = () => {
   const { cartItems, updateQuantity, removeFromCart } = useCart();
-  const [showPopup, setShowPopup] = useState(false); // State for controlling popup visibility
-
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -14,6 +37,10 @@ const Checkout = () => {
     email: "",
     phone: "",
     message: "",
+    contactNumber: "", // New field
+    companyName: "",   // New field
+    country: "",       // New field
+    companyWebsite: "", // New field
   });
 
   const [errors, setErrors] = useState({});
@@ -23,8 +50,9 @@ const Checkout = () => {
   };
 
   const handleQuantityChange = (id, value) => {
-    if (value < 50) {
+    if (value < 1) {
       setErrors((prev) => ({ ...prev, [id]: "Minimum order quantity is 50" }));
+      updateQuantity(id, 1); // Reset to 50 if below limit
     } else {
       setErrors((prev) => ({ ...prev, [id]: "" }));
       updateQuantity(id, value);
@@ -40,6 +68,10 @@ const Checkout = () => {
     });
   };
 
+  const handleCountryChange = (selectedOption) => {
+    setFormData({ ...formData, country: selectedOption ? selectedOption.value : "" });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -48,10 +80,14 @@ const Checkout = () => {
       email: formData.email,
       phone: formData.phone,
       message: formData.message,
+      contactNumber: formData.contactNumber, // New field
+      companyName: formData.companyName,     // New field
+      country: formData.country,             // New field
+      companyWebsite: formData.companyWebsite, // New field
       order_details: cartItems
         .map(
           (item) =>
-            `<p><strong>${item.name}</strong> (SKU: ${item.sku}) - Qty: ${item.quantity}</p>`
+            `<p><strong>${item.name}</strong> (SKU: ${item.code}) - Qty: ${item.quantity}</p>`
         )
         .join(""),
     };
@@ -88,9 +124,7 @@ const Checkout = () => {
         >
           <div>
             <h2 className="text-lg font-semibold text-center">
-              Your order has been placed successfully! 🎉 We'll update you soon
-              with shipping details. Thank you for shopping with us!" Let me
-              know if you'd like to refine this further!
+              Your order has been placed successfully! 🎉 We'll update you soon with shipping details. Thank you for shopping with us!
             </h2>
           </div>
         </div>
@@ -119,7 +153,6 @@ const Checkout = () => {
                   <p className="font-semibold text-xl text-cyan-800">
                     {item.name}
                   </p>
-                  
                   <p className="text-xs text-cyan-500 mt-2 italic">
                     SKU: {item.code}
                   </p>
@@ -127,10 +160,13 @@ const Checkout = () => {
                 <div className="flex items-center gap-2 sm:gap-4 mt-4 sm:mt-0 relative">
                   <button
                     onClick={() =>
-                      handleQuantityChange(item.id, item.quantity - 1)
+                      handleQuantityChange(
+                        item._id,
+                        Math.max(item.quantity - 1, 1)
+                      )
                     }
                     className="p-2 bg-cyan-100 text-cyan-600 rounded-full hover:bg-cyan-200"
-                    disabled={item.quantity <= 50}
+                    disabled={item.quantity <= 1}
                   >
                     -
                   </button>
@@ -139,10 +175,10 @@ const Checkout = () => {
                       type="number"
                       required
                       className="w-12 sm:w-16 border border-cyan-300 rounded-lg text-center py-2 bg-white text-cyan-700 font-medium"
-                      min={50}
+                      min={1}
                       value={item.quantity}
                       onChange={(e) =>
-                        handleQuantityChange(item.id, Number(e.target.value))
+                        handleQuantityChange(item._id, Number(e.target.value))
                       }
                     />
                     {errors[item.id] && (
@@ -153,7 +189,7 @@ const Checkout = () => {
                   </div>
                   <button
                     onClick={() =>
-                      handleQuantityChange(item.id, item.quantity + 1)
+                      handleQuantityChange(item._id, item.quantity + 1)
                     }
                     className="p-2 bg-cyan-100 text-cyan-600 rounded-full hover:bg-cyan-200"
                   >
@@ -174,9 +210,9 @@ const Checkout = () => {
         {/* Right Section - Order Form */}
         <div className="lg:w-1/2 p-8 bg-white w-full">
           <h2 className="text-3xl font-extrabold text-cyan-600 mb-6 text-center sm:text-left">
-            Your Design Selection
+            Price Request Form
           </h2>
-          <form onSubmit={handleSubmit} className="space-y-7">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-cyan-700">
@@ -205,18 +241,87 @@ const Checkout = () => {
                 />
               </div>
             </div>
-            <div>
-              <label className="block text-sm font-semibold text-cyan-700">
-                Phone Number
-              </label>
-              <input
-                type="text"
-                name="phone"
-                className="w-full border border-cyan-300 rounded-lg p-3 mt-2"
-                value={formData.phone}
-                onChange={handleChange}
-              />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-cyan-700">
+                  Contact Number *
+                </label>
+                <input
+                  type="tel"
+                  name="contactNumber"
+                  className="w-full border border-cyan-300 rounded-lg p-3 mt-2"
+                  value={formData.contactNumber}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-cyan-700">
+                  Company Name *
+                </label>
+                <input
+                  type="text"
+                  name="companyName"
+                  className="w-full border border-cyan-300 rounded-lg p-3 mt-2"
+                  value={formData.companyName}
+                  onChange={handleChange}
+                  
+                />
+              </div>
             </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-cyan-700">
+                  Country *
+                </label>
+                <Select
+                  options={countryOptions}
+                  onChange={handleCountryChange}
+                  getOptionLabel={(option) => (
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <FlagIcon code={option.flag} size={24} style={{ marginRight: 8 }} />
+                      {option.label}
+                    </div>
+                  )}
+                  getOptionValue={(option) => option.value}
+                  placeholder="Select Country"
+                  value={countryOptions.find(option => option.value === formData.country)}
+                  required
+                  className="w-full border border-cyan-300 rounded-lg mt-2"
+                  styles={{
+                    control: (base) => ({
+                      ...base,
+                      backgroundColor: "#ffffff",
+                      borderColor: "#e5e7eb",
+                      borderRadius: "0.5rem",
+                      padding: "0.25rem",
+                    }),
+                    menu: (base) => ({
+                      ...base,
+                      backgroundColor: "#ffffff",
+                      borderRadius: "0.5rem",
+                      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                    }),
+                  }}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-cyan-700">
+                  Company Website *
+                </label>
+                <input
+                  type="url"
+                  name="companyWebsite"
+                  className="w-full border border-cyan-300 rounded-lg p-3 mt-2"
+                  value={formData.companyWebsite}
+                  onChange={handleChange}
+                  
+                />
+              </div>
+            </div>
+
             <div>
               <label className="block text-sm font-semibold text-cyan-700">
                 Message
@@ -228,9 +333,10 @@ const Checkout = () => {
                 onChange={handleChange}
               />
             </div>
+
             <button
               type="submit"
-              className="w-full bg-cyan-500 text-white py-3 rounded-lg hover:bg-cyan-600"
+              className="w-full bg-cyan-500 text-white py-3 rounded-lg hover:bg-cyan-600 transition duration-300"
             >
               Send Your Request
             </button>
