@@ -1,11 +1,11 @@
 import { useState } from "react";
+import axios from "axios";
 import emailjs from "@emailjs/browser";
 import { useCart } from "./cartcontext";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { FlagIcon } from "react-flag-kit";
 import * as XLSX from "xlsx";
-
 
 // Country options with flags and codes
 const countryOptions = [
@@ -26,7 +26,6 @@ const countryOptions = [
   { value: "MX", label: "Mexico", flag: "MX" },
   { value: "KR", label: "South Korea", flag: "KR" },
   { value: "SG", label: "Singapore", flag: "SG" },
-  // Add more countries as needed
 ];
 
 const Checkout = () => {
@@ -37,12 +36,11 @@ const Checkout = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     email: "",
-    phone: "",
+    contactNumber: "",
     message: "",
-    contactNumber: "", // New field
-    companyName: "",   // New field
-    country: "",       // New field
-    companyWebsite: "", // New field
+    companyName: "",
+    country: "",
+    companyWebsite: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -54,7 +52,7 @@ const Checkout = () => {
   const handleQuantityChange = (id, value) => {
     if (value < 1) {
       setErrors((prev) => ({ ...prev, [id]: "Minimum order quantity is 50" }));
-      updateQuantity(id, 1); // Reset to 50 if below limit
+      updateQuantity(id, 1);
     } else {
       setErrors((prev) => ({ ...prev, [id]: "" }));
       updateQuantity(id, value);
@@ -77,79 +75,77 @@ const Checkout = () => {
   const generateExcelFile = () => {
     const wb = XLSX.utils.book_new();
     const wsData = [["Product Name", "SKU", "Quantity"]];
-  
+
     cartItems.forEach((item) => {
       wsData.push([item.name, item.code, item.quantity]);
     });
-  
+
     const ws = XLSX.utils.aoa_to_sheet(wsData);
     XLSX.utils.book_append_sheet(wb, ws, "Order Details");
-  
-    // Generate XLSX file as a base64 string
+
     const excelBase64 = XLSX.write(wb, { bookType: "xlsx", type: "base64" });
-  
     return excelBase64;
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const excelFileBase64 = generateExcelFile();
-  
-    const templateParams = {
-      from_name: formData.firstName,
-      email: formData.email,
-      phone: formData.phone,
-      message: formData.message,
-      contactNumber: formData.contactNumber,
-      companyName: formData.companyName,
-      country: formData.country,
-      companyWebsite: formData.companyWebsite,
-      order_details: cartItems
-        .map(
-          (item) =>
-            `<p><strong>${item.name}</strong> (SKU: ${item.code}) - Qty: ${item.quantity}</p>`
-        )
-        .join(""),
-      attachment: excelFileBase64,
-      filename: "Order_Details.xlsx",
-    };
-  
+
     try {
+      // Submit to backend to save order and get download link
+      const backendResponse = await axios.post('http://localhost:8000/api/orders/submit-order', {
+        ...formData,
+        orderDetails: cartItems.map(item => ({
+          name: item.name,
+          sku: item.code,
+          quantity: item.quantity,
+        })),
+        attachment: excelFileBase64,
+      });
+
+      // Extract download link from backend response
+      const { downloadLink } = backendResponse.data;
+
+      // Send email from frontend with download link
+      const emailParams = {
+        from_name: formData.firstName,
+        email: formData.email,
+        message: formData.message,
+        order_details: cartItems
+          .map(item => `<p><strong>${item.name}</strong> (SKU: ${item.code}) - Qty: ${item.quantity}</p>`)
+          .join(""),
+        download_link: downloadLink, // Use the link from backend
+        attachment: excelFileBase64,
+        filename: "Order_Details.xlsx",
+      };
+
       await emailjs.send(
-        "service_bncdgoe",
-        "template_ms65flp",
-        templateParams,
-        "xM_ia1stj7vn6JB_o"
+        "service_bncdgoe", // Your service ID
+        "template_ms65flp", // Your template ID
+        emailParams,
+        "xM_ia1stj7vn6JB_o" // Your public key
       );
+
       cartItems.forEach((item) => removeFromCart(item._id));
-  
       setShowPopup(true);
       setTimeout(() => {
         setShowPopup(false);
         navigate("/");
       }, 3000);
     } catch (error) {
-      console.error("EmailJS error:", error);
-      alert("Failed to send order request. Try again.");
+      console.error("Submission error:", error);
+      alert(`Failed to send order request: ${error.response?.data?.error || error.message || 'Try again.'}`);
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-cyan-50 to-cyan-100 py-12 px-4 sm:px-6 lg:px-12">
       {showPopup && (
-        <div
-          className="fixed h-44 w-[50rem] top-1/2 left-1/2 bg-opacity-50 bg-cyan-200 flex justify-center items-center z-50"
-          style={{
-            transform: "translate(-50%, -50%)",
-            zIndex: 999,
-          }}
-        >
-          <div>
-            <h2 className="text-lg font-semibold text-center">
-              Your order has been placed successfully! 🎉 We'll update you soon with shipping details. Thank you for shopping with us!
-            </h2>
-          </div>
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-50 bg-cyan-200 p-6 rounded-lg shadow-lg z-50 max-w-md w-full">
+          <h2 className="text-lg font-semibold text-center">
+            Your order has been placed successfully! 🎉 We'll update you soon with shipping details. Thank you for shopping with us!
+          </h2>
         </div>
       )}
 
@@ -182,12 +178,7 @@ const Checkout = () => {
                 </div>
                 <div className="flex items-center gap-2 sm:gap-4 mt-4 sm:mt-0 relative">
                   <button
-                    onClick={() =>
-                      handleQuantityChange(
-                        item._id,
-                        Math.max(item.quantity - 1, 1)
-                      )
-                    }
+                    onClick={() => handleQuantityChange(item._id, Math.max(item.quantity - 1, 1))}
                     className="p-2 bg-cyan-100 text-cyan-600 rounded-full hover:bg-cyan-200"
                     disabled={item.quantity <= 1}
                   >
@@ -200,9 +191,7 @@ const Checkout = () => {
                       className="w-12 sm:w-16 border border-cyan-300 rounded-lg text-center py-2 bg-white text-cyan-700 font-medium"
                       min={1}
                       value={item.quantity}
-                      onChange={(e) =>
-                        handleQuantityChange(item._id, Number(e.target.value))
-                      }
+                      onChange={(e) => handleQuantityChange(item._id, Number(e.target.value))}
                     />
                     {errors[item.id] && (
                       <p className="text-red-500 text-xs absolute top-12 left-0">
@@ -211,9 +200,7 @@ const Checkout = () => {
                     )}
                   </div>
                   <button
-                    onClick={() =>
-                      handleQuantityChange(item._id, item.quantity + 1)
-                    }
+                    onClick={() => handleQuantityChange(item._id, item.quantity + 1)}
                     className="p-2 bg-cyan-100 text-cyan-600 rounded-full hover:bg-cyan-200"
                   >
                     +
@@ -249,6 +236,7 @@ const Checkout = () => {
                   onChange={handleChange}
                   required
                 />
+                {errors.firstName && <p className="text-red-500 text-xs">{errors.firstName}</p>}
               </div>
               <div>
                 <label className="block text-sm font-semibold text-cyan-700">
@@ -262,26 +250,29 @@ const Checkout = () => {
                   onChange={handleChange}
                   required
                 />
+                {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
               </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-cyan-700">
+                Contact Number *
+              </label>
+              <input
+                type="tel"
+                name="contactNumber"
+                className="w-full border border-cyan-300 rounded-lg p-3 mt-2"
+                value={formData.contactNumber}
+                onChange={handleChange}
+                required
+              />
+              {errors.contactNumber && <p className="text-red-500 text-xs">{errors.contactNumber}</p>}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-cyan-700">
-                  Contact Number *
-                </label>
-                <input
-                  type="tel"
-                  name="contactNumber"
-                  className="w-full border border-cyan-300 rounded-lg p-3 mt-2"
-                  value={formData.contactNumber}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-cyan-700">
-                  Company Name *
+                  Company Name
                 </label>
                 <input
                   type="text"
@@ -289,12 +280,8 @@ const Checkout = () => {
                   className="w-full border border-cyan-300 rounded-lg p-3 mt-2"
                   value={formData.companyName}
                   onChange={handleChange}
-                  
                 />
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-cyan-700">
                   Country *
@@ -329,20 +316,21 @@ const Checkout = () => {
                     }),
                   }}
                 />
+                {errors.country && <p className="text-red-500 text-xs">{errors.country}</p>}
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-cyan-700">
-                  Company Website *
-                </label>
-                <input
-                  type="url"
-                  name="companyWebsite"
-                  className="w-full border border-cyan-300 rounded-lg p-3 mt-2"
-                  value={formData.companyWebsite}
-                  onChange={handleChange}
-                  
-                />
-              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-cyan-700">
+                Company Website
+              </label>
+              <input
+                type="url"
+                name="companyWebsite"
+                className="w-full border border-cyan-300 rounded-lg p-3 mt-2"
+                value={formData.companyWebsite}
+                onChange={handleChange}
+              />
             </div>
 
             <div>
