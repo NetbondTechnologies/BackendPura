@@ -4,6 +4,8 @@ import { useCart } from "./cartcontext";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { FlagIcon } from "react-flag-kit";
+import * as XLSX from "xlsx";
+
 
 // Country options with flags and codes
 const countryOptions = [
@@ -72,26 +74,47 @@ const Checkout = () => {
     setFormData({ ...formData, country: selectedOption ? selectedOption.value : "" });
   };
 
+  const generateExcelFile = () => {
+    const wb = XLSX.utils.book_new();
+    const wsData = [["Product Name", "SKU", "Quantity"]];
+  
+    cartItems.forEach((item) => {
+      wsData.push([item.name, item.code, item.quantity]);
+    });
+  
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+    XLSX.utils.book_append_sheet(wb, ws, "Order Details");
+  
+    // Generate XLSX file as a base64 string
+    const excelBase64 = XLSX.write(wb, { bookType: "xlsx", type: "base64" });
+  
+    return excelBase64;
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    const excelFileBase64 = generateExcelFile();
+  
     const templateParams = {
       from_name: formData.firstName,
       email: formData.email,
       phone: formData.phone,
       message: formData.message,
-      contactNumber: formData.contactNumber, // New field
-      companyName: formData.companyName,     // New field
-      country: formData.country,             // New field
-      companyWebsite: formData.companyWebsite, // New field
+      contactNumber: formData.contactNumber,
+      companyName: formData.companyName,
+      country: formData.country,
+      companyWebsite: formData.companyWebsite,
       order_details: cartItems
         .map(
           (item) =>
             `<p><strong>${item.name}</strong> (SKU: ${item.code}) - Qty: ${item.quantity}</p>`
         )
         .join(""),
+      attachment: excelFileBase64,
+      filename: "Order_Details.xlsx",
     };
-
+  
     try {
       await emailjs.send(
         "service_bncdgoe",
@@ -100,7 +123,7 @@ const Checkout = () => {
         "xM_ia1stj7vn6JB_o"
       );
       cartItems.forEach((item) => removeFromCart(item._id));
-
+  
       setShowPopup(true);
       setTimeout(() => {
         setShowPopup(false);

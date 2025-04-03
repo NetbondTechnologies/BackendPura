@@ -75,7 +75,7 @@ export default function AdminUserView() {
                 </thead>
                 <tbody>
                   {filteredUsers.map((user, index) => {
-                    const countryCode = user.countryCode;
+                   
                     return (
                       <tr
                         key={user._id}
