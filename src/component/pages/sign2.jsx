@@ -19,6 +19,8 @@ export default function Signup() {
     password: "",
     contactNumber: "",
     country: "",
+    companyName: "", // Updated to camelCase
+    companyWebsite: "", // Updated to camelCase
   });
   const [matchPassword, setMatchPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,8 +34,11 @@ export default function Signup() {
   };
 
   const handleCountryChange = (selectedOption) => {
-    setCredentials({ ...credentials, country: selectedOption ? selectedOption.value : "" });
-    setTouched((prev) => ({ ...prev, country: true }));
+    setCredentials({
+      ...credentials,
+      country: selectedOption ? selectedOption.value : "",
+    });
+    setTouched((prev) => ({ ...prev, companyName: true }));
   };
 
   const validateForm = () => {
@@ -51,6 +56,10 @@ export default function Signup() {
     }
     if (!credentials.contactNumber) errors.contactNumber = t("contact_required");
     if (!credentials.country) errors.country = t("country_required");
+    // Removed validation for companyName and companyWebsite since they are now optional
+    if (credentials.companyWebsite && !/^(ftp|http|https):\/\/[^ "]+$/.test(credentials.companyWebsite)) {
+      errors.companyWebsite = t("invalid_website");
+    }
     return errors;
   };
 
@@ -80,7 +89,15 @@ export default function Signup() {
       console.log("User Registered:", data);
       alert(t("signup_success"));
 
-      setCredentials({ name: "", email: "", password: "", contactNumber: "", country: "" });
+      setCredentials({
+        name: "",
+        email: "",
+        password: "",
+        contactNumber: "",
+        country: "",
+        companyName: "", // Updated to camelCase
+        companyWebsite: "", // Updated to camelCase
+      });
       setMatchPassword("");
       setTouched({});
 
@@ -138,9 +155,7 @@ export default function Signup() {
           onSubmit={handleSignup}
           className="flex flex-col w-full lg:w-2/3 p-6 gap-4 justify-center items-center"
         >
-          <h1 className="font-bold text-2xl  mb-4">
-            {t("signup")}
-          </h1>
+          <h1 className="font-bold text-2xl mb-4">{t("signup")}</h1>
 
           <div className="w-full max-w-md grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Name */}
@@ -150,7 +165,9 @@ export default function Signup() {
               </label>
               <input
                 className={`w-full p-2 border rounded-md focus:ring-2 focus:ring-cyan-500 focus:border-transparent ${
-                  touched.name && !credentials.name ? "border-red-500" : "border-gray-300"
+                  touched.name && !credentials.name
+                    ? "border-red-500"
+                    : "border-gray-300"
                 }`}
                 type="text"
                 name="name"
@@ -168,7 +185,9 @@ export default function Signup() {
               </label>
               <input
                 className={`w-full p-2 border rounded-md focus:ring-2 focus:ring-cyan-500 focus:border-transparent ${
-                  touched.email && !credentials.email ? "border-red-500" : "border-gray-300"
+                  touched.email && !credentials.email
+                    ? "border-red-500"
+                    : "border-gray-300"
                 }`}
                 type="email"
                 name="email"
@@ -186,7 +205,9 @@ export default function Signup() {
               </label>
               <input
                 className={`w-full p-2 border rounded-md focus:ring-2 focus:ring-cyan-500 focus:border-transparent ${
-                  touched.password && !credentials.password ? "border-red-500" : "border-gray-300"
+                  touched.password && !credentials.password
+                    ? "border-red-500"
+                    : "border-gray-300"
                 }`}
                 type="password"
                 name="password"
@@ -204,7 +225,9 @@ export default function Signup() {
               </label>
               <input
                 className={`w-full p-2 border rounded-md focus:ring-2 focus:ring-cyan-500 focus:border-transparent ${
-                  touched.matchPassword && !matchPassword ? "border-red-500" : "border-gray-300"
+                  touched.matchPassword && !matchPassword
+                    ? "border-red-500"
+                    : "border-gray-300"
                 }`}
                 type="password"
                 value={matchPassword}
@@ -221,7 +244,9 @@ export default function Signup() {
               </label>
               <input
                 className={`w-full p-2 border rounded-md focus:ring-2 focus:ring-cyan-500 focus:border-transparent ${
-                  touched.contactNumber && !credentials.contactNumber ? "border-red-500" : "border-gray-300"
+                  touched.contactNumber && !credentials.contactNumber
+                    ? "border-red-500"
+                    : "border-gray-300"
                 }`}
                 type="tel"
                 name="contactNumber"
@@ -229,6 +254,36 @@ export default function Signup() {
                 onChange={handleChange}
                 required
                 placeholder={t("Contact Number")}
+              />
+            </div>
+
+            {/* Company Name (Optional) */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                {t("Company Name")} (Optional)
+              </label>
+              <input
+                className={`w-full p-2 border rounded-md focus:ring-2 focus:ring-cyan-500 focus:border-transparent border-gray-300`} // Removed error styling
+                type="text"
+                name="companyName" // Updated to camelCase
+                value={credentials.companyName} // Updated to camelCase
+                onChange={handleChange}
+                placeholder={t("Company Name")}
+              />
+            </div>
+
+            {/* Company Website (Optional) */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                {t("Company Website")} (Optional)
+              </label>
+              <input
+                className={`w-full p-2 border rounded-md focus:ring-2 focus:ring-cyan-500 focus:border-transparent border-gray-300`} // Removed error styling
+                type="url"
+                name="companyWebsite" // Updated to camelCase
+                value={credentials.companyWebsite} // Updated to camelCase
+                onChange={handleChange}
+                placeholder={t("Company Website")}
               />
             </div>
 
@@ -242,22 +297,33 @@ export default function Signup() {
                 onChange={handleCountryChange}
                 getOptionLabel={(option) => (
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <FlagIcon code={option.flag} size={20} style={{ marginRight: 6 }} />
+                    <FlagIcon
+                      code={option.flag}
+                      size={20}
+                      style={{ marginRight: 6 }}
+                    />
                     {option.label}
                   </div>
                 )}
                 getOptionValue={(option) => option.value}
                 placeholder={t("Select Country")}
-                value={countryOptions.find(option => option.value === credentials.country)}
+                value={countryOptions.find(
+                  (option) => option.value === credentials.country
+                )}
                 required
                 className={`w-full border rounded-md ${
-                  touched.country && !credentials.country ? "border-red-500" : "border-gray-300"
+                  touched.country && !credentials.country
+                    ? "border-red-500"
+                    : "border-gray-300"
                 }`}
                 styles={{
                   control: (base) => ({
                     ...base,
                     backgroundColor: "#ffffff",
-                    borderColor: touched.country && !credentials.country ? "#ef4444" : "#d1d5db",
+                    borderColor:
+                      touched.country && !credentials.country
+                        ? "#ef4444"
+                        : "#d1d5db",
                     borderRadius: "0.375rem",
                     padding: "0.125rem",
                     minHeight: "38px",
@@ -276,7 +342,9 @@ export default function Signup() {
               />
             </div>
 
-            {error && <p className="text-red-500 text-sm mt-2 md:col-span-2">{error}</p>}
+            {error && (
+              <p className="text-red-500 text-sm mt-2 md:col-span-2">{error}</p>
+            )}
 
             <button
               className="w-full md:col-span-2 bg-background-sky text-white p-2 rounded-md hover:bg-cyan-700 transition duration-200 font-semibold"
@@ -287,7 +355,7 @@ export default function Signup() {
 
             <p className="text-sm text-gray-600 text-center md:col-span-2">
               {t("already_account")}{" "}
-              <Link to="/login" className=" font-bold hover:underline">
+              <Link to="/login" className="font-bold hover:underline">
                 {t("login")}
               </Link>
             </p>

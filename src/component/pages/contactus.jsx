@@ -27,6 +27,27 @@ const countryOptions = [
   { value: "MX", label: "Mexico", flag: "MX" },
   { value: "KR", label: "South Korea", flag: "KR" },
   { value: "SG", label: "Singapore", flag: "SG" },
+  { value: "AT", label: "Austria", flag: "AT" },
+  { value: "PT", label: "Portugal", flag: "PT" },
+  { value: "DK", label: "Denmark", flag: "DK" },
+  { value: "SE", label: "Sweden", flag: "SE" },
+  { value: "NO", label: "Norway", flag: "NO" },
+  { value: "NL", label: "Netherlands", flag: "NL" },
+  { value: "TR", label: "Turkey", flag: "TR" },
+  { value: "PL", label: "Poland", flag: "PL" },
+  { value: "RO", label: "Romania", flag: "RO" },
+  { value: "GR", label: "Greece", flag: "GR" },
+  { value: "HU", label: "Hungary", flag: "HU" },
+  { value: "IE", label: "Ireland", flag: "IE" },
+  { value: "LT", label: "Lithuania", flag: "LT" },
+  { value: "LU", label: "Luxembourg", flag: "LU" },
+  { value: "MC", label: "Monaco", flag: "MC" },
+  { value: "CH", label: "Switzerland", flag: "CH" },
+  { value: "IL", label: "Israel", flag: "IL" }, // Israel (not in Europe but included in your list)
+
+  // Non-European countries from your list
+  { value: "AR", label: "Argentina", flag: "AR" },
+  { value: "NZ", label: "New Zealand", flag: "NZ" },
 ];
 
 export default function Contactus() {
@@ -38,8 +59,8 @@ export default function Contactus() {
     email: "",
     message: "",
     contactNumber: "", // New field
-    companyName: "",   // New field
-    country: "",       // New field
+    companyName: "", // New field
+    country: "", // New field
     companyWebsite: "", // New field
   });
 
@@ -52,29 +73,28 @@ export default function Contactus() {
     const templateID = "template_4n9065m";
     const userID = "xM_ia1stj7vn6JB_o";
 
-    emailjs.send(serviceID, templateID, contactdata, userID)
-      .then(
-        (response) => {
-          console.log("SUCCESS", response.status, response.text);
-          setContactData({
-            name: "",
-            email: "",
-            message: "",
-            contactNumber: "",
-            companyName: "",
-            country: "",
-            companyWebsite: "",
-          });
-          setShowPopup(true);
-          setTimeout(() => {
-            setShowPopup(false);
-            navigate("/");
-          }, 3000);
-        },
-        (error) => {
-          console.log("FAILED", error);
-        }
-      );
+    emailjs.send(serviceID, templateID, contactdata, userID).then(
+      (response) => {
+        console.log("SUCCESS", response.status, response.text);
+        setContactData({
+          name: "",
+          email: "",
+          message: "",
+          contactNumber: "",
+          companyName: "",
+          country: "",
+          companyWebsite: "",
+        });
+        setShowPopup(true);
+        setTimeout(() => {
+          setShowPopup(false);
+          navigate("/");
+        }, 3000);
+      },
+      (error) => {
+        console.log("FAILED", error);
+      }
+    );
   }
 
   function handleContactData(e) {
@@ -84,7 +104,10 @@ export default function Contactus() {
 
   // Handle country selection
   const handleCountryChange = (selectedOption) => {
-    setContactData({ ...contactdata, country: selectedOption ? selectedOption.value : "" });
+    setContactData({
+      ...contactdata,
+      country: selectedOption ? selectedOption.value : "",
+    });
   };
 
   return (
@@ -115,7 +138,10 @@ export default function Contactus() {
                 </h2>
 
                 <div className="space-y-2">
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     {t("your_name")}
                   </label>
                   <input
@@ -131,7 +157,10 @@ export default function Contactus() {
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     {t("email")}
                   </label>
                   <input
@@ -147,7 +176,10 @@ export default function Contactus() {
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="contactNumber" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="contactNumber"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     {t("Contact Number")}
                   </label>
                   <input
@@ -163,7 +195,10 @@ export default function Contactus() {
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="companyName" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="companyName"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     {t("Company Name")}
                   </label>
                   <input
@@ -174,35 +209,45 @@ export default function Contactus() {
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg"
                     placeholder={t("Enter company name")}
                     value={contactdata.companyName}
-                   
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="country"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     {t("country")}
                   </label>
                   <Select
                     id="country"
                     options={countryOptions}
-                    
                     onChange={handleCountryChange}
                     getOptionLabel={(option) => (
                       <div style={{ display: "flex", alignItems: "center" }}>
-                        <FlagIcon code={option.flag} size={24} style={{ marginRight: 8 }} />
+                        <FlagIcon
+                          code={option.flag}
+                          size={24}
+                          style={{ marginRight: 8 }}
+                        />
                         {option.label}
                       </div>
                     )}
                     getOptionValue={(option) => option.value}
                     placeholder={t("Select Country")}
-                    value={countryOptions.find(option => option.value === contactdata.country)}
+                    value={countryOptions.find(
+                      (option) => option.value === contactdata.country
+                    )}
                     required
                     className="w-full bg-gray-50 border border-gray-200 rounded-lg"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="companyWebsite" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="companyWebsite"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     {t("Company Website")}
                   </label>
                   <input
@@ -213,12 +258,14 @@ export default function Contactus() {
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg"
                     placeholder={t("Enter Company Website")}
                     value={contactdata.companyWebsite}
-                  
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     {t("message")}
                   </label>
                   <textarea
@@ -254,7 +301,6 @@ export default function Contactus() {
                   +91 9314 346 148
                 </p>
               </div>
-              
 
               <div className="bg-white lg:h-96 rounded-2xl shadow-xl p-8 flex flex-col justify-center items-center">
                 <div className="p-4 bg-gray-100 rounded-full mb-4">
@@ -267,7 +313,6 @@ export default function Contactus() {
                   info@puramenteinternational.com
                 </p>
               </div>
-              
             </div>
           </div>
         </div>
@@ -283,8 +328,12 @@ export default function Contactus() {
           />
         </div>
         <div className="lg:w-1/2 flex items-center flex-col">
-          <h1 className="text-3xl text-black font-bold">{t("offline_store")}</h1>
-          <p className="m-12 text-xl font-semibold text-black">{t("store_address")}</p>
+          <h1 className="text-3xl text-black font-bold">
+            {t("offline_store")}
+          </h1>
+          <p className="m-12 text-xl font-semibold text-black">
+            {t("store_address")}
+          </p>
           <p className="lg:text-xl font-semibold text-black">
             {t("phone")}: 1414911855, +91 7023555055
           </p>

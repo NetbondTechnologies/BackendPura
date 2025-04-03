@@ -21,7 +21,7 @@ const Jewelryinfo = () => {
           </p>
         </div>
       ),
-      image: "/companypicture.webp",
+      image: "/puramentestore.jpeg",
     },
     welcome: {
       title: "Welcome to Your Jewelry Journey",
@@ -40,7 +40,7 @@ const Jewelryinfo = () => {
           </p>
         </div>
       ),
-      image: "/journey.webp",
+      image: "https://i.postimg.cc/NfD50gHY/IMG-6855.jpg",
     },
     custom: {
       title: "Crafting Dreams: Custom Jewelry",
@@ -58,7 +58,7 @@ const Jewelryinfo = () => {
           </p>
         </div>
       ),
-      image: "/POSTERS/2.JPG",
+      image: "https://i.postimg.cc/j2KSs9qL/IMG-7164.jpg",
     },
     materials: {
       title: "Unveiling the Sparkle: Our Materials",
@@ -137,7 +137,7 @@ const Jewelryinfo = () => {
           </p>
         </div>
       ),
-      image: "https://img.freepik.com/free-vector/milestone-route-map-template-with-modern-execution-plan_1017-44254.jpg?t=st=1743063825~exp=1743067425~hmac=bf9be63bd8a56fb919896fce01e842058e8274f02352a392d7c445eb4d283094&w=1380",
+      image: "https://img.freepik.com/free-photo/shallow-focus-from-male-standing-pathway-middle-grassy-field_181624-7323.jpg?t=st=1743677001~exp=1743680601~hmac=a898879f779690c14cf73b8b0e692b23a47293d770fbfa9a423c423a17e689db&w=1380",
     },
   };
 

@@ -65,6 +65,12 @@ export default function AdminUserView() {
                     <th className="py-3 px-6 text-left border border-gray-300">
                       Country
                     </th>
+                    <th className="py-3 px-6 text-left border border-gray-300">
+                      Company Name
+                    </th>
+                    <th className="py-3 px-6 text-left border border-gray-300">
+                      Company Website
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -87,8 +93,6 @@ export default function AdminUserView() {
                           {user.contactNumber || "N/A"}
                         </td>
                         <td className="py-3 px-6 border border-gray-300 text-gray-600 flex items-center gap-2">
-                          
-                          {/* Debugging Log */}
                           {user.country ? (
                             <FlagIcon
                               code={user.country.toUpperCase()}
@@ -98,6 +102,23 @@ export default function AdminUserView() {
                             <span className="text-gray-400">🌍</span>
                           )}
                           {user.country || "N/A"}
+                        </td>
+                        <td className="py-3 px-6 border border-gray-300 text-gray-600">
+                          {user.companyName || "N/A"}
+                        </td>
+                        <td className="py-3 px-6 border border-gray-300 text-gray-600">
+                          {user.companyWebsite ? (
+                            <a
+                              href={user.companyWebsite}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-500 hover:underline"
+                            >
+                              {user.companyWebsite}
+                            </a>
+                          ) : (
+                            "N/A"
+                          )}
                         </td>
                       </tr>
                     );

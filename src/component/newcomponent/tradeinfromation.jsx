@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { 
   Key, Calculator, Handshake, DollarSign, User, 
-  Users, ThumbsUp, BarChart2 
+  Users, ThumbsUp, BarChart2, Leaf, Home 
 } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -39,6 +39,14 @@ const principles = [
     icon: <BarChart2 className="w-8 h-8" />,
     text: "Capacity Building",
   },
+  {
+    icon: <Leaf className="w-8 h-8" />,
+    text: "Respect for the Environment",
+  },
+  {
+    icon: <Home className="w-8 h-8" />,
+    text: "Community Development",
+  },
 ];
 
 export default function FairTradePrinciples() {
@@ -69,8 +77,8 @@ export default function FairTradePrinciples() {
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4  gap-6">
+        {/* Grid - Changed to lg:grid-cols-5 for 5 columns on large screens */}
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
           {principles.map((principle, index) => (
             <div
               key={index}
