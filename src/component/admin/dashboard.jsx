@@ -24,9 +24,9 @@ export default function Dashboard() {
           <Link to="/addproduct" className="flex items-center gap-2">
             <FilePlus /> Add Product
           </Link>
-          {/* <Link to="/orderlist" className="flex items-center gap-2">
+          <Link to="/orderlist" className="flex items-center gap-2">
             <View /> View Order
-          </Link> */}
+          </Link>
           <Link to="/userview" className="flex items-center gap-2">
             <UserRoundSearch /> View User
           </Link>
