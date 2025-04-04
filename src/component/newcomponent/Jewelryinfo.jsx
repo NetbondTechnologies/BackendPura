@@ -58,7 +58,7 @@ const Jewelryinfo = () => {
           </p>
         </div>
       ),
-      image: "https://i.postimg.cc/j2KSs9qL/IMG-7164.jpg",
+      image: "https://i.postimg.cc/W1mqgMCR/COL0018R.jpg",
     },
     materials: {
       title: "Unveiling the Sparkle: Our Materials",
@@ -87,7 +87,7 @@ const Jewelryinfo = () => {
         </div>
       ),
       image:
-        "https://img.freepik.com/free-photo/flat-lay-bead-working-essentials_23-2148815819.jpg?t=st=1743063621~exp=1743067221~hmac=b3a58eb4ecdc11f080df09684d6f78d7382046fc294d3195ae4bdf4860551d65&w=1380",
+        "/material.png",
     },
     global: {
       title: "Our Global Network",
@@ -98,8 +98,7 @@ const Jewelryinfo = () => {
           captivates customers worldwide.
         </p>
       ),
-      image:
-        "https://img.freepik.com/free-vector/character-illustration-people-with-global-network-concept_53876-43079.jpg?t=st=1743063672~exp=1743067272~hmac=c5978a4eb0735eec792988638d6eb614244f38c214590221c959670ad33a2c47&w=1380",
+      image: "/globalnetwork.jpg",
     },
     why: {
       title: "Why Choose Puramente",
@@ -120,7 +119,7 @@ const Jewelryinfo = () => {
           ))}
         </div>
       ),
-      image: "/why.webp",
+      image: "https://i.postimg.cc/j5ByZRhB/ES0358-R-AC.jpg",
     },
     conclusion: {
       title: "Your Journey Begins",
@@ -137,7 +136,8 @@ const Jewelryinfo = () => {
           </p>
         </div>
       ),
-      image: "https://img.freepik.com/free-photo/shallow-focus-from-male-standing-pathway-middle-grassy-field_181624-7323.jpg?t=st=1743677001~exp=1743680601~hmac=a898879f779690c14cf73b8b0e692b23a47293d770fbfa9a423c423a17e689db&w=1380",
+      image:
+        "https://img.freepik.com/free-photo/shallow-focus-from-male-standing-pathway-middle-grassy-field_181624-7323.jpg?t=st=1743677001~exp=1743680601~hmac=a898879f779690c14cf73b8b0e692b23a47293d770fbfa9a423c423a17e689db&w=1380",
     },
   };
 

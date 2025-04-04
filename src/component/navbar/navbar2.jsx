@@ -32,7 +32,7 @@ export default function Navbar2() {
           {t("BROWSE_CATEGORIES")}
         </button>
         <Menu className="absolute left-8 h-6 w-6" />
-        <div className="text-button-orange flex font-bold gap-10 p-2 text-xl">
+        <div className="text-button-orange flex  gap-10 p-2 text-lg font-bold">
           <Link
             onMouseEnter={() => setDropdown(false)}
             className="hover:text-cyan-600"
@@ -83,7 +83,7 @@ export default function Navbar2() {
             className="hover:text-cyan-600"
             to="/fairtrade"
           >
-            Fair Trade
+            Fair Trade Practicing
           </Link>
 
           <Link className="hover:text-cyan-600" to="/contactus">

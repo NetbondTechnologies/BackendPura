@@ -11,7 +11,7 @@ import * as XLSX from "xlsx";
 const countryOptions = [
   { value: "US", label: "United States", flag: "US" },
   { value: "IN", label: "India", flag: "IN" },
-  { value: "UK", label: "United Kingdom", flag: "GB" },
+  { value: "GB", label: "United Kingdom", flag: "GB" },
   { value: "CA", label: "Canada", flag: "CA" },
   { value: "AU", label: "Australia", flag: "AU" },
   { value: "DE", label: "Germany", flag: "DE" },
@@ -26,7 +26,27 @@ const countryOptions = [
   { value: "MX", label: "Mexico", flag: "MX" },
   { value: "KR", label: "South Korea", flag: "KR" },
   { value: "SG", label: "Singapore", flag: "SG" },
+  { value: "CH", label: "Switzerland", flag: "CH" },
+  { value: "AT", label: "Austria", flag: "AT" },
+  { value: "PT", label: "Portugal", flag: "PT" },
+  { value: "DK", label: "Denmark", flag: "DK" },
+  { value: "SE", label: "Sweden", flag: "SE" },
+  { value: "AR", label: "Argentina", flag: "AR" },
+  { value: "NO", label: "Norway", flag: "NO" },
+  { value: "NZ", label: "New Zealand", flag: "NZ" },
+  { value: "NL", label: "Netherlands", flag: "NL" },
+  { value: "TR", label: "Turkey", flag: "TR" },
+  { value: "IL", label: "Israel", flag: "IL" },
+  { value: "PL", label: "Poland", flag: "PL" },
+  { value: "RO", label: "Romania", flag: "RO" },
+  { value: "GR", label: "Greece", flag: "GR" },
+  { value: "HU", label: "Hungary", flag: "HU" },
+  { value: "IE", label: "Ireland", flag: "IE" },
+  { value: "LT", label: "Lithuania", flag: "LT" },
+  { value: "LU", label: "Luxembourg", flag: "LU" },
+  { value: "MC", label: "Monaco", flag: "MC" }
 ];
+
 
 const Checkout = () => {
   const { cartItems, updateQuantity, removeFromCart } = useCart();
@@ -69,7 +89,10 @@ const Checkout = () => {
   };
 
   const handleCountryChange = (selectedOption) => {
-    setFormData({ ...formData, country: selectedOption ? selectedOption.value : "" });
+    setFormData({
+      ...formData,
+      country: selectedOption ? selectedOption.value : "",
+    });
   };
 
   const generateExcelFile = () => {
@@ -94,15 +117,18 @@ const Checkout = () => {
 
     try {
       // Submit to backend to save order and get download link
-      const backendResponse = await axios.post('http://localhost:8000/api/orders/submit-order', {
-        ...formData,
-        orderDetails: cartItems.map(item => ({
-          name: item.name,
-          sku: item.code,
-          quantity: item.quantity,
-        })),
-        attachment: excelFileBase64,
-      });
+      const backendResponse = await axios.post(
+        "http://localhost:8000/api/orders/submit-order",
+        {
+          ...formData,
+          orderDetails: cartItems.map((item) => ({
+            name: item.name,
+            sku: item.code,
+            quantity: item.quantity,
+          })),
+          attachment: excelFileBase64,
+        }
+      );
 
       // Extract download link from backend response
       const { downloadLink } = backendResponse.data;
@@ -113,7 +139,10 @@ const Checkout = () => {
         email: formData.email,
         message: formData.message,
         order_details: cartItems
-          .map(item => `<p><strong>${item.name}</strong> (SKU: ${item.code}) - Qty: ${item.quantity}</p>`)
+          .map(
+            (item) =>
+              `<p><strong>${item.name}</strong> (SKU: ${item.code}) - Qty: ${item.quantity}</p>`
+          )
           .join(""),
         download_link: downloadLink, // Use the link from backend
         attachment: excelFileBase64,
@@ -135,7 +164,11 @@ const Checkout = () => {
       }, 3000);
     } catch (error) {
       console.error("Submission error:", error);
-      alert(`Failed to send order request: ${error.response?.data?.error || error.message || 'Try again.'}`);
+      alert(
+        `Failed to send order request: ${
+          error.response?.data?.error || error.message || "Try again."
+        }`
+      );
     }
   };
 
@@ -144,7 +177,8 @@ const Checkout = () => {
       {showPopup && (
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-50 bg-cyan-200 p-6 rounded-lg shadow-lg z-50 max-w-md w-full">
           <h2 className="text-lg font-semibold text-center">
-            Your order has been placed successfully! 🎉 We'll update you soon with shipping details. Thank you for shopping with us!
+            Your order has been placed successfully! 🎉 We'll update you soon
+            with shipping details. Thank you for shopping with us!
           </h2>
         </div>
       )}
@@ -178,7 +212,12 @@ const Checkout = () => {
                 </div>
                 <div className="flex items-center gap-2 sm:gap-4 mt-4 sm:mt-0 relative">
                   <button
-                    onClick={() => handleQuantityChange(item._id, Math.max(item.quantity - 1, 1))}
+                    onClick={() =>
+                      handleQuantityChange(
+                        item._id,
+                        Math.max(item.quantity - 1, 1)
+                      )
+                    }
                     className="p-2 bg-cyan-100 text-cyan-600 rounded-full hover:bg-cyan-200"
                     disabled={item.quantity <= 1}
                   >
@@ -191,7 +230,9 @@ const Checkout = () => {
                       className="w-12 sm:w-16 border border-cyan-300 rounded-lg text-center py-2 bg-white text-cyan-700 font-medium"
                       min={1}
                       value={item.quantity}
-                      onChange={(e) => handleQuantityChange(item._id, Number(e.target.value))}
+                      onChange={(e) =>
+                        handleQuantityChange(item._id, Number(e.target.value))
+                      }
                     />
                     {errors[item.id] && (
                       <p className="text-red-500 text-xs absolute top-12 left-0">
@@ -200,7 +241,9 @@ const Checkout = () => {
                     )}
                   </div>
                   <button
-                    onClick={() => handleQuantityChange(item._id, item.quantity + 1)}
+                    onClick={() =>
+                      handleQuantityChange(item._id, item.quantity + 1)
+                    }
                     className="p-2 bg-cyan-100 text-cyan-600 rounded-full hover:bg-cyan-200"
                   >
                     +
@@ -236,7 +279,9 @@ const Checkout = () => {
                   onChange={handleChange}
                   required
                 />
-                {errors.firstName && <p className="text-red-500 text-xs">{errors.firstName}</p>}
+                {errors.firstName && (
+                  <p className="text-red-500 text-xs">{errors.firstName}</p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-semibold text-cyan-700">
@@ -250,7 +295,9 @@ const Checkout = () => {
                   onChange={handleChange}
                   required
                 />
-                {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+                {errors.email && (
+                  <p className="text-red-500 text-xs">{errors.email}</p>
+                )}
               </div>
             </div>
 
@@ -266,7 +313,9 @@ const Checkout = () => {
                 onChange={handleChange}
                 required
               />
-              {errors.contactNumber && <p className="text-red-500 text-xs">{errors.contactNumber}</p>}
+              {errors.contactNumber && (
+                <p className="text-red-500 text-xs">{errors.contactNumber}</p>
+              )}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -291,13 +340,19 @@ const Checkout = () => {
                   onChange={handleCountryChange}
                   getOptionLabel={(option) => (
                     <div style={{ display: "flex", alignItems: "center" }}>
-                      <FlagIcon code={option.flag} size={24} style={{ marginRight: 8 }} />
+                      <FlagIcon
+                        code={option.flag}
+                        size={24}
+                        style={{ marginRight: 8 }}
+                      />
                       {option.label}
                     </div>
                   )}
                   getOptionValue={(option) => option.value}
                   placeholder="Select Country"
-                  value={countryOptions.find(option => option.value === formData.country)}
+                  value={countryOptions.find(
+                    (option) => option.value === formData.country
+                  )}
                   required
                   className="w-full border border-cyan-300 rounded-lg mt-2"
                   styles={{
@@ -316,7 +371,9 @@ const Checkout = () => {
                     }),
                   }}
                 />
-                {errors.country && <p className="text-red-500 text-xs">{errors.country}</p>}
+                {errors.country && (
+                  <p className="text-red-500 text-xs">{errors.country}</p>
+                )}
               </div>
             </div>
 

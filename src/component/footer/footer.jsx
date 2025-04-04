@@ -59,7 +59,7 @@ export default function Footer() {
               {t("SERVICES")}
             </button>
             <Link to="/fairtrade" className="hover:text-cyan-500">
-              <button className="hover:text-cyan-500">Fair Trade</button>
+              <button className="hover:text-cyan-500">Fair Trade Practicing</button>
             </Link>
             <Link to="/contactus" className="hover:text-cyan-500">
               {t("Contact us")}

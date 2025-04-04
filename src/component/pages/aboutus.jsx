@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import FairTradePrinciples from "../newcomponent/tradeinfromation";
-import TradeBanner from "../newcomponent/tradebanner";
 import VideoSection from "../newcomponent/youtubevideo";
 import HelpSection from "../newcomponent/help";
 import InfoFairTrade from "../newcomponent/infofairtrade";
@@ -68,7 +67,7 @@ export default function Aboutus() {
         </div>
       </div>
       <VisitJaipur/>
-      <TradeBanner />
+      
       <InfoFairTrade/>
       <FairTradePrinciples />
       <VideoSection />

@@ -9,6 +9,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import { FaCartShopping } from "react-icons/fa6";
 import { IsAdmin } from "../authantication/isauthanticat";
 import { useCart } from "../newcomponent/cartcontext";
+import LanguageSwitcher from "../language/languagetranslator";
 
 export default function Navbar1() {
   const { t, i18n } = useTranslation();
@@ -120,7 +121,7 @@ export default function Navbar1() {
             </div>
           )}
         </div>
-        <div className="flex items-center w-72 mr-10 gap-4">
+        <div className="flex items-center w-72 mr-28 gap-2">
           {/* Cart Button */}
           <Link to="/cart" className="relative w-10 h-10">
             <img className="w-10 h-10" src="/cart2.svg" alt="cart" />
@@ -131,7 +132,7 @@ export default function Navbar1() {
             )}
           </Link>
 
-          <button
+          {/* <button
             onClick={() =>
               i18n.language === "en"
                 ? i18n.changeLanguage("hi")
@@ -140,7 +141,8 @@ export default function Navbar1() {
             className="text-white w-32 h-8 rounded-sm bg-button-orange text-lg"
           >
             {t("Language")}
-          </button>
+          </button> */}
+          <LanguageSwitcher/>
           {Isauthanticate() ? (
             <button
               onClick={Logout}

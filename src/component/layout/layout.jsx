@@ -12,13 +12,13 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     setLoading(true);
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
     const timer = setTimeout(() => {
       setLoading(false);
     }, 400);
 
-    return () => clearTimeout(timer); // Cleanup timeout on unmount
-  }, [location.pathname]); // Run on route change
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
 
   return (
     <div>

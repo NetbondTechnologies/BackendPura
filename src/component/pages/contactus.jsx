@@ -6,11 +6,10 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { FlagIcon } from "react-flag-kit"; // Alternative to react-country-flag
 
-// Country options with flags and codes
 const countryOptions = [
   { value: "US", label: "United States", flag: "US" },
   { value: "IN", label: "India", flag: "IN" },
-  { value: "UK", label: "United Kingdom", flag: "GB" },
+  { value: "GB", label: "United Kingdom", flag: "GB" },
   { value: "CA", label: "Canada", flag: "CA" },
   { value: "AU", label: "Australia", flag: "AU" },
   { value: "DE", label: "Germany", flag: "DE" },
@@ -18,8 +17,6 @@ const countryOptions = [
   { value: "IT", label: "Italy", flag: "IT" },
   { value: "ES", label: "Spain", flag: "ES" },
   { value: "JP", label: "Japan", flag: "JP" },
-  // Add more countries as needed (e.g., all countries in the world)
-  // You can expand this list with all ISO 3166-1 alpha-2 country codes
   { value: "BR", label: "Brazil", flag: "BR" },
   { value: "CN", label: "China", flag: "CN" },
   { value: "RU", label: "Russia", flag: "RU" },
@@ -27,13 +24,17 @@ const countryOptions = [
   { value: "MX", label: "Mexico", flag: "MX" },
   { value: "KR", label: "South Korea", flag: "KR" },
   { value: "SG", label: "Singapore", flag: "SG" },
+  { value: "CH", label: "Switzerland", flag: "CH" },
   { value: "AT", label: "Austria", flag: "AT" },
   { value: "PT", label: "Portugal", flag: "PT" },
   { value: "DK", label: "Denmark", flag: "DK" },
   { value: "SE", label: "Sweden", flag: "SE" },
+  { value: "AR", label: "Argentina", flag: "AR" },
   { value: "NO", label: "Norway", flag: "NO" },
+  { value: "NZ", label: "New Zealand", flag: "NZ" },
   { value: "NL", label: "Netherlands", flag: "NL" },
   { value: "TR", label: "Turkey", flag: "TR" },
+  { value: "IL", label: "Israel", flag: "IL" },
   { value: "PL", label: "Poland", flag: "PL" },
   { value: "RO", label: "Romania", flag: "RO" },
   { value: "GR", label: "Greece", flag: "GR" },
@@ -42,12 +43,6 @@ const countryOptions = [
   { value: "LT", label: "Lithuania", flag: "LT" },
   { value: "LU", label: "Luxembourg", flag: "LU" },
   { value: "MC", label: "Monaco", flag: "MC" },
-  { value: "CH", label: "Switzerland", flag: "CH" },
-  { value: "IL", label: "Israel", flag: "IL" }, // Israel (not in Europe but included in your list)
-
-  // Non-European countries from your list
-  { value: "AR", label: "Argentina", flag: "AR" },
-  { value: "NZ", label: "New Zealand", flag: "NZ" },
 ];
 
 export default function Contactus() {

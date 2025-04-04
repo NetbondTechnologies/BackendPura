@@ -19,9 +19,9 @@ export default function Home() {
       <HomeProductCard />
       <Topproduct />
       <WhoWeAre />
-      <TradeBanner />
+      {/* <TradeBanner />
       <Infofairtrade />
-      <FairTradePrinciples />
+      <FairTradePrinciples /> */}
       <Jewelryinfo />
       <InfoCards />
       <VideoSection />
