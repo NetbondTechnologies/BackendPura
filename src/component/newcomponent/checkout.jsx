@@ -177,7 +177,7 @@ const Checkout = () => {
       {showPopup && (
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-50 bg-cyan-200 p-6 rounded-lg shadow-lg z-50 max-w-md w-full">
           <h2 className="text-lg font-semibold text-center">
-            Your order has been placed successfully! 🎉 We'll update you soon
+          Your price request form has been submitted successfully.! 🎉 We'll update you soon
             with shipping details. Thank you for shopping with us!
           </h2>
         </div>

@@ -123,7 +123,9 @@ export default function Navbar1() {
         </div>
         <div className="flex items-center w-72 mr-28 gap-2">
           {/* Cart Button */}
-          <Link to="/cart" className="relative w-10 h-10">
+          
+          <Link to="/cart" className="relative flex w-10 h-10">
+         
             <img className="w-10 h-10" src="/cart2.svg" alt="cart" />
             {cartItems.length > 0 && (
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">

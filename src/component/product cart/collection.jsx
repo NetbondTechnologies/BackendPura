@@ -13,6 +13,7 @@ export default function Collection() {
     { name: t("Bracelets"), img: "https://i.postimg.cc/SxwqS5Dk/ND008-B-PMS.jpg", slug: "bracelet" },
     { name: t("Earrings"), img: "https://i.postimg.cc/kGtB48Kp/COL0032E.jpg", slug: "earring" },
     { name: t("Necklaces"), img: "https://i.postimg.cc/zXQY76mK/NS0242.jpg", slug: "necklace" },
+    { name: t("Pendant"), img: "https://i.postimg.cc/zXQY76mK/NS0242.jpg", slug: "pendant" },
   ];
 
   return (
@@ -21,11 +22,11 @@ export default function Collection() {
         <h1 className="text-3xl sm:text-4xl m-6 sm:m-10 font-bold text-center">
           {t("Categories")}
         </h1>
-        <div className="w-full text-center grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-6 justify-items-center">
+        <div className="w-full text-center grid grid-cols-2 gap-4 sm:grid-cols-2  xl:grid-cols-5  justify-items-center">
           {categories.map((item, index) => (
             <div
               key={index}
-              className="w-40 bg-white sm:w-48 m-2 md:w-56 lg:w-64 lg:m-2 h-auto flex flex-col items-center lg:p-4  shadow-lg rounded-lg"
+              className="w-40 bg-white sm:w-48 m-2 md:w-56 lg:w-56 lg:m-2 h-auto flex flex-col items-center lg:p-4  shadow-lg rounded-lg"
             >
               <Link to={`/category/${item.name}`}>
                 <img

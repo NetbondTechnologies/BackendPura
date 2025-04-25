@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Filter } from "lucide-react";
 import axios from "axios";
 import BaseURL from "../../baseurl";
 import { useCart } from "../newcomponent/cartcontext";
@@ -11,13 +10,12 @@ AOS.init();
 
 const ProductCard = () => {
   const [products, setProducts] = useState([]);
-  const [sortOption, setSortOption] = useState("latest");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { addToCart } = useCart();
-  const [addedProduct, setAddedProduct] = useState(null);
+  const [addedProducts, setAddedProducts] = useState([]); // ✅ Track added products
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 8;
+  const productsPerPage = 16;
   const productListRef = useRef(null);
 
   useEffect(() => {
@@ -25,7 +23,7 @@ const ProductCard = () => {
       try {
         const response = await axios.get(`${BaseURL}/api/products`);
         setProducts(response.data);
-        setCurrentPage(1); // Reset to first page on new data load
+        setCurrentPage(1);
       } catch (err) {
         setError("Failed to load products.");
       } finally {
@@ -36,22 +34,15 @@ const ProductCard = () => {
     fetchProducts();
   }, []);
 
-  const sortedProducts = [...products].sort((a, b) => {
-    if (sortOption === "category") return a.category.localeCompare(b.category);
-    if (sortOption === "latest") return new Date(b.dateAdded) - new Date(a.dateAdded);
-    return 0;
-  });
-
   const handleAddToCart = (product) => {
     addToCart(product);
-    setAddedProduct(product._id);
-    setTimeout(() => setAddedProduct(null), 4000);
+    setAddedProducts((prevAdded) => [...prevAdded, product._id]);
   };
 
-  const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
+  const totalPages = Math.ceil(products.length / productsPerPage);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -67,20 +58,6 @@ const ProductCard = () => {
         <p className="text-lg font-medium text-cyan-800 mt-2 italic max-w-2xl mx-auto">
           “Exquisite craftsmanship meets timeless elegance – shop our stunning jewelry collection today!”
         </p>
-      </div>
-
-      <div className="flex justify-between items-center p-4 bg-white shadow-lg rounded-xl mb-10 max-w-5xl mx-auto">
-        <div className="flex items-center space-x-4">
-          <Filter className="w-6 h-6 text-cyan-600" />
-          <span className="text-cyan-700 font-semibold">Filter Products</span>
-        </div>
-        <select
-          onChange={(e) => setSortOption(e.target.value)}
-          className="bg-cyan-50 text-cyan-800 border border-cyan-300 px-4 py-2 rounded-lg shadow-md hover:bg-cyan-100 focus:ring-2 focus:ring-cyan-500 transition-all duration-300 font-medium"
-        >
-          <option value="latest">Sort by Latest</option>
-          <option value="category">Sort by Category</option>
-        </select>
       </div>
 
       {loading && <p className="text-center text-cyan-700 font-semibold">Loading products...</p>}
@@ -120,7 +97,7 @@ const ProductCard = () => {
                 onClick={() => handleAddToCart(product)}
                 className="mt-4 w-full bg-cyan-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105"
               >
-                {addedProduct === product._id ? "Product Added! ✅" : "Add To List"}
+                {addedProducts.includes(product._id) ? "Product Added! ✅" : "Add To List"}
               </button>
             </div>
           </div>
@@ -139,19 +116,17 @@ const ProductCard = () => {
             </button>
           )}
 
-          {[...Array(totalPages)].map((_, i) =>
-            sortedProducts.slice(i * productsPerPage, (i + 1) * productsPerPage).length >= productsPerPage ? (
-              <button
-                key={i}
-                onClick={() => handlePageChange(i + 1)}
-                className={`px-4 py-2 rounded-lg shadow-md font-semibold ${
-                  currentPage === i + 1 ? "bg-cyan-700 text-white" : "bg-cyan-500 text-white hover:bg-cyan-600"
-                }`}
-              >
-                {i + 1}
-              </button>
-            ) : null
-          )}
+          {[...Array(totalPages)].map((_, i) => (
+            <button
+              key={i}
+              onClick={() => handlePageChange(i + 1)}
+              className={`px-4 py-2 rounded-lg shadow-md font-semibold ${
+                currentPage === i + 1 ? "bg-cyan-700 text-white" : "bg-cyan-500 text-white hover:bg-cyan-600"
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
 
           {currentPage < totalPages && (
             <button

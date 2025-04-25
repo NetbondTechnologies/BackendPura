@@ -5,7 +5,7 @@ import { FaYoutube } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa";
 import { IsAdmin } from "../authantication/isauthanticat";
 import { AiFillInstagram } from "react-icons/ai";
-import { ChevronDown, Menu } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 export default function Navbar2() {
   const categories = [
@@ -14,25 +14,14 @@ export default function Navbar2() {
     { name: "Bracelet", category: "Bracelets" },
     { name: "Ring", category: "Rings" },
   ];
-  const [menu, setmenu] = useState(false);
+
   const [dropdown, setDropdown] = useState(false);
   const { t } = useTranslation();
 
-  function menutoggle() {
-    setmenu(!menu);
-  }
-
   return (
     <div>
-      <nav className="relative hidden lg:flex gap-8 items-center h-12 w-full">
-        <button
-          onClick={menutoggle}
-          className="text-lg w-72 rounded-sm ml-5 text-black font-semibold bg-background-sky h-10"
-        >
-          {t("BROWSE_CATEGORIES")}
-        </button>
-        <Menu className="absolute left-8 h-6 w-6" />
-        <div className="text-button-orange flex  gap-10 p-2 text-lg font-bold">
+      <nav className="relative hidden lg:flex gap-8 items-center h-16 w-full">
+        <div className="text-button-orange  flex justify-between items-center px-24  w-full gap-10 p-2 text-lg font-bold">
           <Link
             onMouseEnter={() => setDropdown(false)}
             className="hover:text-cyan-600"
@@ -62,7 +51,7 @@ export default function Navbar2() {
                 onMouseLeave={() => {
                   setDropdown(false);
                 }}
-                className="absolute z-50 left-0  mt-2 w-48 bg-white shadow-lg rounded-md "
+                className="absolute z-50 left-0 mt-2 w-48 bg-white shadow-lg rounded-md"
               >
                 {categories.map((item) => (
                   <li key={item.category}>
@@ -97,8 +86,7 @@ export default function Navbar2() {
               </button>
             </Link>
           ) : (
-            // socialmedialink
-            <div className=" flex gap-4">
+            <div className="flex gap-4">
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -124,38 +112,6 @@ export default function Navbar2() {
           )}
         </div>
       </nav>
-
-      {/* Sidebar Menu */}
-      <div
-        onMouseLeave={menutoggle}
-        className={`${
-          menu
-            ? "flex flex-col z-20 absolute left-5 p-4 text-xl gap-2 bg-background-sky font-semibold text-black rounded items-start w-72 h-72"
-            : "hidden"
-        }`}
-      >
-        <Link to="/">
-          <button>{t("Home")}</button>
-        </Link>
-        <Link to="/shopall">
-          <button>{t("Shop All")}</button>
-        </Link>
-        <Link to="/category">
-          <button>{t("Category")}</button>
-        </Link>
-        <Link to="/category/Bracelets">
-          <button>{t("Bracelets")}</button>
-        </Link>
-        <Link to="/category/Earrings">
-          <button>{t("Earrings")}</button>
-        </Link>
-        <Link to="/category/Necklaces">
-          <button>{t("Necklace")}</button>
-        </Link>
-        <Link to="/category/Rings">
-          <button>{t("Ring")}</button>
-        </Link>
-      </div>
     </div>
   );
 }
