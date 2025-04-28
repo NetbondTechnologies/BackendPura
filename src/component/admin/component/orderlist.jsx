@@ -72,7 +72,7 @@ const OrderList = () => {
                   {filteredOrders.length > 0 ? (
                     filteredOrders.map((order, index) => (
                       <tr key={order._id} className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition-all`}>
-                        <td className="p-3 border-b border-gray-200 font-medium text-gray-700">{order._id}</td>
+                        <td className="p-3 border-b border-gray-200 font-medium text-gray-700">{order.orderId}</td>
                         <td className="p-3 border-b border-gray-200 text-gray-600">{order.firstName}</td>
                         <td className="p-3 border-b border-gray-200 text-gray-700">{order.email}</td>
                         <td className="p-3 border-b border-gray-200 text-gray-700">{order.companyName || "-"}</td>

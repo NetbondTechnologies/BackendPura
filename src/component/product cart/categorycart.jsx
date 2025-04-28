@@ -10,7 +10,7 @@ export default function CategoryPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [addedProductId, setAddedProductId] = useState(null); // Track added product
+  const [addedProducts, setAddedProducts] = useState([]); // <-- plural for multiple products
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -34,12 +34,7 @@ export default function CategoryPage() {
   // Handle Add to Cart button click
   const handleAddToCart = (product) => {
     addToCart(product);
-    setAddedProductId(product._id);
-
-    // Reset the button text after 4 seconds
-    setTimeout(() => {
-      setAddedProductId(null);
-    }, 4000);
+    setAddedProducts((prev) => [...prev, product._id]); // Add product id to the array
   };
 
   return (
@@ -76,16 +71,23 @@ export default function CategoryPage() {
               </div>
 
               <div className="mt-6 text-center">
-                <h3 className=" text-sm lg:text-xl font-bold text-cyan-800 line-clamp-1 tracking-tight">{product.name}</h3>
+                <h3 className="text-sm lg:text-xl font-bold text-cyan-800 line-clamp-1 tracking-tight">
+                  {product.name}
+                </h3>
                 <p className="text-sm text-cyan-600 mt-1">{product.category}</p>
                 <p className="text-xs text-cyan-500 mt-2 font-medium">
                   Design Code: <span className="font-semibold">{product.code}</span>
                 </p>
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="mt-4 w-full bg-cyan-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105"
+                  className={`mt-4 w-full ${
+                    addedProducts.includes(product._id)
+                      ? "bg-cyan-700"
+                      : "bg-cyan-500"
+                  } text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105`}
+                  disabled={addedProducts.includes(product._id)}
                 >
-                  {addedProductId === product._id ? "Product Added" : "Add To List"}
+                  {addedProducts.includes(product._id) ? "Product Added ✅" : "Add To List"}
                 </button>
               </div>
 

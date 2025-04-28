@@ -13,6 +13,7 @@ export default function Navbar2() {
     { name: "Earring", category: "Earrings" },
     { name: "Bracelet", category: "Bracelets" },
     { name: "Ring", category: "Rings" },
+    { name: "Pendant", category: "Pendant" },
   ];
 
   const [dropdown, setDropdown] = useState(false);

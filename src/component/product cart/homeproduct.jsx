@@ -13,7 +13,7 @@ const ProductCard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { addToCart } = useCart();
-  const [addedProduct, setAddedProduct] = useState(null);
+  const [addedProducts, setAddedProducts] = useState([]); // <-- notice plural now
   const [visibleProducts, setVisibleProducts] = useState(8);
 
   useEffect(() => {
@@ -33,10 +33,7 @@ const ProductCard = () => {
 
   const handleAddToCart = (product) => {
     addToCart(product);
-    setAddedProduct(product._id);
-    setTimeout(() => {
-      setAddedProduct(null);
-    }, 4000);
+    setAddedProducts((prev) => [...prev, product._id]); // <-- add product id to added list
   };
 
   return (
@@ -47,11 +44,10 @@ const ProductCard = () => {
     >
       <div className="w-full text-center mb-12">
         <h1 className="text-4xl font-extrabold text-cyan-600 tracking-tight">
-        Our Latest Collection
+          Our Latest Collection
         </h1>
         <p className="text-lg font-medium text-cyan-800 mt-2 italic max-w-2xl mx-auto">
-          “Exquisite craftsmanship meets timeless elegance – shop our stunning
-          jewelry collection today!”
+          “Exquisite craftsmanship meets timeless elegance – shop our stunning jewelry collection today!”
         </p>
       </div>
 
@@ -95,9 +91,14 @@ const ProductCard = () => {
               </Link>
               <button
                 onClick={() => handleAddToCart(product)}
-                className="mt-4 w-full bg-cyan-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105"
+                className={`mt-4 w-full ${
+                  addedProducts.includes(product._id)
+                    ? "bg-cyan-700"
+                    : "bg-cyan-500"
+                } text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105`}
+                disabled={addedProducts.includes(product._id)}
               >
-                {addedProduct === product._id ? "Product Added! ✅" : "Add To List"}
+                {addedProducts.includes(product._id) ? "Product Added! ✅" : "Add To List"}
               </button>
             </div>
 

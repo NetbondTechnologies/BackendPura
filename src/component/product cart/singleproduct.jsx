@@ -72,8 +72,8 @@ export default function SingleProduct() {
 
           {/* Details Section */}
           <div className="w-full md:w-1/2 p-6 bg-white rounded-2xl shadow-2xl transform transition-all duration-300 hover:shadow-3xl">
-            <p className="text-sm text-cyan-600 font-semibold uppercase tracking-wider animate-fade-in">
-              SKU: {product.code}
+            <p className="text-sm text-cyan-600 font-semibold  tracking-wider animate-fade-in">
+            Design Code: {product.code}
             </p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mt-2 animate-slide-up">
               {product.name}
