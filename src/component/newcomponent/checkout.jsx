@@ -125,6 +125,7 @@ const Checkout = () => {
             name: item.name,
             sku: item.code,
             quantity: item.quantity,
+            imageurl:item.imageurl
           })),
           attachment: excelFileBase64,
         }

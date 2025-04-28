@@ -86,8 +86,7 @@ const Jewelryinfo = () => {
           </div>
         </div>
       ),
-      image:
-        "/material.png",
+      image: "/material.png",
     },
     global: {
       title: "Our Global Network",
@@ -100,27 +99,30 @@ const Jewelryinfo = () => {
       ),
       image: "/globalnetwork.jpg",
     },
-    why: {
-      title: "Why Choose Puramente",
+    exhibition: {
+      title: "Exhibition Showcase",
       content: (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-600">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
-            "Customization: Your vision crafted into unique masterpieces",
-            "Materials of Distinction: Premium brass and sterling silver",
-            "Global Perspective: Catering to diverse markets worldwide",
-            "Artisanal Excellence: Passionate craftsmanship in every piece",
-            "Collaboration: Transparent communication with clients",
-            "Quality Assurance: Meticulous checks for excellence",
-          ].map((item, index) => (
-            <div key={index} className="flex items-start">
-              <span className="text-cyan-500 mr-2 text-lg">✦</span>
-              <span className="text-sm">{item}</span>
-            </div>
+            "https://dummyimage.com/800x600/cccccc/000000.png&text=Jewelry+Case",
+            "https://dummyimage.com/800x600/eeeeee/000000.png&text=Glass+Jewelry+Display",
+            "https://dummyimage.com/800x600/cccccc/333333.png&text=Jewelry+Showcase",
+            "https://dummyimage.com/800x600/dddddd/111111.png&text=Luxury+Retail+Jewelry",
+            "https://dummyimage.com/800x600/ffffff/000000.png&text=Jewelry+Exhibition+Display",
+            "https://dummyimage.com/800x600/ffffff/000000.png&text=Jewelry+Exhibition+Display",
+          ].map((img, idx) => (
+            <img
+              key={idx}
+              src={img}
+              alt={`Exhibition ${idx + 1}`}
+              className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+            />
           ))}
         </div>
       ),
-      image: "https://i.postimg.cc/j5ByZRhB/ES0358-R-AC.jpg",
+      image: "https://dummyimage.com/800x600/ffffff/000000.png&text=Jewelry+Exhibition+Display",
     },
+
     conclusion: {
       title: "Your Journey Begins",
       content: (
@@ -185,8 +187,6 @@ const Jewelryinfo = () => {
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-cyan-800 mb-4 sm:mb-6 tracking-tight">
             {sections[activeSection].title}
           </h2>
-          {/* Display Image Above Content */}
-
           {sections[activeSection].content}
           {activeSection === "conclusion" && (
             <button className="mt-4 sm:mt-6 lg:mt-8 bg-gradient-to-r from-cyan-600 to-cyan-800 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-cyan-700 hover:to-cyan-900 transition-all duration-300 shadow-md hover:shadow-lg text-sm sm:text-base">
