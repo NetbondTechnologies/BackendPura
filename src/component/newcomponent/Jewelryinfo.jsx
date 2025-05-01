@@ -104,24 +104,26 @@ const Jewelryinfo = () => {
       content: (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
-            "https://dummyimage.com/800x600/cccccc/000000.png&text=Jewelry+Case",
-            "https://dummyimage.com/800x600/eeeeee/000000.png&text=Glass+Jewelry+Display",
-            "https://dummyimage.com/800x600/cccccc/333333.png&text=Jewelry+Showcase",
-            "https://dummyimage.com/800x600/dddddd/111111.png&text=Luxury+Retail+Jewelry",
-            "https://dummyimage.com/800x600/ffffff/000000.png&text=Jewelry+Exhibition+Display",
-            "https://dummyimage.com/800x600/ffffff/000000.png&text=Jewelry+Exhibition+Display",
-          ].map((img, idx) => (
-            <img
-              key={idx}
-              src={img}
-              alt={`Exhibition ${idx + 1}`}
-              className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
-            />
-          ))}
+            "/exibetion2.jpg",
+            "/exibetion5.jpg",
+            "/exibetion6.jpg",
+            // You can add more images here, but only the first 3 will display
+          ]
+            .slice(0, 3)
+            .map((img, idx) => (
+              <img
+                key={idx}
+                src={img}
+                alt={`Exhibition ${idx + 1}`}
+                className="w-full h-48 sm:h-56 mb-5 md:h-64 object-contain rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+              />
+            ))}
         </div>
       ),
-      image: "https://dummyimage.com/800x600/ffffff/000000.png&text=Jewelry+Exhibition+Display",
+      image: "/exibetion2.jpg", // Optional default image
     },
+    
+    
 
     conclusion: {
       title: "Your Journey Begins",
