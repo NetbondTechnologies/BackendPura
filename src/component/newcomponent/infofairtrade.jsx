@@ -10,7 +10,7 @@ const InfoFairTrade = () => {
         "Create opportunities for producers to thrive and grow with dignity.",
       imageAlt: "Empowered women in vibrant communities",
       imageUrl:
-        "https://img.freepik.com/free-photo/cup-man-achievement-success-honor_1150-1719.jpg?t=st=1743509035~exp=1743512635~hmac=30b1ac2d75087ea17351dbcc5a6d370aebcad0673f2db1f375cd7fd5e16eed47&w=1380",
+        "/uplift.jpg",
       icon: "🌱",
     },
     {
@@ -19,7 +19,7 @@ const InfoFairTrade = () => {
         "Providing resources to ensure sustainable growth and stability for producers.",
       imageAlt: "Hands exchanging resources",
       imageUrl:
-        "https://img.freepik.com/free-vector/demand-analysts-shaking-hands-from-laptops-screens-planning-future-demand-demand-planning-demand-analytics-digital-sales-forecast-concept-illustration_335657-2098.jpg?t=st=1743508946~exp=1743512546~hmac=ab83690aa27f9ff4f55326b6fe603855c9c27721261cbf37fb136a282d472db4&w=1380",
+        "/finacesupport.jpg",
       icon: "💰",
     },
     {
@@ -27,7 +27,7 @@ const InfoFairTrade = () => {
       description: "Building trust through clear and honest financial practices.",
       imageAlt: "Transparent business handshake",
       imageUrl:
-        "https://img.freepik.com/free-vector/flat-design-csr-concept-illustrated_23-2148915156.jpg?t=st=1743509113~exp=1743512713~hmac=6941934e9a21efbb13bd32d5d3a9d671bd737818689c3b33879e03dd13893e76&w=1380",
+        "/accountability.jpg",
       icon: "🔍",
     },
     {
@@ -36,7 +36,7 @@ const InfoFairTrade = () => {
         "Fostering inclusivity and justice for all in the trade ecosystem.",
       imageAlt: "Diverse team collaborating",
       imageUrl:
-        "https://img.freepik.com/free-vector/gender-equality-concept_23-2148588281.jpg?t=st=1743509176~exp=1743512776~hmac=f9152397471a8e9e31fd94f124fea2867ec56a1cdda12fba1b4a35f04261a462&w=1380",
+        "/equality.jpg",
       icon: "🤝",
     },
     {
@@ -45,7 +45,7 @@ const InfoFairTrade = () => {
         "Guaranteeing safe, healthy, and fair workplaces for everyone involved.",
       imageAlt: "Clean and safe work environment",
       imageUrl:
-        "https://img.freepik.com/free-photo/front-view-flexing-male-engineer-sitting-his-working-place-job-agenda-plan-document-corporate-property-builder-business-contractor_140725-155018.jpg?t=st=1743509238~exp=1743512838~hmac=756b8a70c9c55391980a320851d9948232e256d965d8040687727fb5c6487ea0&w=1380",
+        "/goodworkingconditions.jpg",
       icon: "🏭",
     },
     {
@@ -53,7 +53,7 @@ const InfoFairTrade = () => {
       description: "Committing to sustainable practices that protect our planet.",
       imageAlt: "Lush green fields and sustainable farming",
       imageUrl:
-        "https://img.freepik.com/free-photo/little-boy-holding-soil-plant-park_53876-22922.jpg?t=st=1743509301~exp=1743512901~hmac=8f11890476109191bb9eda368950dffa4195d01033701fef42d01c4890566795&w=1380",
+        "/respectforearth.jpg",
       icon: "🌍",
     },
   ];

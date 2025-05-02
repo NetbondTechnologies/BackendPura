@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
 const Jewelryinfo = () => {
@@ -141,7 +142,7 @@ const Jewelryinfo = () => {
         </div>
       ),
       image:
-        "https://img.freepik.com/free-photo/shallow-focus-from-male-standing-pathway-middle-grassy-field_181624-7323.jpg?t=st=1743677001~exp=1743680601~hmac=a898879f779690c14cf73b8b0e692b23a47293d770fbfa9a423c423a17e689db&w=1380",
+        "/yourjourney.jpg",
     },
   };
 
@@ -191,15 +192,16 @@ const Jewelryinfo = () => {
           </h2>
           {sections[activeSection].content}
           {activeSection === "conclusion" && (
+            <Link to="/contactus">
             <button className="mt-4 sm:mt-6 lg:mt-8 bg-gradient-to-r from-cyan-600 to-cyan-800 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-cyan-700 hover:to-cyan-900 transition-all duration-300 shadow-md hover:shadow-lg text-sm sm:text-base">
               Start Your Journey
-            </button>
+            </button></Link>
           )}
           {sections[activeSection].image && (
             <img
               src={sections[activeSection].image}
               alt={sections[activeSection].title}
-              className="w-full h-48 sm:h-64 md:h-72 lg:h-96 rounded-lg shadow-md mb-4 sm:mb-6 object-cover"
+              className="w-full pt-5 h-48 sm:h-64 md:h-72 lg:h-96 rounded-lg shadow-md mb-4 sm:mb-6 object-cover"
             />
           )}
         </main>
