@@ -38,9 +38,7 @@ function App() {
               <Route path="/contactus" element={<Contactus />}></Route>
               <Route path="/profile" element={<Profile />}></Route>
               <Route path="/userview" element={<AdminUserView />}></Route>
-
               {/* admin routes */}
-
               <Route path="/dashboard" element={<Adminhome />}></Route>
               <Route path="/addproduct" element={<AddProduct />}></Route>
               <Route path="/orderlist" element={<OrderList />}></Route>
